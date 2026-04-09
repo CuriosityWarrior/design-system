@@ -89,8 +89,7 @@ Changelog
 
 ### 흰색 카드 프레임으로 감싸기
 
-각 컴포넌트 페이지의 모든 노드(텍스트, 컴포넌트 등)는
-**흰색 카드 프레임 하나**로 감싸서 회색 피그마 캔버스 위에 배치한다.
+각 컴포넌트 페이지의 배경 카드 프레임은 해당 페이지에 포함된 모든 컴포넌트 및 관련 내용을 기준으로 상하좌우 100px 패딩을 적용하여 생성한다.
 
 ```
 [ Figma Canvas — 회색 바닥 ]
@@ -107,7 +106,7 @@ Changelog
 |---|---|
 | 배경 | #FFFFFF |
 | Border Radius | 16px |
-| 내부 패딩 | 48px |
+| 내부 패딩 | 100px |
 | 그림자 | Drop Shadow — rgba(26,25,22,0.08), y:4, blur:16 |
 | 프레임 이름 | 컴포넌트 이름과 동일 (예: `Button`) |
 
@@ -162,7 +161,7 @@ children.forEach(n => {
   maxY = Math.max(maxY, n.y + n.height);
 });
 
-const padding = 48;
+const padding = 100;
 const cardFrame = figma.createFrame();
 cardFrame.name = page.name.replace(/^\d+ — /, ''); // 번호 제거한 이름
 cardFrame.x = 0;
@@ -236,3 +235,4 @@ for (const c of components) {
 | 버전 | 날짜 | 변경 내용 |
 |---|---|---|
 | v1.0 | 2026.04.08 | 최초 작성 — 페이지 네이밍, 프레임 구조, Height 규칙 통합 |
+| v1.1 | 2026.04.09 | 배경 카드 프레임 패딩 48px → 100px 변경, 프레임 생성 규칙 문장 수정 |
