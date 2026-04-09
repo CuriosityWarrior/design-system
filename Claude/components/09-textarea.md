@@ -11,10 +11,34 @@
 
 | 토큰 | 값 |
 |---|---|
-| 최소 높이 | 80px |
+| 높이 | 120px (Fixed) |
 | 크기 조정 | 세로 방향만 허용 |
 | 줄 높이 | `line-height/relaxed` = 1.6 |
 | 패딩 | 10px 12px |
+
+## 레이아웃 규칙
+
+| 항목 | 값 |
+|---|---|
+| layoutSizingVertical | `FIXED` (120px) |
+
+> Textarea는 Hug Contents가 아닌 Fixed Height로 설정한다. 사용자가 입력할 수 있는 영역의 최소 높이를 보장하기 위함.
+
+---
+
+## 스타일 변형
+
+### Border 스타일 (기본)
+- Input의 Border 스타일과 동일. 배경 투명, 보더로 영역 표현.
+- 보더: 1px solid `color/border/default`
+- 배경: `color/surface/1`
+
+### Surface 스타일
+- Input의 Surface 스타일과 동일. 보더 없이 면(Fill)으로 영역 표현.
+- 배경: `color/background/subtle`
+- 보더: 없음 (포커스 상태에서만 `color/primary/default` 보더 표시)
+
+> Input과 스타일 일관성을 유지한다 (보더 두께, radius, 색상 등 동일).
 
 ---
 

@@ -5,14 +5,46 @@
 
 ---
 
+## 레이아웃 규칙
+
+| 항목 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` |
+| layoutSizingVertical | `FIXED` |
+
+> Radio 인디케이터는 정사각형 고정값으로 설정한다 (Width = Height).
+
+---
+
+## 사이즈 베리언트
+
+Checkbox와 동일한 기준으로 XS, S, M, L, XL 5단계를 제공한다.
+
+| 사이즈 | 인디케이터 크기 | 선택됨 점 크기 | 라벨 텍스트 크기 |
+|---|---|---|---|
+| XS | 12 × 12px | 5px | 11px |
+| S | 16 × 16px | 7px | 13px |
+| M | 20 × 20px | 8px | 14px |
+| L | 24 × 24px | 10px | 16px |
+| XL | 28 × 28px | 12px | 18px |
+
+---
+
+## 라벨 텍스트 토글
+
+- Boolean 프로퍼티 `showLabel`로 라벨 텍스트를 켜고 끌 수 있다.
+- `showLabel = true`: 라디오 인디케이터 + 라벨 텍스트 표시
+- `showLabel = false`: 라디오 인디케이터만 표시
+
+---
+
 ## 디자인 토큰
 
 | 토큰 | 값 |
 |---|---|
-| 크기 | 18 × 18px |
 | 보더 반경 | 50% (원형) |
 | 보더 | 1.5px solid `color/border/strong` |
-| 선택됨 점 | 8×8px 원형, `color/primary/default` |
+| 선택됨 점 | 원형, `color/primary/default` |
 | 포커스 링 | `shadow/focus` |
 | 모션 | 100ms ease-out |
 
@@ -30,8 +62,17 @@
 
 ---
 
+## 베리언트 구조
+
+네이밍: `Radio/{사이즈}/{상태}`
+- 사이즈: XS, S, M, L, XL
+- 상태: Default, Selected, Disabled, Disabled Selected
+
+---
+
 ## 레이블 포함 패턴
-- 체크박스와 동일한 레이블 패턴
+- Checkbox와 동일한 레이블 패턴
+- 레이블 텍스트 크기: 사이즈별 상이 (사이즈 베리언트 표 참조)
 - 라디오 그룹에는 위에 그룹 레이블 필요 (heading-sm)
 
 ---

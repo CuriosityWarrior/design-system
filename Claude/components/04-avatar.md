@@ -17,6 +17,15 @@
 
 ---
 
+## 레이아웃 규칙
+
+| 항목 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` |
+| layoutSizingVertical | `FIXED` |
+
+> 정사각형 요소로, Width와 Height를 동일한 Fixed 값으로 설정한다.
+
 ## 크기
 
 | 크기 | 가로 × 세로 | 폰트 크기 |

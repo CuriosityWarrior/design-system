@@ -44,6 +44,22 @@
 
 ---
 
+## 스타일 변형
+
+### Border 스타일 (기본)
+- 배경 투명, 보더로 영역을 표현하는 기본 스타일
+- 보더: 1px solid `color/border/default`
+- 배경: `color/surface/1`
+
+### Surface 스타일
+- 보더 없이 면(Fill)으로 영역을 표현하는 스타일
+- 배경: `color/background/subtle`
+- 보더: 없음 (포커스 상태에서만 `color/primary/default` 보더 표시)
+
+> 두 스타일 모두 동일한 사이즈(lg, md, sm) 및 상태(Default, Hover, Focus, Error, Success, Disabled, Readonly) 변형을 갖는다.
+
+---
+
 ## 종류
 - **텍스트**: 표준 텍스트 입력
 - **비밀번호**: 마스킹 처리, 우측에 표시/숨기기 토글 아이콘
