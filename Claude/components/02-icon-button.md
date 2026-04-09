@@ -18,6 +18,13 @@
 
 ## 크기 (Size)
 
+| 항목 | 값 |
+|---|---|
+| layoutSizingHorizontal | `HUG` |
+| layoutSizingVertical | `HUG` |
+
+> 가로·세로 모두 Hug Contents로 설정하여 아이콘 및 패딩에 맞게 자동 조정한다.
+
 | 크기 | 가로 × 세로 | 아이콘 크기 |
 |---|---|---|
 | Large (lg) | 44 × 44px | 18px |

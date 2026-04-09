@@ -5,16 +5,45 @@
 
 ---
 
+## 레이아웃 규칙
+
+| 항목 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` |
+| layoutSizingVertical | `FIXED` |
+
+> 체크박스 인디케이터는 정사각형 고정값으로 설정한다 (Width = Height).
+
+---
+
+## 사이즈 베리언트
+
+| 사이즈 | 인디케이터 크기 | 보더 반경 | 체크마크 크기 | 라벨 텍스트 크기 |
+|---|---|---|---|---|
+| XS | 12 × 12px | 3px | 7×4px | 11px |
+| S | 16 × 16px | 4px | 9×5px | 13px |
+| M | 20 × 20px | 5px | 11×6px | 14px |
+| L | 24 × 24px | 6px | 13×7px | 16px |
+| XL | 28 × 28px | 7px | 15×8px | 18px |
+
+---
+
+## 라벨 텍스트 토글
+
+- Boolean 프로퍼티 `showLabel`로 라벨 텍스트를 켜고 끌 수 있다.
+- `showLabel = true`: 체크박스 인디케이터 + 라벨 텍스트 표시
+- `showLabel = false`: 체크박스 인디케이터만 표시
+
+---
+
 ## 디자인 토큰
 
 | 토큰 | 값 |
 |---|---|
-| 크기 | 18 × 18px |
-| 보더 반경 | 5px |
 | 보더 | 1.5px solid `color/border/strong` |
 | 체크됨 배경 | `color/primary/default` |
 | 체크됨 보더 | `color/primary/default` |
-| 체크마크 | 흰색, 10×6px, -45° 회전 |
+| 체크마크 | 흰색, -45° 회전 |
 | 포커스 링 | `shadow/focus` |
 | 모션 | 100ms ease-out |
 
@@ -34,9 +63,18 @@
 
 ---
 
+## 베리언트 구조
+
+네이밍: `Checkbox/{사이즈}/{상태}`
+- 사이즈: XS, S, M, L, XL
+- 상태: Default, Checked, Indeterminate, Disabled, Disabled Checked
+
+---
+
 ## 레이블 포함 패턴
 - 체크박스 좌측 정렬, 레이블 텍스트 우측, 10px 간격
-- 레이블: 14px / Regular, `color/text/primary`
+- 레이블 텍스트 크기: 사이즈별 상이 (사이즈 베리언트 표 참조)
+- 레이블 폰트: Regular, `color/text/primary`
 - 선택적 부설명: 12px / Regular, `color/text/tertiary`, 레이블 아래 2px
 
 ---
