@@ -22,11 +22,13 @@
 
 ## 크기
 
-| 크기 | 폰트 | 패딩 |
-|---|---|---|
-| Large (lg) | 16px | 11px 14px |
-| Medium (md) | 14px | 9px 12px |
-| Small (sm) | 13px | 6px 10px |
+> 📐 Height는 [파운데이션: 사이즈](../foundations/07-size.md)의 Semantic 토큰을 참조한다. Width는 콘텐츠에 따라 가변.
+
+| 크기 | Height 토큰 | Height | 폰트 | 패딩 (세로 × 가로) |
+|---|---|---|---|---|
+| Large (lg) | `size/input/lg` → `size/xl` | 48px | 16px | 14px 14px |
+| Medium (md) | `size/input/md` → `size/lg` | 40px | 14px | 11px 12px |
+| Small (sm) | `size/input/sm` → `size/sm` | 24px | 13px | 4px 10px |
 
 ---
 
@@ -83,6 +85,16 @@
 
 ---
 
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingVertical | `HUG` |
+
+> Height는 Size 토큰(`size/input/*`) 기준 콘텐츠 + 패딩으로 자동 결정된다. Width는 배치 컨텍스트에 따라 FILL 또는 HUG. 임의 px 값으로 Height Fixed 지정 금지.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -96,9 +108,10 @@
 - 배경: 흰색 / 다크 서피스
 
 크기:
-- Large: 16px, 패딩 11px 14px
-- Medium: 14px, 패딩 9px 12px (기본)
-- Small: 13px, 패딩 6px 10px
+- Large: height 48px, 16px, 패딩 14px 14px
+- Medium: height 40px, 14px, 패딩 11px 12px (기본)
+- Small: height 24px, 13px, 패딩 4px 10px
+Height에는 Size/Semantic Variables (size/input/lg, md, sm)를 바인딩
 
 상태:
 - 기본: 회색 보더

@@ -14,6 +14,8 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 뱃지는 텍스트+패딩 기반으로 Height가 결정되므로 Semantic 토큰 미적용.
+
 ## 뱃지 크기
 
 | 크기 | 폰트 | 패딩 |
@@ -62,6 +64,17 @@
 ## 접근성
 - 뱃지: `role="status"` 또는 설명적 `aria-label`
 - 태그 제거 버튼: `aria-label="[태그명] 제거"`
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `HUG` |
+| layoutSizingVertical | `HUG` |
+
+> 뱃지/태그는 텍스트 + 패딩 기준으로 가로·세로 모두 자동 조정된다. 임의 px 값으로 Fixed 지정 금지.
 
 ---
 

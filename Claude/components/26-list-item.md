@@ -20,12 +20,25 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 아이콘 컨테이너는 `size/icon-button/lg`(40px) 또는 `size/icon-button/md`(32px) 적용 가능.
+
 ## 구조 (좌측에서 우측)
 1. **아이콘 컨테이너** (선택): 36×36px 둥근 정사각형
 2. **콘텐츠** (flex-1):
    - 제목: 14px / Medium, `color/text/primary`
    - 설명 (선택): 12px / Regular, `color/text/tertiary`, 제목 아래 2px
 3. **메타** (선택): 12px / Regular, `color/text/tertiary`, 우측 정렬
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` (부모 너비) |
+| layoutSizingVertical | `HUG` |
+
+> Height는 아이콘/텍스트/메타 콘텐츠 + 패딩 기준으로 자동 조정된다. 임의 px 값으로 Fixed 지정 금지.
 
 ---
 

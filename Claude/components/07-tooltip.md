@@ -20,6 +20,8 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 툴팁은 콘텐츠 기반으로 크기가 결정되므로 Semantic 토큰 미적용.
+
 ## 위치
 
 ### Top (툴팁이 위에 위치 — 기본)
@@ -49,6 +51,17 @@
 - 툴팁 요소에 `role="tooltip"` 사용
 - 트리거는 `aria-describedby`로 툴팁 ID 참조
 - 키보드 접근성 필수 (포커스 시 표시)
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `HUG` (max-width 240px) |
+| layoutSizingVertical | `HUG` |
+
+> 콘텐츠(텍스트) 기반으로 자동 조정. 최대 너비는 240px로 제한. 임의 px 값으로 Fixed 지정 금지.
 
 ---
 

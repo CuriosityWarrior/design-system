@@ -12,9 +12,11 @@
 | 기본 색상 | `color/border/default` |
 | 강조 색상 | `color/border/strong` |
 | 미묘 색상 | `color/border/subtle` |
-| 두께 | 1px |
+| 두께 | `size/border/thin` = 1px |
 
 ---
+
+> 📐 두께는 [파운데이션: 사이즈](../foundations/07-size.md)의 `size/border/*` Semantic 토큰을 참조한다.
 
 ## 변형
 
@@ -46,6 +48,17 @@
 ## 접근성
 - `role="separator"` 또는 `<hr>` 요소 사용
 - 장식용 구분선: `aria-hidden="true"`
+
+---
+
+## 사이즈 동작
+
+| 변형 | layoutSizingHorizontal | layoutSizingVertical |
+|---|---|---|
+| 가로 (Horizontal) | `FILL` (부모 너비) | `FIXED` (1px) |
+| 세로 (Vertical) | `FIXED` (1px) | `FILL` (부모 높이) |
+
+> 두께는 Size 토큰(`size/border/thin`)으로 고정하고, 축 방향은 부모에 맞춰 늘린다.
 
 ---
 

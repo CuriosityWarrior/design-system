@@ -19,6 +19,8 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 보더는 `size/border/thin`(1px) 적용.
+
 ## 구조
 1. **레이블**: 12px Medium 대문자, `color/text/tertiary`
    - 하단 여백: 8px
@@ -34,6 +36,17 @@
 ## 그리드 레이아웃
 - 일반적으로 2~4열 그리드에서 사용
 - 각 카드: 최소 너비 180px
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` 또는 `HUG` |
+| layoutSizingVertical | `HUG` |
+
+> Height는 레이블 + 값 + 트렌드 인디케이터 + 패딩 기준으로 자동 조정된다. 대시보드 그리드에서 높이 정렬이 필요하면 부모 그리드에서 `FILL`로 동기화. 임의 px 값으로 Fixed 지정 금지.
 
 ---
 

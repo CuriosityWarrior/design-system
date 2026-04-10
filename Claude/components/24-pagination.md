@@ -9,7 +9,7 @@
 
 | 토큰 | 값 |
 |---|---|
-| 버튼 크기 | 36 × 36px |
+| 버튼 크기 | `size/icon-button/md` → `size/md` = 32 × 32px |
 | 보더 반경 | `radius/button` = 8px |
 | 보더 | 1px solid `color/border/default` |
 | 배경 | `color/surface/1` |
@@ -20,6 +20,8 @@
 | 모션 | `motion/hover` = 100ms |
 
 ---
+
+> 📐 버튼 크기는 [파운데이션: 사이즈](../foundations/07-size.md)의 `size/icon-button/md`(32px) Semantic 토큰을 참조한다.
 
 ## 요소
 - 이전 버튼 (‹): 첫 번째 페이지에서 비활성
@@ -37,12 +39,23 @@
 
 ---
 
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `HUG` |
+| layoutSizingVertical | `HUG` |
+
+> 페이지 아이템들 + 이전/다음 버튼 기준으로 자동 조정. 임의 px 값으로 Fixed 지정 금지.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
 다음 스펙으로 페이지네이션(Pagination) 컴포넌트를 만들어줘:
 
-버튼: 36×36px 정사각형, 보더 반경 8px, 1px 회색 보더
+버튼: 32×32px 정사각형 (size/icon-button/md), 보더 반경 8px, 1px 회색 보더
 폰트: 13px Medium
 
 상태:

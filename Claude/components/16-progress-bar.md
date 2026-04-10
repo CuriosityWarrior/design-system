@@ -17,6 +17,8 @@
 
 ## 크기
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 프로그레스 바 전용 Semantic 토큰은 현재 미정의 — Semantic 토큰이 추가되면 참조로 전환한다.
+
 | 크기 | 높이 |
 |---|---|
 | Small (sm) | 4px |
@@ -45,6 +47,17 @@
 - 퍼센트 표시 없음
 - 채움 애니메이션: translateX(-100%) → translateX(350%) 무한 반복
 - 채움 너비 고정 40%
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` (부모 너비) |
+| layoutSizingVertical | `FIXED` |
+
+> 트랙 높이는 크기 변형별 고정 값. 너비는 부모에 맞춰 늘어난다. Height에 임의 값 입력 금지.
 
 ---
 
