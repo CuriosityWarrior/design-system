@@ -17,13 +17,14 @@
 
 ## 원형 스피너 크기
 
-| 크기 | 가로 × 세로 | 보더 두께 |
-|---|---|---|
-| XL | 40 × 40px | 3px |
-| Large (lg) | 32 × 32px | 3px |
-| Medium (md) | 24 × 24px | 2.5px |
-| Small (sm) | 18 × 18px | 2px |
-| XS | 14 × 14px | 2px |
+> 📐 Width와 Height 모두 [파운데이션: 사이즈](../foundations/07-size.md)의 Semantic 토큰을 참조한다 (정사각형).
+
+| 크기 | Size 토큰 | 가로 × 세로 | 보더 두께 |
+|---|---|---|---|
+| Large (lg) | `size/spinner/lg` → `size/lg` | 40 × 40px | 3px |
+| Medium (md) | `size/spinner/md` → `size/md` | 32 × 32px | 3px |
+| Small (sm) | `size/spinner/sm` → `size/sm` | 24 × 24px | 2.5px |
+| XS | `size/spinner/xs` → `size/xs` | 16 × 16px | 2px |
 
 ---
 
@@ -52,13 +53,25 @@
 
 ---
 
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` |
+| layoutSizingVertical | `FIXED` |
+
+> 정사각형 고정 크기. Size 토큰(`size/spinner/*`)을 통해서만 크기를 지정한다. HUG 사용 금지.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
 다음 스펙으로 스피너(Spinner) 로딩 인디케이터 컴포넌트를 만들어줘:
 
 원형 스피너:
-크기: XL(40px), Large(32px), Medium(24px), Small(18px), XS(14px)
+크기: Large(40px), Medium(32px), Small(24px), XS(16px)
+Width/Height에는 Size/Semantic Variables (size/spinner/lg, md, sm, xs)를 바인딩
 구조: 회색 트랙 + 오렌지 활성 호(상단), 700ms linear 무한 회전
 
 색상 변형:

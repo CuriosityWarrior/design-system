@@ -19,6 +19,8 @@
 
 ## 크기
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 토글 전용 Semantic 토큰은 현재 미정의 — Semantic 토큰이 추가되면 참조로 전환한다.
+
 | 크기 | 트랙 너비 | 트랙 높이 | 썸 크기 | 이동 거리 |
 |---|---|---|---|---|
 | Medium (기본) | 40px | 24px | 18×18px | 16px |
@@ -48,6 +50,17 @@
 - 설명: 12px / Regular, `color/text/tertiary`
 - 행 패딩: 14px 20px
 - 하단 보더: 1px `color/border/subtle`
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` |
+| layoutSizingVertical | `FIXED` |
+
+> 트랙 너비·높이는 고정 값. 크기 변형(Medium/Large)에 따른 지정 외 임의 값 입력 금지.
 
 ---
 

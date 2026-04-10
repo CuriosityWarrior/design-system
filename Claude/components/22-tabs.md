@@ -20,6 +20,8 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 인디케이터는 `size/border/medium`(2px) 적용.
+
 ## 변형
 
 ### 언더라인 (기본)
@@ -32,6 +34,17 @@
 - 컨테이너: `color/surface/3`, 보더 반경 8px, 패딩 4px
 - 활성 필: `color/surface/1` 배경, 박스 섀도우, 보더 반경 6px
 - 폰트: 13px / Medium
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` 또는 `HUG` (배치 컨텍스트) |
+| layoutSizingVertical | `HUG` |
+
+> Tab 바 Height는 각 탭 아이템의 콘텐츠 + 패딩으로 자동 결정된다. 임의 px 값으로 Fixed 지정 금지.
 
 ---
 

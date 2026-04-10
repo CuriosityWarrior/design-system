@@ -21,6 +21,8 @@
 
 ---
 
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 보더는 `size/border/thin`(1px), 내부 체크박스/뱃지/아이콘 버튼은 해당 컴포넌트의 Semantic 토큰을 따른다.
+
 ## 기능
 
 ### 정렬
@@ -45,6 +47,17 @@
 - **날짜 셀**: 13px / Regular, `color/text/secondary`
 - **뱃지 셀**: 상태 뱃지 컴포넌트
 - **액션 셀**: 아이콘 버튼 (편집, 삭제 등)
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` (부모 너비) |
+| layoutSizingVertical | `HUG` |
+
+> 행 수에 따라 Height 자동 조정. 각 행의 Height도 HUG(콘텐츠 + 패딩). 임의 px 값으로 Fixed 지정 금지.
 
 ---
 
