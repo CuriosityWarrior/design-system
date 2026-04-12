@@ -13,6 +13,7 @@
 | 그림자 | `shadow/modal` |
 | 너비 | 360px (최대 90vw) |
 | 오버레이 | `color/surface/overlay` |
+| 보더 반경 (바텀 시트) | `radius/XL` (16px) — 상단 모서리만 적용 (topLeftRadius/topRightRadius = `radius/XL`, bottomLeftRadius/bottomRightRadius = `radius/0`) |
 | 모션 | `motion/page` = 300ms ease-out (translateX) |
 
 ---
@@ -34,6 +35,23 @@
 
 ---
 
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| 기본 너비 | 360px (레이아웃 고정 — 토큰 미적용) |
+| 헤더 패딩 상하 | `spacing/20` | 20px |
+| 헤더 패딩 좌우 | `spacing/24` | 24px |
+| 본문 패딩 상하 | `spacing/20` | 20px |
+| 본문 패딩 좌우 | `spacing/24` | 24px |
+| 푸터 패딩 상하 | `spacing/16` | 16px |
+| 푸터 패딩 좌우 | `spacing/24` | 24px |
+| 헤더–본문 구분 보더 | 1px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
+---
+
 ## 위치
 - **우측** (기본): 우측 가장자리에서 슬라이드 인
 - **하단** (모바일): 하단에서 슬라이드 업 (바텀 시트)
@@ -48,6 +66,14 @@
 | layoutSizingVertical | `FILL` (뷰포트 전체 높이) |
 
 > 좌/우 드로어는 너비만 고정하고 높이는 뷰포트에 맞춘다. 내부 콘텐츠는 스크롤.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
 
 ---
 

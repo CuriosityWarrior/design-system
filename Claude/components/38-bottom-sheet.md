@@ -21,6 +21,23 @@
 
 ---
 
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| 상단 보더 반경 | `radius/XL` | 20px |
+| 드래그 핸들 너비 | `size/36` | 36px |
+| 드래그 핸들 높이 | `size/4` | 4px |
+| 핸들 영역 패딩 상 | `spacing/8` | 8px |
+| 핸들 영역 패딩 하 | `spacing/12` | 12px |
+| 본문 패딩 상하 | `spacing/16` | 16px |
+| 본문 패딩 좌우 | `spacing/20` | 20px |
+| Peek 높이 | 120px (레이아웃 고정 — 토큰 미적용) |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
+---
+
 ## 변형 (Variant)
 
 ### Modal Bottom Sheet

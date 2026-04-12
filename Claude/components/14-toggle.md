@@ -13,6 +13,7 @@
 | 트랙 (ON) | `color/primary/default` |
 | 썸 | #FFFFFF |
 | 썸 그림자 | 0 1px 3px rgba(0,0,0,0.15) |
+| 보더 반경 (트랙/썸) | `radius/FULL` (9999px — pill 형태) |
 | 모션 | 100ms ease-out (썸 슬라이드) |
 
 ---
@@ -25,6 +26,21 @@
 |---|---|---|---|---|
 | Medium (기본) | 40px | 24px | 18×18px | 16px |
 | Large | 52px | 30px | 24×24px | 22px |
+
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| 트랙 높이 (Medium) | `size/S` | 24px |
+| 트랙 너비 (Medium) | `size/L` | 40px |
+| 썸 크기 (Medium) | `size/18` | 18px |
+| 트랙 높이 (Large) | `size/30` | 30px |
+| 트랙 너비 (Large) | `size/52` | 52px |
+| 썸 크기 (Large) | `size/S` | 24px |
+| 트랙 내부 여백 (썸 패딩) | `spacing/3` | 3px |
+| 토글–라벨 간격 | `spacing/10` | 10px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
 
 ---
 
@@ -61,6 +77,14 @@
 | layoutSizingVertical | `FIXED` |
 
 > 트랙 너비·높이는 고정 값. 크기 변형(Medium/Large)에 따른 지정 외 임의 값 입력 금지.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
 
 ---
 

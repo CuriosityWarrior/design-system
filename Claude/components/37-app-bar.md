@@ -17,6 +17,8 @@
 | 배경 (Large 변형) | `color/surface/1` |
 | 모션 | 200ms ease-out (스크롤 축소 전환) |
 
+> 이 컴포넌트는 직각 형태로, Radius 토큰을 적용하지 않는다 (`radius/0`). 상단/하단 앱 바는 화면 가장자리에 고정되므로 보더 반경이 불필요하다.
+
 ---
 
 ## 변형 (Variant)
@@ -45,6 +47,22 @@
 - 좌측: Icon Button 그룹 (2~4개)
 - 우측: FAB 또는 Primary Button
 - 하단 safe area 고려
+
+---
+
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| Height — Small / Center Aligned | `size/XXL` | 56px |
+| Height — Medium | `size/96` | 96px |
+| Height — Large | `size/136` | 136px |
+| Height — Bottom App Bar | `size/3XL` | 64px |
+| 좌우 패딩 | `spacing/16` | 16px |
+| 제목–아이콘 간격 | `spacing/8` | 8px |
+| Trailing 아이콘 간 간격 | `spacing/8` | 8px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
 
 ---
 

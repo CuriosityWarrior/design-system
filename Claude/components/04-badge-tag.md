@@ -24,6 +24,24 @@
 | Medium (md) | 12px | 3px 10px |
 | Small (sm) | 11px | 2px 8px |
 
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| Height (lg) | `size/S` | 24px |
+| Height (md) | `size/20` | 20px |
+| Height (sm) | `size/XS` | 16px |
+| 내부 패딩 상하 (lg) | `spacing/4` | 4px |
+| 내부 패딩 좌우 (lg) | `spacing/12` | 12px |
+| 내부 패딩 상하 (md) | `spacing/3` | 3px |
+| 내부 패딩 좌우 (md) | `spacing/10` | 10px |
+| 내부 패딩 상하 (sm) | `spacing/2` | 2px |
+| 내부 패딩 좌우 (sm) | `spacing/8` | 8px |
+| 상태 점–텍스트 간격 | `spacing/4` | 4px |
+| 태그 제거 버튼 크기 | `size/14` | 14px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
 ---
 
 ## 뱃지 색상 변형
@@ -75,6 +93,14 @@
 | layoutSizingVertical | `HUG` |
 
 > 뱃지/태그는 텍스트 + 패딩 기준으로 가로·세로 모두 자동 조정된다. 임의 px 값으로 Fixed 지정 금지.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
 
 ---
 

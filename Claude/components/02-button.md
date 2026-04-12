@@ -40,11 +40,32 @@
 - **사용처**: 인라인 액션, 경계선이 있는 보조 버튼
 
 ### Text (텍스트)
-- **배경**: transparent
-- **보더**: 없음
-- **텍스트**: `color/primary/default`
-- **호버**: 텍스트 → `color/primary/hover`, 배경 → `color/primary/subtle`
-- **사용처**: 최소 강조 액션, 링크성 버튼, 인라인 텍스트 내 액션
+
+텍스트만으로 구성된 버튼. 배경도 보더도 없이 레이블 텍스트만 존재한다.
+시각적으로 일반 텍스트처럼 보이지만 클릭 가능한 인터랙티브 요소이며, 호버 시 연한 배경이 나타나 버튼임을 인지시킨다.
+
+| 속성 | Default | Hover | Focus | Disabled |
+|---|---|---|---|---|
+| 배경 (fills) | 없음 `[]` | `color/primary/subtle` (#FFF5ED) | 없음 `[]` | 없음 `[]` |
+| 보더 (strokes) | 없음 `[]` | 없음 `[]` | 없음 `[]` | 없음 `[]` |
+| 텍스트 색상 | `color/primary/default` | `color/primary/hover` (#C75200) | `color/primary/default` | `color/primary/default` |
+| 포커스 링 | — | — | `shadow/focus` (3px 오렌지) | — |
+| 불투명도 | 1 | 1 | 1 | 0.4 |
+
+- **사용처**: 최소 강조 액션, 링크성 버튼, 인라인 텍스트 내 액션, "더 보기", "취소" 등
+- **Figma 속성 요약**: `fills: []`, `strokes: []`, `strokeWeight: 0` — 배경·보더 모두 빈 배열
+
+> ⚠️ **Ghost vs Text 차이점**
+>
+> | 구분 | Ghost | Text |
+> |---|---|---|
+> | 보더 | `1px solid color/primary/default` | **없음** |
+> | 배경 (Default) | transparent | transparent |
+> | 호버 배경 | `color/primary/subtle` | `color/primary/subtle` |
+> | 호버 텍스트 | 그대로 | `color/primary/hover`로 변경 |
+> | 시각적 인상 | 테두리가 있는 투명 버튼 | 텍스트만 있는 링크형 버튼 |
+>
+> Figma에서 Ghost를 클론하여 Text를 생성할 경우, 반드시 `strokes: []`, `strokeWeight: 0`으로 변경해야 한다.
 
 ### Subtle (저강조)
 - **배경**: `color/primary/subtle`
@@ -128,8 +149,8 @@ Height에는 Size/Semantic Variables (size/XL, L, M, S) 바인딩 (XS는 size/20
 
 Primary: 배경 #F26A00, 흰색 텍스트, 호버 #C75200, 액티브 scale(0.97)
 Secondary: 흰색 배경, 1px 회색 보더, 호버 시 보더 진해짐
-Ghost: 투명 배경, 오렌지 텍스트/보더, 호버 시 연한 오렌지 배경
-Text: 투명 배경, 보더 없음, 오렌지 텍스트, 호버 시 연한 오렌지 배경
+Ghost: 투명 배경, 오렌지 보더(1px solid), 오렌지 텍스트, 호버 시 연한 오렌지 배경
+Text: 투명 배경, 보더 완전히 없음(strokes:[], strokeWeight:0), 오렌지 텍스트, 호버 시 텍스트→primary/hover(#C75200) + 배경→primary/subtle(#FFF5ED). Ghost와의 핵심 차이: 보더 유무
 Danger: 배경 #E8321E, 흰색 텍스트
 
 상태: Default, Hover, Active, Focus(3px 오렌지 링), Disabled(40% 불투명도), Loading(스피너)
