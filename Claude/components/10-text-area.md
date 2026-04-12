@@ -31,6 +31,22 @@ Input과 동일한 기본 토큰에 아래 항목 추가.
 
 > Text Area는 HUG가 아닌 Fixed Height를 사용한다. 사용자가 입력할 수 있는 최소 영역 확보를 위함.
 
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| Height (L) | `size/120` | 120px |
+| Height (M) | `size/80` | 80px |
+| Height (S) | `size/60` | 60px |
+| 내부 패딩 상하 (L) | `spacing/14` | 14px |
+| 내부 패딩 좌우 (L) | `spacing/14` | 14px |
+| 내부 패딩 상하 (M) | `spacing/11` | 11px |
+| 내부 패딩 좌우 (M) | `spacing/12` | 12px |
+| 내부 패딩 상하 (S) | `spacing/8` | 8px |
+| 내부 패딩 좌우 (S) | `spacing/10` | 10px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
 ---
 
 ## 스타일 변형
@@ -66,6 +82,14 @@ Input과 동일: Default, Hover, Focus, Error, Disabled
 |---|---|
 | layoutSizingHorizontal | `FILL` 또는 `HUG` |
 | layoutSizingVertical | `FIXED` |
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
 
 ---
 

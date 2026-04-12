@@ -19,6 +19,8 @@
 | 폰트 (레이블) | 11px / Medium 500 |
 | 모션 | 150ms ease-out |
 
+> 이 컴포넌트는 직각 형태로, Radius 토큰을 적용하지 않는다 (`radius/0`). 화면 가장자리에 붙는 하단 내비게이션 바이므로 보더 반경이 불필요하다.
+
 ---
 
 ## 변형 (Variant)
@@ -42,6 +44,23 @@
 - 아이템: 아이콘 + 레이블 (가로 배치, 긴 이름 지원)
 - 섹션 그룹화 + Divider
 - 활성 아이템: 배경 강조 + 좌측 인디케이터 바
+
+---
+
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| Navigation Bar 높이 | `size/3XL` | 64px |
+| Navigation Rail 너비 | `size/80` | 80px |
+| Navigation Drawer 너비 | 280~360px (레이아웃 고정 — 토큰 미적용) |
+| 아이콘 크기 (Bar/Rail) | `size/S` | 24px |
+| 아이콘 크기 (Drawer) | `size/20` | 20px |
+| 아이템 내 아이콘–레이블 간격 | `spacing/4` | 4px |
+| Drawer 아이템 패딩 좌우 | `spacing/16` | 16px |
+| Drawer 아이템 패딩 상하 | `spacing/12` | 12px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
 
 ---
 
