@@ -18,54 +18,88 @@
 
 ## 변형 (Variant)
 
-### Primary (주요)
-- **배경**: `color/primary/default` (#F26A00 라이트 / #FF8A1E 다크)
+버튼은 시각적 스타일에 따라 **Fill / Border / Text** 3가지 대분류로 나뉘며, 각 대분류 안에 **Primary / Secondary** 강조 단계가 존재한다. 추가로 특수 목적의 **Subtle**, **Danger** 변형이 있다.
+
+### 변형 구조 요약
+
+| 대분류 | 강조 | 설명 |
+|---|---|---|
+| **Fill** | Primary | 채워진 브랜드 컬러 배경. 가장 강한 시각적 강조 |
+| **Fill** | Secondary | 채워진 뉴트럴 배경. 보조적 강조 |
+| **Border** | Primary | 브랜드 컬러 보더. 중간 강조 |
+| **Border** | Secondary | 뉴트럴 보더. 낮은 강조 |
+| **Text** | Primary | 브랜드 컬러 텍스트만. 최소 강조 |
+| **Text** | Secondary | 뉴트럴 텍스트만. 최소 강조 보조 |
+| **Subtle** | — | 연한 브랜드 배경. 저강조 CTA |
+| **Danger** | — | 에러 컬러 배경. 삭제/위험 액션 전용 |
+
+---
+
+### Fill / Primary
+- **배경**: `color/primary/default` (#F26A00)
 - **텍스트**: `color/primary/on-primary` (#FFFFFF)
-- **호버**: `color/primary/hover` (#C75200)
-- **액티브**: `color/primary/active` (#9C3D00)
+- **호버**: 배경 → `color/primary/hover` (#C75200)
+- **액티브**: 배경 → `color/primary/active` (#9C3D00)
 - **사용처**: 주요 CTA, 저장, 확인
 
-### Secondary (보조)
-- **배경**: `color/surface/1`
+### Fill / Secondary
+- **배경**: `color/neutral/100` (#F0F0F0)
 - **텍스트**: `color/text/primary`
-- **보더**: 1px solid `color/border/default`
-- **호버**: 보더 → `color/border/strong`, 배경 → `color/surface/2`
-- **사용처**: 보조 액션, 취소
+- **호버**: 배경 → `color/neutral/200` (#E0E0E0)
+- **액티브**: 배경 → `color/neutral/300` (#D0D0D0)
+- **사용처**: 보조 액션, 덜 강조된 CTA, 주요 버튼과 나란히 배치 시
 
-### Ghost
+### Border / Primary
 - **배경**: transparent
 - **텍스트**: `color/primary/default`
 - **보더**: 1px solid `color/primary/default`
 - **호버**: 배경 → `color/primary/subtle`
-- **사용처**: 인라인 액션, 경계선이 있는 보조 버튼
+- **사용처**: 인라인 액션, 경계선이 있는 브랜드 보조 버튼
 
-### Text (텍스트)
+### Border / Secondary
+- **배경**: `color/surface/1`
+- **텍스트**: `color/text/primary`
+- **보더**: 1px solid `color/border/default`
+- **호버**: 보더 → `color/border/strong`, 배경 → `color/surface/2`
+- **사용처**: 보조 액션, 취소, 뉴트럴 톤 보조 버튼
 
-텍스트만으로 구성된 버튼. 배경도 보더도 없이 레이블 텍스트만 존재한다.
-시각적으로 일반 텍스트처럼 보이지만 클릭 가능한 인터랙티브 요소이며, 호버 시 연한 배경이 나타나 버튼임을 인지시킨다.
+### Text / Primary
+텍스트만으로 구성된 브랜드 컬러 버튼. 배경도 보더도 없이 레이블 텍스트만 존재한다.
 
 | 속성 | Default | Hover | Focus | Disabled |
 |---|---|---|---|---|
-| 배경 (fills) | 없음 `[]` | `color/primary/subtle` (#FFF5ED) | 없음 `[]` | 없음 `[]` |
-| 보더 (strokes) | 없음 `[]` | 없음 `[]` | 없음 `[]` | 없음 `[]` |
+| 배경 | 없음 `[]` | `color/primary/subtle` (#FFF5ED) | 없음 `[]` | 없음 `[]` |
+| 보더 | 없음 `[]` | 없음 `[]` | 없음 `[]` | 없음 `[]` |
 | 텍스트 색상 | `color/primary/default` | `color/primary/hover` (#C75200) | `color/primary/default` | `color/primary/default` |
 | 포커스 링 | — | — | `shadow/focus` (3px 오렌지) | — |
 | 불투명도 | 1 | 1 | 1 | 0.4 |
 
-- **사용처**: 최소 강조 액션, 링크성 버튼, 인라인 텍스트 내 액션, "더 보기", "취소" 등
-- **Figma 속성 요약**: `fills: []`, `strokes: []`, `strokeWeight: 0` — 배경·보더 모두 빈 배열
+- **사용처**: 최소 강조 액션, 링크성 버튼, "더 보기", "취소" 등
+- **Figma 속성**: `fills: []`, `strokes: []`, `strokeWeight: 0`
 
-> ⚠️ **Ghost vs Text 차이점**
+### Text / Secondary
+텍스트만으로 구성된 뉴트럴 컬러 버튼.
+
+| 속성 | Default | Hover | Focus | Disabled |
+|---|---|---|---|---|
+| 배경 | 없음 `[]` | `color/neutral/100` (#F0F0F0) | 없음 `[]` | 없음 `[]` |
+| 보더 | 없음 `[]` | 없음 `[]` | 없음 `[]` | 없음 `[]` |
+| 텍스트 색상 | `color/text/secondary` | `color/text/primary` | `color/text/secondary` | `color/text/secondary` |
+| 포커스 링 | — | — | `shadow/focus` (3px 오렌지) | — |
+| 불투명도 | 1 | 1 | 1 | 0.4 |
+
+- **사용처**: 최소 강조 보조 액션, 뉴트럴 톤 인라인 액션
+- **Figma 속성**: `fills: []`, `strokes: []`, `strokeWeight: 0`
+
+> ⚠️ **Border vs Text 차이점**
 >
-> | 구분 | Ghost | Text |
+> | 구분 | Border | Text |
 > |---|---|---|
-> | 보더 | `1px solid color/primary/default` | **없음** |
-> | 배경 (Default) | transparent | transparent |
-> | 호버 배경 | `color/primary/subtle` | `color/primary/subtle` |
-> | 호버 텍스트 | 그대로 | `color/primary/hover`로 변경 |
-> | 시각적 인상 | 테두리가 있는 투명 버튼 | 텍스트만 있는 링크형 버튼 |
+> | 보더 | 1px solid (브랜드 또는 뉴트럴) | **없음** |
+> | 배경 (Default) | transparent 또는 surface | transparent |
+> | 시각적 인상 | 테두리가 있는 버튼 | 텍스트만 있는 링크형 버튼 |
 >
-> Figma에서 Ghost를 클론하여 Text를 생성할 경우, 반드시 `strokes: []`, `strokeWeight: 0`으로 변경해야 한다.
+> Border 버튼을 클론하여 Text 버튼을 생성할 경우, 반드시 `strokes: []`, `strokeWeight: 0`으로 변경해야 한다.
 
 ### Subtle (저강조)
 - **배경**: `color/primary/subtle`
@@ -92,9 +126,6 @@
 | L | `size/L` | 40px | `radius/M` (8px) | `text/label-md` (14px SemiBold) | 11px 16px |
 | M | `size/M` | 32px | `radius/M` (8px) | `text/label-sm` (13px SemiBold) | 8px 12px |
 | S | `size/S` | 24px | `radius/S` (6px) | `text/label-xs` (12px Medium) | 4px 8px |
-| XS | `size/20` | 20px | `radius/XS` (4px) | `text/label-xs` (12px Medium) | 2px 6px |
-
-> XS 사이즈는 Size Semantic 토큰 범위(최소 S=24px) 외의 값이므로 Primitive(`size/20`)를 직접 참조한다.
 
 ---
 
@@ -122,7 +153,7 @@
 - 아이콘 전용 버튼은 `aria-label` 필수
 - 비활성 상태: `aria-disabled="true"` 사용
 - 포커스 링 항상 표시
-- 최소 터치 영역: 높이 44px (XL 사이즈 충족, L 이하는 터치 타깃 확보 필요)
+- 최소 터치 영역: 높이 44px (XL 사이즈 충족, L/M/S는 터치 타깃 확보 필요)
 
 ---
 
@@ -142,19 +173,25 @@
 ```
 다음 스펙으로 버튼(Button) 컴포넌트를 만들어줘:
 
-변형: Primary, Secondary, Ghost, Text, Subtle, Danger
-크기: XL (height 48px, 패딩 14px 20px, radius 8px), L (height 40px, 패딩 11px 16px, radius 8px), M (height 32px, 패딩 8px 12px, radius 8px), S (height 24px, 패딩 4px 8px, radius 6px), XS (height 20px, 패딩 2px 6px, radius 4px)
-Height에는 Size/Semantic Variables (size/XL, L, M, S) 바인딩 (XS는 size/20 Primitive 직접)
-폰트: Pretendard SemiBold 600 (XS, S는 Medium 500)
+대분류 3가지: Fill, Border, Text
+각 대분류에 강조 2단계: Primary, Secondary
+특수 변형: Subtle, Danger
 
-Primary: 배경 #F26A00, 흰색 텍스트, 호버 #C75200, 액티브 scale(0.97)
-Secondary: 흰색 배경, 1px 회색 보더, 호버 시 보더 진해짐
-Ghost: 투명 배경, 오렌지 보더(1px solid), 오렌지 텍스트, 호버 시 연한 오렌지 배경
-Text: 투명 배경, 보더 완전히 없음(strokes:[], strokeWeight:0), 오렌지 텍스트, 호버 시 텍스트→primary/hover(#C75200) + 배경→primary/subtle(#FFF5ED). Ghost와의 핵심 차이: 보더 유무
+크기: XL (48px, 패딩 14px 20px, radius 8px), L (40px, 패딩 11px 16px, radius 8px), M (32px, 패딩 8px 12px, radius 8px), S (24px, 패딩 4px 8px, radius 6px)
+Height에는 Size/Semantic Variables (size/XL, L, M, S) 바인딩
+폰트: Pretendard SemiBold 600 (S는 Medium 500)
+
+Fill/Primary: 배경 #F26A00, 흰색 텍스트, 호버 #C75200
+Fill/Secondary: 배경 #F0F0F0(neutral/100), 검정 텍스트, 호버 #E0E0E0(neutral/200)
+Border/Primary: 투명 배경, 오렌지 보더(1px solid), 오렌지 텍스트, 호버 시 연한 오렌지 배경
+Border/Secondary: 흰색 배경, 1px 회색 보더, 호버 시 보더 진해짐
+Text/Primary: 배경·보더 없음(strokes:[], strokeWeight:0), 오렌지 텍스트, 호버 시 연한 오렌지 배경
+Text/Secondary: 배경·보더 없음, 회색 텍스트(text/secondary), 호버 시 연한 뉴트럴 배경
+Subtle: 연한 오렌지 배경, 오렌지 텍스트
 Danger: 배경 #E8321E, 흰색 텍스트
 
 상태: Default, Hover, Active, Focus(3px 오렌지 링), Disabled(40% 불투명도), Loading(스피너)
 
 Combine as Variants 적용.
-네이밍: Button / {변형} / {크기} / {상태}
+네이밍: Button / {대분류} / {강조} / {크기} / {상태}
 ```
