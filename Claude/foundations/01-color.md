@@ -79,6 +79,16 @@ Warm Orange(#F26A00) 브랜드 컬러 기반의 컬러 시스템. Primitive → 
 | `color/primary/tint` | orange/100 | rgba(242,106,0,0.20) | 뱃지 bg, 태그 bg |
 | `color/primary/on-primary` | #FFFFFF | neutral/950 | Primary 배경 위 텍스트 |
 
+### Secondary (중립 인터랙션)
+
+| 토큰 | 라이트 | 다크 | 사용처 |
+|---|---|---|---|
+| `color/secondary/default` | neutral/600 | neutral/300 | Secondary 버튼 배경, 중립 인터랙션 기본 |
+| `color/secondary/hover` | neutral/700 | neutral/200 | Secondary 버튼 hover |
+| `color/secondary/active` | neutral/800 | neutral/100 | Secondary 버튼 pressed |
+| `color/secondary/subtle` | neutral/100 | neutral/800 | Secondary 연한 배경 (Text/Secondary 호버 등) |
+| `color/secondary/on-secondary` | #FFFFFF | neutral/950 | Secondary 배경 위 텍스트 |
+
 ### Background (페이지 배경)
 
 | 토큰 | 라이트 | 다크 | 사용처 |
@@ -152,6 +162,13 @@ Primary:
 - subtle: orange/50 / rgba(242,106,0,0.12)
 - tint: orange/100 / rgba(242,106,0,0.20)
 - on-primary: #FFFFFF / neutral/950
+
+Secondary:
+- default: neutral/600(Light) / neutral/300(Dark)
+- hover: neutral/700 / neutral/200
+- active: neutral/800 / neutral/100
+- subtle: neutral/100 / neutral/800
+- on-secondary: #FFFFFF / neutral/950
 
 Surface: 1/2/3/overlay
 Border: subtle/default/strong
