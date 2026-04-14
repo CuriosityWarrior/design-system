@@ -11,7 +11,7 @@
 |---|---|
 | 트랙 (OFF) | `color/border/strong` |
 | 트랙 (ON) | `color/primary/default` |
-| 썸 | #FFFFFF |
+| 썸 | `color/common/white` (#FFFFFF) |
 | 썸 그림자 | 0 1px 3px rgba(0,0,0,0.15) |
 | 보더 반경 (트랙/썸) | `radius/FULL` (9999px — pill 형태) |
 | 모션 | 100ms ease-out (썸 슬라이드) |
@@ -57,14 +57,14 @@
 ---
 
 ## 레이블 포함 패턴
-- 토글 좌측, 레이블 우측, 10px 간격
+- 토글 좌측, 레이블 우측, `spacing/10` (10px) 간격
 - 레이블: 14px / Regular
 
 ## 설정 목록 패턴
 - 전체 너비 행: 레이블+설명 좌측, 토글 우측
 - 레이블: 14px / Medium
 - 설명: 12px / Regular, `color/text/tertiary`
-- 행 패딩: 14px 20px
+- 행 패딩: `spacing/14` (14px) `spacing/20` (20px)
 - 하단 보더: 1px `color/border/subtle`
 
 ---
@@ -85,6 +85,11 @@
 > 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
 > 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
 > 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
 
 ---
 

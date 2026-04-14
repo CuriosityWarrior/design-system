@@ -50,6 +50,19 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 모든 상태 아이콘(`check_circle`, `warning`, `cancel`, `info`, `more_horiz`)은 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 닫기 버튼의 `close` 아이콘도 `01 — Icons` 페이지 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(✓, ✕, ⚠ 등)로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 `size/XS` (16px)로 통일한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```

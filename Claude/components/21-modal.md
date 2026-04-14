@@ -72,7 +72,19 @@
 | layoutSizingHorizontal | `FIXED` (크기 변형별 고정 너비) |
 | layoutSizingVertical | `HUG` (max-height 90vh) |
 
-> 너비는 크기 변형(sm/md/lg 등)에서 고정. Height는 콘텐츠에 맞춰 hug하되 뷰포트 90% 제한. 임의 px 값으로 Fixed 지정 금지.
+> 너비는 크기 변형(S/M/L 등)에서 고정. Height는 콘텐츠에 맞춰 hug하되 뷰포트 90% 제한. 임의 px 값으로 Fixed 지정 금지.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 헤더의 닫기 아이콘(`close`, 24x24)은 반드시 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(✕ 등)로 닫기 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다.
 
 ---
 

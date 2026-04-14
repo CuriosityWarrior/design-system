@@ -9,24 +9,24 @@
 
 | 토큰 | 값 |
 |---|---|
-| 패딩 | 12px 16px |
+| 패딩 | `spacing/12` (12px) `spacing/16` (16px) |
 | 하단 보더 | 1px solid `color/border/subtle` |
 | 호버 배경 | `color/surface/2` |
 | 모션 | `motion/hover` = 100ms |
 | 아이콘 컨테이너 | 36×36px, `radius/button` = 8px, `color/primary/subtle` |
-| 제목 폰트 | `text/label-md` = 14px / Medium |
+| 제목 폰트 | `text/label-MD` = 14px / Medium |
 | 설명 폰트 | 12px / Regular, `color/text/tertiary` |
 | 메타 폰트 | 12px / Regular, `color/text/tertiary` |
 
 ---
 
-> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 아이콘 컨테이너는 `size/icon-button/lg`(40px) 또는 `size/icon-button/md`(32px) 적용 가능.
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 아이콘 컨테이너는 `size/icon-button/L`(40px) 또는 `size/icon-button/M`(32px) 적용 가능.
 
 ## 구조 (좌측에서 우측)
 1. **아이콘 컨테이너** (선택): 36×36px 둥근 정사각형
 2. **콘텐츠** (flex-1):
    - 제목: 14px / Medium, `color/text/primary`
-   - 설명 (선택): 12px / Regular, `color/text/tertiary`, 제목 아래 2px
+   - 설명 (선택): 12px / Regular, `color/text/tertiary`, 제목 아래 `spacing/2` (2px)
 3. **메타** (선택): 12px / Regular, `color/text/tertiary`, 우측 정렬
 
 ---
@@ -47,6 +47,11 @@
 > 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
 > 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
 > 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
 
 ---
 

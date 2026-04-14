@@ -16,7 +16,7 @@
 | 활성 배경 | `color/primary/default` |
 | 활성 텍스트 | `color/primary/on-primary` |
 | 폰트 | 13px / Medium |
-| 간격 | 버튼 사이 4px |
+| 간격 | 버튼 사이 `spacing/4` (4px) |
 | 모션 | `motion/hover` = 100ms |
 
 ---
@@ -24,11 +24,11 @@
 > 📐 버튼 크기는 [파운데이션: 사이즈](../foundations/07-size.md)의 `size/icon-button/md`(32px) Semantic 토큰을 참조한다.
 
 ## 요소
-- 이전 버튼 (‹): 첫 번째 페이지에서 비활성
+- 이전 버튼: `chevron_left` 아이콘 인스턴스 (`01 — Icons`) — 첫 번째 페이지에서 비활성
 - 페이지 번호 버튼: 클릭 가능
 - 활성 페이지: Primary 색상 배경
-- 말줄임표 (···): 건너뛴 페이지 표시
-- 다음 버튼 (›): 마지막 페이지에서 비활성
+- 말줄임표: `more_horiz` 아이콘 인스턴스 (`01 — Icons`) — 건너뛴 페이지 표시
+- 다음 버튼: `chevron_right` 아이콘 인스턴스 (`01 — Icons`) — 마지막 페이지에서 비활성
 
 ---
 
@@ -58,6 +58,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -72,7 +77,7 @@
 - 활성: 오렌지 배경 (#F26A00), 흰색 텍스트
 - 비활성: 40% 불투명도 (이전/다음 화살표)
 
-요소: ‹ 이전, 페이지 번호, ··· 말줄임표, 다음 ›
+요소: chevron_left 이전, 페이지 번호, more_horiz 말줄임표, 다음 chevron_right (모두 01 — Icons 인스턴스)
 
 정보 포함 변형:
 - "전체 128개 중 21–30번째" 텍스트 좌측

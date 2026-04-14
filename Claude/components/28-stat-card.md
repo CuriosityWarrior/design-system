@@ -12,7 +12,7 @@
 | 배경 | `color/surface/1` |
 | 보더 | 1px solid `color/border/default` |
 | 보더 반경 | `radius/card` = 12px |
-| 패딩 | 18px 20px |
+| 패딩 | `spacing/18` (18px) `spacing/20` (20px) |
 | 레이블 폰트 | 12px / Medium 500, `color/text/tertiary`, 대문자 |
 | 값 폰트 | 28px / Bold 700, 자간 -0.02em |
 | 변화 폰트 | 12px / Regular |
@@ -23,13 +23,13 @@
 
 ## 구조
 1. **레이블**: 12px Medium 대문자, `color/text/tertiary`
-   - 하단 여백: 8px
+   - 하단 여백: `spacing/8` (8px)
 2. **값**: 28px Bold, `color/text/primary`
-   - 하단 여백: 6px
+   - 하단 여백: `spacing/6` (6px)
 3. **변화 인디케이터**: 트렌드 화살표 + 퍼센트 텍스트
-   - 증가: ↑ + `color/success/text` 텍스트
-   - 감소: ↓ + `color/error/text` 텍스트
-   - 중립: — + `color/text/tertiary` 텍스트
+   - 증가: `trending_up` 아이콘 인스턴스 (`01 — Icons`) + `color/success/text` 텍스트
+   - 감소: `trending_down` 아이콘 인스턴스 (`01 — Icons`) + `color/error/text` 텍스트
+   - 중립: `trending_flat` 아이콘 인스턴스 (`01 — Icons`) + `color/text/tertiary` 텍스트
 
 ---
 
@@ -58,6 +58,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -71,9 +76,9 @@
 1. 레이블: 12px Medium 대문자 회색 텍스트 (예: "총 사용자")
 2. 값: 28px Bold 대형 숫자 (예: "12,482")
 3. 변화: 트렌드 화살표가 있는 소형 텍스트
-   - ↑ 초록 텍스트 증가 (예: "↑ 12.5% 지난 달 대비")
-   - ↓ 빨간 텍스트 감소
-   - — 회색 텍스트 중립
+   - trending_up 아이콘 인스턴스(01 — Icons) + 초록 텍스트 증가 (예: "trending_up 12.5% 지난 달 대비")
+   - trending_down 아이콘 인스턴스(01 — Icons) + 빨간 텍스트 감소
+   - trending_flat 아이콘 인스턴스(01 — Icons) + 회색 텍스트 중립
 
 그리드: 4개 카드로 구성된 4열 레이아웃 예시
 

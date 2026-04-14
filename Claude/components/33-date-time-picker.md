@@ -15,10 +15,10 @@
 | 팝오버 배경 | `color/surface/1` |
 | 팝오버 보더 반경 | `radius/dropdown` = 10px |
 | 팝오버 그림자 | `shadow/dropdown` |
-| 팝오버 패딩 | 16px |
+| 팝오버 패딩 | `spacing/16` (16px) |
 | 폰트 | 13px / Regular 400 |
-| 셀 크기 | 36 × 36px |
-| 셀 보더 반경 | 8px |
+| 셀 크기 | `size/XL` (36px) × `size/XL` (36px) |
+| 셀 보더 반경 | `radius/M` (8px) |
 | 포커스 링 | `shadow/focus` |
 
 ---
@@ -80,6 +80,18 @@
 - Day Grid: `role="grid"`, 각 셀 `role="gridcell"`
 - 키보드: ← → ↑ ↓ 날짜 이동, PageUp/Down 월 이동, Enter 선택
 - 스크린리더: 선택된 날짜 전체 형식으로 읽기 ("2026년 4월 10일 금요일")
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 트리거의 캘린더 아이콘(`calendar_today`)과 헤더의 이전/다음 쉐브론(`chevron_left`, `chevron_right`)은 반드시 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(📅, ◀, ▶ 등)로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다.
 
 ---
 

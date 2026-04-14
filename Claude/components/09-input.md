@@ -9,7 +9,7 @@
 
 | 토큰 | 값 |
 |---|---|
-| 폰트 | 14px / Regular 400 → `text/body-sm` |
+| 폰트 | 14px / Regular 400 → `text/body-SM` |
 | 배경 | `color/surface/1` |
 | 보더 | 1px solid `color/border/default` |
 | 보더 반경 | `radius/input` = 8px |
@@ -26,9 +26,9 @@
 
 | 크기 | Height 토큰 | Height | 폰트 | 패딩 (세로 × 가로) |
 |---|---|---|---|---|
-| Large (lg) | `size/input/lg` → `size/xl` | 48px | 16px | 14px 14px |
-| Medium (md) | `size/input/md` → `size/lg` | 40px | 14px | 11px 12px |
-| Small (sm) | `size/input/sm` → `size/sm` | 24px | 13px | 4px 10px |
+| Large (L) | `size/input/L` → `size/XL` | 48px | 16px | 14px 14px |
+| Medium (M) | `size/input/M` → `size/L` | 40px | 14px | 11px 12px |
+| Small (S) | `size/input/S` → `size/S` | 24px | 13px | 4px 10px |
 
 ---
 
@@ -58,7 +58,7 @@
 - 배경: `color/background/subtle`
 - 보더: 없음 (포커스 상태에서만 `color/primary/default` 보더 표시)
 
-> 두 스타일 모두 동일한 사이즈(lg, md, sm) 및 상태(Default, Hover, Focus, Error, Success, Disabled, Readonly) 변형을 갖는다.
+> 두 스타일 모두 동일한 사이즈(L, M, S) 및 상태(Default, Hover, Focus, Error, Success, Disabled, Readonly) 변형을 갖는다.
 
 ---
 
@@ -103,6 +103,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -119,7 +124,7 @@
 - Large: height 48px, 16px, 패딩 14px 14px
 - Medium: height 40px, 14px, 패딩 11px 12px (기본)
 - Small: height 24px, 13px, 패딩 4px 10px
-Height에는 Size/Semantic Variables (size/input/lg, md, sm)를 바인딩
+Height에는 Size/Semantic Variables (size/input/L, M, S)를 바인딩
 
 상태:
 - 기본: 회색 보더

@@ -50,9 +50,9 @@
 
 ### Fill / Danger
 - **배경**: `color/error/default` (#E8321E)
-- **텍스트**: #FFFFFF
+- **텍스트**: `color/common/white` (#FFFFFF)
 - **호버**: 배경 → `color/error/text` (#C72816 계열)
-- **액티브**: 배경 → darken 10%
+- **액티브**: 배경 → `color/error/active` (토큰 기반 호버 상태)
 - **사용처**: 삭제 확인, 계정 탈퇴 등 되돌리기 어려운 위험 액션
 
 ---

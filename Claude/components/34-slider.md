@@ -11,7 +11,7 @@
 |---|---|
 | 트랙 배경 | `color/surface/3` |
 | 트랙 활성 | `color/primary/default` |
-| 썸 배경 | #FFFFFF |
+| 썸 배경 | `color/common/white` (#FFFFFF) |
 | 썸 보더 | 2px solid `color/primary/default` |
 | 썸 그림자 | 0 1px 3px rgba(0,0,0,0.15) |
 | 트랙 높이 | 4px |
@@ -112,6 +112,11 @@
 > 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
 > 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
 > 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
 
 ---
 

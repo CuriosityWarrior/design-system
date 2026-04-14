@@ -9,11 +9,11 @@
 
 | 토큰 | 값 |
 |---|---|
-| 폰트 | 14px / Regular 400 → `text/body-sm` |
+| 폰트 | 14px / Regular 400 → `text/body-SM` |
 | 배경 | `color/surface/2` |
 | 보더 | 1px solid `color/border/default` |
 | 보더 반경 | `radius/input` = 8px |
-| 패딩 (좌·우) | 12px (아이콘 포함 시 좌측 36px) |
+| 패딩 (좌·우) | `spacing/12` (12px) (아이콘 포함 시 좌측 `size/XL` (36px)) |
 | 포커스 링 | `shadow/focus` = 0 0 0 3px rgba(242,106,0,0.20) |
 | 플레이스홀더 | `color/text/tertiary` |
 | 모션 | 100ms ease-out |
@@ -26,9 +26,9 @@
 
 | 크기 | Height 토큰 | Height | 폰트 |
 |---|---|---|---|
-| Large (lg) | `size/input/lg` → `size/xl` | 48px | 16px |
-| Medium (md) | `size/input/md` → `size/lg` | 40px | 14px |
-| Small (sm) | `size/input/sm` → `size/sm` | 24px | 13px |
+| Large (L) | `size/input/L` → `size/XL` | 48px | 16px |
+| Medium (M) | `size/input/M` → `size/L` | 40px | 14px |
+| Small (S) | `size/input/S` → `size/S` | 24px | 13px |
 
 ---
 
@@ -87,6 +87,18 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 프리픽스 검색 아이콘(`search`)과 클리어 버튼 아이콘(`close`)은 반드시 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(🔍, ✕ 등)로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -94,7 +106,7 @@
 
 변형: Search Bar, Search Bar with Shortcut, Search Field in Modal
 크기: Large (48px), Medium (40px), Small (24px)
-Height에는 Size/Semantic Variables (size/input/lg, md, sm)를 바인딩
+Height에는 Size/Semantic Variables (size/input/L, M, S)를 바인딩
 
 기본 구조:
 - 좌측: search 아이콘 (Icons 페이지 인스턴스 사용, 텍스트 기호 금지)

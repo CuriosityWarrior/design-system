@@ -20,23 +20,23 @@
 
 | 크기 | 폰트 | 패딩 |
 |---|---|---|
-| Large (lg) | 13px | 4px 12px |
-| Medium (md) | 12px | 3px 10px |
-| Small (sm) | 11px | 2px 8px |
+| Large (L) | 13px | 4px 12px |
+| Medium (M) | 12px | 3px 10px |
+| Small (S) | 11px | 2px 8px |
 
 ### Size/Spacing 토큰 바인딩
 
 | 속성 | 토큰 | 값 |
 |---|---|---|
-| Height (lg) | `size/S` | 24px |
-| Height (md) | `size/20` | 20px |
-| Height (sm) | `size/XS` | 16px |
-| 내부 패딩 상하 (lg) | `spacing/4` | 4px |
-| 내부 패딩 좌우 (lg) | `spacing/12` | 12px |
-| 내부 패딩 상하 (md) | `spacing/3` | 3px |
-| 내부 패딩 좌우 (md) | `spacing/10` | 10px |
-| 내부 패딩 상하 (sm) | `spacing/2` | 2px |
-| 내부 패딩 좌우 (sm) | `spacing/8` | 8px |
+| Height (L) | `size/S` | 24px |
+| Height (M) | `size/20` | 20px |
+| Height (S) | `size/XS` | 16px |
+| 내부 패딩 상하 (L) | `spacing/4` | 4px |
+| 내부 패딩 좌우 (L) | `spacing/12` | 12px |
+| 내부 패딩 상하 (M) | `spacing/3` | 3px |
+| 내부 패딩 좌우 (M) | `spacing/10` | 10px |
+| 내부 패딩 상하 (S) | `spacing/2` | 2px |
+| 내부 패딩 좌우 (S) | `spacing/8` | 8px |
 | 상태 점–텍스트 간격 | `spacing/4` | 4px |
 | 태그 제거 버튼 크기 | `size/14` | 14px |
 
@@ -101,6 +101,11 @@
 > 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
 > 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
 > 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
 
 ---
 
