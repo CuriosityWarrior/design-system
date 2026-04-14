@@ -100,6 +100,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```

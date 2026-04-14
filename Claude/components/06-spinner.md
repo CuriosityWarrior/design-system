@@ -21,9 +21,9 @@
 
 | 크기 | Size 토큰 | 가로 × 세로 | 보더 두께 |
 |---|---|---|---|
-| Large (lg) | `size/spinner/lg` → `size/lg` | 40 × 40px | 3px |
-| Medium (md) | `size/spinner/md` → `size/md` | 32 × 32px | 3px |
-| Small (sm) | `size/spinner/sm` → `size/sm` | 24 × 24px | 2.5px |
+| Large (L) | `size/spinner/L` → `size/L` | 40 × 40px | 3px |
+| Medium (M) | `size/spinner/M` → `size/M` | 32 × 32px | 3px |
+| Small (S) | `size/spinner/S` → `size/S` | 24 × 24px | 2.5px |
 | XS | `size/spinner/xs` → `size/xs` | 16 × 16px | 2px |
 
 ---
@@ -34,7 +34,7 @@
 |---|---|---|
 | Primary | `color/primary/default` (오렌지) | 기본 |
 | 무채색 (Muted) | `color/text/secondary` (회색) | 저강조 |
-| 흰색 (White) | #FFFFFF | 어두운/컬러 배경 위 |
+| 흰색 (White) | `color/common/white` (#FFFFFF) | 어두운/컬러 배경 위 |
 
 ---
 
@@ -72,6 +72,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -79,7 +84,7 @@
 
 원형 스피너:
 크기: Large(40px), Medium(32px), Small(24px), XS(16px)
-Width/Height에는 Size/Semantic Variables (size/spinner/lg, md, sm, xs)를 바인딩
+Width/Height에는 Size/Semantic Variables (size/spinner/L, M, S, xs)를 바인딩
 구조: 회색 트랙 + 오렌지 활성 호(상단), 700ms linear 무한 회전
 
 색상 변형:

@@ -58,6 +58,7 @@ Change Log
 04 — Shadow
 05 — Radius
 06 — Motion
+07 — Size
 
 [ COMPONENTS ]
 01 — Icons

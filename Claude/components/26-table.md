@@ -13,8 +13,8 @@
 | 헤더 배경 | `color/surface/2` |
 | 헤더 보더 | 1px solid `color/border/default` |
 | 셀 폰트 | 14px / Regular, `color/text/primary` |
-| 셀 패딩 (기본) | 10px 12px |
-| 셀 패딩 (컴팩트) | 6px 12px |
+| 셀 패딩 (기본) | `spacing/10` (10px) `spacing/12` (12px) |
+| 셀 패딩 (컴팩트) | `spacing/6` (6px) `spacing/12` (12px) |
 | 행 보더 | 1px solid `color/border/subtle` |
 | 행 호버 | `color/surface/2` |
 | 보더 반경 (컨테이너) | `radius/M` (8px) |
@@ -28,7 +28,7 @@
 
 ### 정렬
 - 컬럼 헤더: 클릭 가능
-- 정렬 표시: ↑ (오름차순) / ↓ (내림차순) 헤더 텍스트 뒤에 추가
+- 정렬 표시: `arrow_upward` 아이콘 인스턴스 (오름차순) / `arrow_downward` 아이콘 인스턴스 (내림차순) (`01 — Icons`) 헤더 텍스트 뒤에 추가
 - 기본: 표시 없음
 
 ### 행 선택
@@ -37,8 +37,8 @@
 - 선택된 행: `color/primary/subtle` 배경
 
 ### 밀도
-- 기본: 10px 12px 셀 패딩
-- 컴팩트: 6px 12px 셀 패딩
+- 기본: `spacing/10` (10px) `spacing/12` (12px) 셀 패딩
+- 컴팩트: `spacing/6` (6px) `spacing/12` (12px) 셀 패딩
 
 ---
 
@@ -70,6 +70,11 @@
 
 ---
 
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
 ## Figma Make 프롬프트
 
 ```
@@ -78,7 +83,7 @@
 헤더 행:
 - 12px Medium 대문자 회색 텍스트
 - 행보다 약간 어두운 배경
-- 정렬 가능한 컬럼 (↑↓ 인디케이터)
+- 정렬 가능한 컬럼 (arrow_upward / arrow_downward 아이콘 인스턴스, 01 — Icons)
 - 선택 전체 체크박스 (선택적)
 
 데이터 행:

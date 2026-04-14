@@ -26,9 +26,9 @@
 
 | 크기 | Size 토큰 | 가로 × 세로 | 아이콘 크기 |
 |---|---|---|---|
-| Large (lg) | `size/fab/lg` → `size/2xl` | 56 × 56px | 24px |
-| Medium (md) | `size/fab/md` → `size/xl` | 48 × 48px | 24px |
-| Small (sm) | `size/fab/sm` → `size/lg` | 40 × 40px | 20px |
+| Large (L) | `size/fab/L` → `size/2XL` | 56 × 56px | 24px |
+| Medium (M) | `size/fab/M` → `size/XL` | 48 × 48px | 24px |
+| Small (S) | `size/fab/S` → `size/L` | 40 × 40px | 20px |
 
 ---
 
@@ -40,7 +40,7 @@
 
 ### Extended FAB
 - 아이콘 + 텍스트 레이블을 한 행에 배치
-- Height: 48px, 패딩 16px 20px, 레이블 14px Medium
+- Height: 48px, 패딩 `spacing/16` (16px) `spacing/20` (20px), 레이블 14px Medium
 - Width: HUG
 
 ### Surface FAB
@@ -83,8 +83,20 @@
 ## 접근성
 - 아이콘 전용 FAB는 `aria-label` 필수 (예: `aria-label="글쓰기"`)
 - 포커스 링 항상 표시
-- 최소 터치 영역: 44px 이상 (sm 변형은 모바일에서 지양)
+- 최소 터치 영역: 44px 이상 (S 변형은 모바일에서 지양)
 - 화면 가장자리 여백 확보하여 시스템 UI와 충돌 방지
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 모든 아이콘은 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(+, ✕ 등)나 이모지, 직접 그린 벡터로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다 (L/M: 24px, S: 20px).
 
 ---
 
@@ -95,7 +107,7 @@
 
 변형: FAB (기본), Extended FAB, Surface FAB
 크기: Large (56px), Medium (48px), Small (40px)
-Width/Height에는 Size/Semantic Variables (size/fab/lg, md, sm) 바인딩
+Width/Height에는 Size/Semantic Variables (size/fab/L, M, S) 바인딩
 
 기본 FAB:
 - 오렌지 배경 (#F26A00), 흰색 아이콘

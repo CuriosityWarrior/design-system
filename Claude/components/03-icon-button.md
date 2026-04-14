@@ -29,10 +29,10 @@
 
 | 크기 | Size 토큰 | 가로 × 세로 | 아이콘 크기 |
 |---|---|---|---|
-| XLarge (xl) | `size/icon-button/xl` → `size/xl` | 48 × 48px | 24px |
-| Large (lg) | `size/icon-button/lg` → `size/lg` | 40 × 40px | 20px |
-| Medium (md) | `size/icon-button/md` → `size/md` | 32 × 32px | 16px |
-| Small (sm) | `size/icon-button/sm` → `size/sm` | 24 × 24px | 14px |
+| XLarge (XL) | `size/icon-button/XL` → `size/XL` | 48 × 48px | 24px |
+| Large (L) | `size/icon-button/L` → `size/L` | 40 × 40px | 20px |
+| Medium (M) | `size/icon-button/M` → `size/M` | 32 × 32px | 16px |
+| Small (S) | `size/icon-button/S` → `size/S` | 24 × 24px | 14px |
 
 ---
 
@@ -71,7 +71,20 @@
 ## 접근성
 - 액션을 설명하는 `aria-label` 항상 필요 (예: `aria-label="편집"`)
 - 호버 시 툴팁으로 액션 레이블 표시
-- 최소 터치 영역: 44px (xl 사이즈 충족, lg 이하는 터치 타깃 확보 필요)
+- 최소 터치 영역: 44px (XL 사이즈 충족, L 이하는 터치 타깃 확보 필요)
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 모든 아이콘은 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(✓, ✕, ▶ 등)로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다 (XL: 24px, L: 20px, M: 16px, S: 14px).
+- 직접 그린 벡터나 이모지로 아이콘을 대체하는 것을 금지한다.
 
 ---
 
@@ -81,7 +94,7 @@
 다음 스펙으로 아이콘 버튼(Icon Button) 컴포넌트를 만들어줘:
 
 크기: XLarge (48×48px, 아이콘 24px), Large (40×40px, 아이콘 20px), Medium (32×32px, 아이콘 16px), Small (24×24px, 아이콘 14px)
-Width/Height에는 Size/Semantic Variables (size/icon-button/xl, lg, md, sm)를 바인딩
+Width/Height에는 Size/Semantic Variables (size/icon-button/XL, L, M, S)를 바인딩
 변형: Primary, Secondary, Ghost
 보더 반경: 8px
 
