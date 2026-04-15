@@ -123,6 +123,18 @@
 
 ---
 
+---
+
+## 사용 원칙
+
+| 원칙 | 설명 |
+|---|---|
+| 플랫폼에 맞는 변형 선택 | 모바일에는 Navigation Bar(하단), 데스크톱에는 Navigation Rail 또는 Navigation Drawer를 사용한다. 플랫폼 고유의 탐색 패턴을 따른다. |
+| 탑레벨 목적지만 포함 | Navigation Bar에는 앱의 최상위 목적지(홈, 검색, 알림, 프로필 등)만 포함한다. 하위 페이지 이동에는 Tabs나 Breadcrumb를 사용한다. |
+| 목적지 수 제한 준수 | Bottom Navigation은 3~5개, Rail은 3~7개 목적지를 기준으로 한다. 항목이 너무 많으면 Navigation Drawer로 전환을 검토한다. |
+| 항상 고정 표시 | Navigation Bar는 스크롤에 관계없이 화면에 항상 고정된다. 일부 콘텐츠 화면에서만 숨기더라도 일관된 패턴을 유지한다. |
+| Tabs와 혼용 금지 | 같은 화면에서 Navigation Bar와 Tabs를 같은 계층 전환 목적으로 동시에 사용하지 않는다. Navigation Bar는 앱 전역, Tabs는 페이지 내부에서만 사용한다. |
+
 ## Figma Make 프롬프트
 
 ```
