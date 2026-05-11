@@ -103,7 +103,7 @@ Figma `Change Log` 페이지의 카드 프레임 내부는 다음 2개 영역으
 - 각 축은 슬래시(`/`)로 구분하고, 축이 불필요한 경우 생략할 수 있다.
 - 예:
   - `Button / Primary / LG / Default`
-  - `Icon Button / Ghost / MD / Hover`
+  - `Icon Button / Tertiary / MD / Hover`
   - `Badge / Success / SM`
   - `Divider / Horizontal / Default`
 
@@ -366,7 +366,7 @@ for (const node of children) {
 - Variant 속성명은 §1의 네이밍 규칙(`{이름}/{변형}/{크기}/{상태}`)을 따른다.
 
 > **판단 기준 예시**
-> - Button — Primary/Secondary/Ghost × XS/S/M/L × Default/Hover/Pressed/Disabled → 다중 변형 → Component Set ✅
+> - Button — Fill/Border/Text × Primary/Secondary/Danger × XL/L/M/S × Default/Hover/Focus/Disabled → 다중 변형 → Component Set ✅
 > - Card — 변형 없이 Default 1종만 존재 → 단일 변형 → 개별 COMPONENT 유지 ✅
 > - Modal — Default 1종만 존재 → 단일 변형 → 개별 COMPONENT 유지 ✅
 
@@ -408,30 +408,46 @@ for (const node of children) {
   - Change Log 페이지 entries — 버전 이력
 - 카드 프레임 내부에 "Labels", "Spec", "Meta" 등 별도 프레임/그룹을 생성하지 않는다 ([§1.6](#16-페이지-내-메타-박스-금지)).
 
-### 변형 배치 규칙
+### 변형 배치 규칙 (계층 기반)
 
-**기본 — 5 columns × N rows 그리드** (좌→우, 위→아래 순)
+컴포넌트의 변형 축을 **그룹 > 위계 > 상태 > 사이즈** 의미적 계층으로 정렬하고, 각 계층 간 간격을 다르게 적용한다.
 
-**예외 — wide-stack (1 column × N rows)**:
-- 변형의 width/height 비율 > 2 AND 변형 너비 > 200px AND 변형 수 ≤ 5
-- 위 조건 모두 충족 시 세로 1열로 스택 (대표: Alert, Toast, List Item, Tabs, Skeleton)
+| 계층 | 의미 | 대표 예시 | 변형 간 간격 |
+|---|---|---|---|
+| **그룹** | 의미적으로 분리되는 최상위 분류 (스타일 분류, 시멘틱 컬러 등) | Button의 `Fill / Border / Text`, Text Area/Select/Input의 `Border / Surface`, Badge/Progress Bar의 `Primary / Success / Error` | **100px** |
+| **위계** | 강조 수준 또는 importance | Button의 `Primary / Secondary / Danger`, Icon Button의 `Primary / Secondary / Tertiary` | **50px** |
+| **상태** | 인터랙션 상태 | `Default / Hover / Focus / Disabled / Selected / ...` | **20px** |
+| **사이즈** | T-Shirt 사이즈 | `XL / L / M / S / XS` | **20px** |
 
-| 컴포넌트 | 변형 수 | 적용 레이아웃 |
-|---|---|---|
-| Avatar (1D × Size) | 7 | 5-col 그리드 (5×2) |
-| Spinner | 4 | 5-col 그리드 (4×1) |
-| Icon Button (3D) | 48 | 5-col 그리드 (5×10) |
-| Button (4D) | 144 | 5-col 그리드 (5×29) |
-| Alert (wide) | 5 | wide-stack (1×5) |
-| Toast (wide) | 2 | wide-stack (1×2) |
-| List Item (wide) | 3 | wide-stack (1×3) |
-| Tabs (wide) | 2 | wide-stack (1×2) |
-| Skeleton (wide max) | 5 | wide-stack (1×5) |
+### 축 수별 적용 패턴
 
-### 간격 규칙
+| 축 수 | 대표 컴포넌트 | 계층 적용 | 배치 |
+|---|---|---|---|
+| **1축 (Size 또는 Variant)** | Avatar, Spinner, Chip, Label, Stat Card, Tooltip, Tabs, Alert, Toast, Skeleton, List Item, Data Case 등 | 사이즈/상태 20px | 가로 1행 또는 (wide variant ≤5는) 세로 1열 스택, 20px 간격 |
+| **2축 (Size × State)** | Toggle, Checkbox, Radio | 사이즈/상태 20px | 행 = Size, 열 = State, 모두 20px 간격 |
+| **2축 (Variant × Size, 그룹 분리)** | Badge, Progress Bar | Variant 그룹 100px / Size 20px | 행 = Variant (100px), 열 = Size (20px) |
+| **3축 (Style × Size × State)** | Text Area, Select, Input | Style **그룹 100px** / Size·State 20px | 각 Style 블록(Size × State 2D 그리드)을 세로로 100px 간격 스택 |
+| **3축 (Variant × Size × State, 위계 분리)** | Icon Button | Variant **위계 50px** / Size·State 20px | 각 Variant 블록을 세로로 50px 간격 스택 |
+| **4축 (Style × Emphasis × Size × State)** | Button | Style **100** / Emphasis **50** / Size·State 20 | Style 블록을 100px 간격으로 세로 스택, 각 Style 블록 내에 Emphasis 블록을 50px 간격으로 스택, 각 Emphasis 블록은 Size × State 2D 그리드 |
 
-- **변형 사이 상하좌우 20px 균등 간격**
-- 그리드 외곽에 추가 padding 없음 (카드 프레임의 100px 패딩만 적용 — §2)
+### 그리드 셀 규칙
+
+- **컬럼 너비**: Component Set 내 최대 변형 너비 (모든 셀 동일 너비, 변형은 left-top 정렬)
+- **행 높이**: 해당 사이즈의 변형 높이 (사이즈마다 다른 행 높이 허용 — 사이즈 내림차순 정렬 권장)
+- **그리드 외곽 padding 없음** (카드 프레임 100px 패딩만 적용 — §2)
+- **Component Set 위치**: 카드 내 `(100, 190)` — 페이지 헤더 아래 적정 거리
+
+### 그룹/위계 블록 정렬 방향
+
+- **기본: 세로 스택** (블록들이 위→아래로 쌓임, 같은 너비 유지)
+- 가로 스택은 별도 검토 (예: 작은 시멘틱 변형이 많을 때 가로가 시각적으로 유리한 경우)
+
+### 절대 좌표 배치
+
+- Component Set의 **Auto Layout 사용 금지** (`layoutMode = NONE`)
+- 변형들은 위 알고리즘으로 계산한 `(x, y)` 절대 좌표로 배치한다
+- Component Set 크기는 변형 배치에 맞춰 결정 (외곽 padding 없음)
+- 카드 프레임은 Component Set + 헤더 + 100px 패딩에 맞춰 자동 확장한다 (§2)
 
 ### 절대 좌표 배치
 
@@ -513,3 +529,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.9 | 2026.05.11 | §10 메타 라벨 depth를 3 → 4로 확장. depth 4 신설 (Inter Bold 17 #000) — Button과 같이 Style 그룹 + 위계(Primary/Secondary/Danger) + 상태 + 사이즈 4축 컴포넌트의 최상위 그룹 헤더용. Depth 적용 가이드 표를 4D 그리드 행으로 보강 (Button: Style→depth 4 / Strong→depth 3 / 상태→depth 2 / 사이즈→depth 1). 디자인 시스템에서 단일 컴포넌트의 최대 권장 depth는 4임을 명문화 (5축 이상은 컴포넌트 분리·결합 토큰화·페이지 분할 등으로 해소 권장). Figma 적용: 페이지 헤더 일괄 정규화 — 전 페이지(Foundations 7 + Components 38 + Change Log) 타이틀·설명을 Inter Bold 32 / Inter Medium 15 / #000으로 정규화. |
 | v2.10 | 2026.05.11 | Figma 1D / 단일 변형 페이지 17건에 depth 1 메타 라벨 41개 일괄 추가 (모두 Inter Regular 11 #000). 레이아웃 패턴 3종 적용 — (a) horizontal-below 균등 baseline 5페이지: Spinner / Tooltip / Stat Card / Chip / Label (b) vertical-left 4페이지: Alert / Toast / Tabs / List Item (c) individual-below 1페이지: Skeleton (d) single-below 6페이지: Card / Modal / Drawer / Breadcrumb / Pagination / Table. Data Case는 6 변형이 카드 내 동일 좌표 겹침 상태로 별도 정리 필요해 보류. |
 | v2.11 | 2026.05.11 | **§10 전면 단순화: 메타 라벨 폐지 + 변형 그리드 배치 규칙**. 페이지에 변형 식별용 텍스트 라벨을 두지 않기로 결정 — 변형은 시각 차이 + Figma Variant Property 패널로 식별. 기존 depth 1~4 폰트 스펙·라벨↔베리언트 1:1 매칭·그리드별 라벨 배치 매트릭스 등 라벨 관련 모든 규칙 제거. 변형 배치 신규 규칙: (1) 기본 5 columns × N rows (2) 예외 wide-stack: width/height > 2 + width > 200 + 변형수 ≤ 5일 때 1 column 스택 (3) 변형 사이 상하좌우 20px 균등 간격 (4) Component Set Auto Layout 사용 금지, 절대 좌표 배치. 페이지 헤더(Inter Bold 32 / Inter Medium 15)는 유지. §7에 메타 라벨 예외 노트 갱신, §9 간격 규칙도 메타 라벨 제거 반영. Figma 적용: [ COMPONENTS ] 섹션 38페이지 일괄 정리 — 메타 라벨 186건 삭제, 30개 Component Set 5-col 그리드 또는 wide-stack 재배치 (Alert/Toast/List Item/Tabs/Skeleton/Divider/Search/Navigation Bar = wide-stack, 나머지 22 = 5-col 그리드). |
+| v2.12 | 2026.05.11 | **§10 계층 기반 레이아웃 정책 도입**. v2.11 5-col 그리드 정책 폐지. 컴포넌트 변형을 그룹(100px) > 위계(50px) > 상태/사이즈(20px) 의미적 계층으로 정렬. 축 수별 적용 패턴 표 신설 (1축/2축/2축 그룹/3축 그룹/3축 위계/4축). §8에서 잘못 작성된 Button Variants 예시 수정 (Primary/Secondary/Ghost → Fill/Border/Text × Primary/Secondary/Danger). Figma 적용: (1) Button 4축 계층 배치 (2) Icon Button 3축 위계 50px (3) Text Area/Select/Input 3축 그룹 100px (Input은 Surface 접두사로 Border/Surface 가상 그룹화) (4) Toggle/Checkbox/Radio 2축 flat 20px (5) Progress Bar/Badge 2축 Variant 그룹 100px (6) Avatar 7→5 사이즈 (XXL/XXS 변형 삭제, 5 사이즈를 1D 가로 행 20px 간격) (7) Icons 110개 컴포넌트 모두 24×24 적용 + width/height를 size/S Variable에 바인딩 (109개 신규 바인딩 + 1개 기존). md 갱신: 03-icon-button.md Ghost → Tertiary 4건, 05-avatar.md 사이즈 표 7종→5종(XXL/XXS 제거), 디자인 가이드의 Variants 네이밍 예시 정정. |
