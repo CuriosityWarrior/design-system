@@ -442,6 +442,35 @@ for (const node of children) {
 - **기본: 세로 스택** (블록들이 위→아래로 쌓임, 같은 너비 유지)
 - 가로 스택은 별도 검토 (예: 작은 시멘틱 변형이 많을 때 가로가 시각적으로 유리한 경우)
 
+### 작은 변형 그룹의 간격 예외
+
+- **변형 크기가 작아 100px 그룹 간격이 시각적으로 과한 경우**, 그룹 간격을 **50px**로 축소한다 (위계 수준으로 다운그레이드).
+- 예: Badge — Primary/Success/Warning/Error/Info/Neutral 변형들이 모두 22×68px 이하의 작은 칩이라 100px 간격이 비대칭적으로 보임 → **Variant 간 50px**.
+- 판단 기준: 변형 높이 < 50px 또는 변형 너비 < 100px 정도면 50px 권장.
+
+### 한 페이지 다중 컴포넌트 정책
+
+한 페이지에 **독립된 2개 이상의 컴포넌트가 존재**하는 경우 (예: `04 — Badge & Tag` 페이지의 Tag + Badge):
+
+- 각 컴포넌트(Component / Component Set) 사이 간격 **100px** (그룹 수준)
+- 컴포넌트는 세로로 스택 (단순한 것부터 → 복잡한 것 순서 권장)
+- 모든 컴포넌트는 x=100 좌측 정렬 유지
+- 카드 패딩은 전체 컴포넌트 그룹의 최외곽 기준 100px 유지
+
+### 페이지 레이아웃 좌표 (전 페이지 공통)
+
+| 요소 | 좌표 |
+|---|---|
+| 카드 프레임 | (0, 0), 패딩 100px 사방 |
+| 페이지 타이틀 | (100, 100) — Inter Bold 32, #000 |
+| 페이지 설명 | (100, 144) — Inter Medium 15, #000 |
+| 첫 번째 Component Set / Component | (100, **215**) — 설명 아래 **50px** 간격 |
+| 다중 컴포넌트의 다음 컴포넌트 | (100, 이전 컴포넌트 bottom + **100px**) |
+
+- **모든 요소 좌측 x=100 정렬** (페이지 헤더와 컴포넌트들이 같은 선상)
+- 카드 너비 = `100 + max(title.width, description.width, content.width) + 100`
+- 카드 높이 = `마지막 컴포넌트.bottom + 100`
+
 ### 절대 좌표 배치
 
 - Component Set의 **Auto Layout 사용 금지** (`layoutMode = NONE`)
@@ -530,3 +559,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.10 | 2026.05.11 | Figma 1D / 단일 변형 페이지 17건에 depth 1 메타 라벨 41개 일괄 추가 (모두 Inter Regular 11 #000). 레이아웃 패턴 3종 적용 — (a) horizontal-below 균등 baseline 5페이지: Spinner / Tooltip / Stat Card / Chip / Label (b) vertical-left 4페이지: Alert / Toast / Tabs / List Item (c) individual-below 1페이지: Skeleton (d) single-below 6페이지: Card / Modal / Drawer / Breadcrumb / Pagination / Table. Data Case는 6 변형이 카드 내 동일 좌표 겹침 상태로 별도 정리 필요해 보류. |
 | v2.11 | 2026.05.11 | **§10 전면 단순화: 메타 라벨 폐지 + 변형 그리드 배치 규칙**. 페이지에 변형 식별용 텍스트 라벨을 두지 않기로 결정 — 변형은 시각 차이 + Figma Variant Property 패널로 식별. 기존 depth 1~4 폰트 스펙·라벨↔베리언트 1:1 매칭·그리드별 라벨 배치 매트릭스 등 라벨 관련 모든 규칙 제거. 변형 배치 신규 규칙: (1) 기본 5 columns × N rows (2) 예외 wide-stack: width/height > 2 + width > 200 + 변형수 ≤ 5일 때 1 column 스택 (3) 변형 사이 상하좌우 20px 균등 간격 (4) Component Set Auto Layout 사용 금지, 절대 좌표 배치. 페이지 헤더(Inter Bold 32 / Inter Medium 15)는 유지. §7에 메타 라벨 예외 노트 갱신, §9 간격 규칙도 메타 라벨 제거 반영. Figma 적용: [ COMPONENTS ] 섹션 38페이지 일괄 정리 — 메타 라벨 186건 삭제, 30개 Component Set 5-col 그리드 또는 wide-stack 재배치 (Alert/Toast/List Item/Tabs/Skeleton/Divider/Search/Navigation Bar = wide-stack, 나머지 22 = 5-col 그리드). |
 | v2.12 | 2026.05.11 | **§10 계층 기반 레이아웃 정책 도입**. v2.11 5-col 그리드 정책 폐지. 컴포넌트 변형을 그룹(100px) > 위계(50px) > 상태/사이즈(20px) 의미적 계층으로 정렬. 축 수별 적용 패턴 표 신설 (1축/2축/2축 그룹/3축 그룹/3축 위계/4축). §8에서 잘못 작성된 Button Variants 예시 수정 (Primary/Secondary/Ghost → Fill/Border/Text × Primary/Secondary/Danger). Figma 적용: (1) Button 4축 계층 배치 (2) Icon Button 3축 위계 50px (3) Text Area/Select/Input 3축 그룹 100px (Input은 Surface 접두사로 Border/Surface 가상 그룹화) (4) Toggle/Checkbox/Radio 2축 flat 20px (5) Progress Bar/Badge 2축 Variant 그룹 100px (6) Avatar 7→5 사이즈 (XXL/XXS 변형 삭제, 5 사이즈를 1D 가로 행 20px 간격) (7) Icons 110개 컴포넌트 모두 24×24 적용 + width/height를 size/S Variable에 바인딩 (109개 신규 바인딩 + 1개 기존). md 갱신: 03-icon-button.md Ghost → Tertiary 4건, 05-avatar.md 사이즈 표 7종→5종(XXL/XXS 제거), 디자인 가이드의 Variants 네이밍 예시 정정. |
+| v2.13 | 2026.05.11 | **§10 페이지 레이아웃 규칙 보강 + Badge 50px 예외 + 다중 컴포넌트 정책**. 신규 규칙: (1) 페이지 헤더 ↔ 첫 컴포넌트 간격 50px 명시 (CS at y=215) (2) 좌측 정렬 — title/description/Component Set 모두 x=100 (3) 카드 패딩 정확히 상하좌우 100px 보장 (4) 페이지 레이아웃 좌표 표 추가 (5) 작은 변형 그룹 예외 — 변형 크기 작으면 그룹 간격 100→50px 다운그레이드 (Badge가 대표 케이스) (6) 한 페이지 다중 컴포넌트 정책 신설 — 각 컴포넌트 간 100px 간격, 세로 스택, x=100 정렬. Figma 적용: 38개 컴포넌트 페이지 전수 좌표 정규화 (title 100,100 / desc 100,144 / content 100,215 / 카드 100px 패딩). Badge Variant 간격 100→50px 재배치. 04 Badge & Tag 페이지에서 Tag(단일) + 100px gap + Badge(6×3 그리드) 다중 컴포넌트 배치. ⚠️ 01 — Icons 페이지 보강 사이드이펙트: v2.11에서 메타 라벨 일괄 삭제 시 카테고리 한글 라벨(내비게이션/액션/...)도 함께 삭제되어, 본 작업의 카테고리 그리드 복구에서 라벨 텍스트는 누락된 상태. 시각적 그룹화는 유지. 한글 라벨 재생성 여부는 사용자 결정 대기. |
