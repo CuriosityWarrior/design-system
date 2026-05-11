@@ -410,29 +410,30 @@ for (const node of children) {
 
 #### 메타 라벨 계층(depth)별 스펙
 
-라벨의 계층 깊이에 따라 폰트가 달라진다. **숫자가 클수록 상위 그룹(시각적으로 큼)**.
+라벨의 계층 깊이에 따라 폰트가 달라진다. **숫자가 클수록 상위 그룹(시각적으로 큼)**. 폰트 사이즈는 +2px 균등 증분, 굵기는 Regular → Medium → Semi Bold → Bold로 단계적 증가.
 
 | Depth | 용도 | 폰트 | 색상 |
 |---|---|---|---|
-| **Depth 3** | 최상위 그룹 헤더 (페이지 내에 변형 그룹이 2개 이상 있을 때의 그룹명 — 예: Icon Button의 `Primary` / `Secondary` / `Ghost`) | Inter **Semi Bold 15** | `#000000` |
-| **Depth 2** | 중간 sub-라벨 (그룹 내부 또는 2D 그리드의 한 축 — 예: Icon Button 그룹 안의 `lg` / `md` / `sm`, Toggle의 사이즈 축) | Inter **Medium 13** | `#000000` |
-| **Depth 1** | 잎(leaf) 식별 라벨 (단일 축 변형, 그리드 잎 셀 축 — 예: Avatar의 `XXL` / `XL` / `L` / `M` / `S` / `XS` / `XXS`, 상태 열 헤더 `Default` / `Hover` / `Focus` / `Disabled`) | Inter **Regular 11** | `#000000` |
+| **Depth 4** | 페이지 내 최상위 그룹 (Style 묶음 — 예: Button의 `Fill` / `Border` / `Text` 스타일 분류) | Inter **Bold 17** | `#000000` |
+| **Depth 3** | 2단계 그룹 헤더 (위계/주요 변형 — 예: Button의 `Primary` / `Secondary` / `Danger`, Icon Button의 `Primary` / `Secondary` / `Ghost`) | Inter **Semi Bold 15** | `#000000` |
+| **Depth 2** | 중간 sub-라벨 (그룹 내부 또는 2D 그리드의 한 축 — 예: Button의 상태 열 헤더, Icon Button의 사이즈 sub `lg` / `md` / `sm`) | Inter **Medium 13** | `#000000` |
+| **Depth 1** | 잎(leaf) 식별 라벨 (단일 축 변형, 그리드 잎 셀 축 — 예: Avatar의 `XXL`~`XXS`, Button의 사이즈 `XS`/`S`/`M`/`L`) | Inter **Regular 11** | `#000000` |
 
 > 💡 모든 메타 라벨은 `02 — Typography`의 Pretendard Text Style을 적용하지 **않는다**. Inter는 fontName 직접 지정으로 사용.
 
+> 📏 **최대 depth = 4 (권장 상한)**. 한 컴포넌트에서 5축 이상의 변형 그리드가 필요해 보이면 다음을 검토한다: (a) 별도 컴포넌트로 분리, (b) 두 축을 단일 토큰으로 합치기(예: 변형명을 `Primary-Filled` 식으로 결합), (c) 별도 페이지에 같은 컴포넌트의 다른 view로 분할. 5 depth 이상의 폰트 사이즈를 임의로 추가하지 않는다.
+
 #### Depth 적용 가이드 — 그리드 형태별 매핑
 
-| 그리드 형태 | 사용할 depth |
-|---|---|
-| 단일 변형 (Card, Modal, Drawer 등) | **depth 1** (변형 식별 라벨 1개) |
-| 1D × 사이즈 (Avatar, Spinner, Icon 등) | **depth 1** (사이즈 라벨) |
-| 1D × 변형 (Tooltip, Tabs, Alert, Toast, Skeleton, Data Case, List Item, Stat Card, Chip, Label) | **depth 1** (변형 라벨) |
-| 1D × 혼합축 (Divider Horizontal × Size + Vertical) | **depth 1** (각 변형 라벨) |
-| 2D 그리드 (Toggle / Checkbox / Radio / Progress Bar = 사이즈 × 상태 또는 변형 × 사이즈) | **depth 2** (행 축) + **depth 1** (열 축) |
-| 3D 그리드 (Icon Button / Input / Select / Text Area = 그룹 × 사이즈 × 상태) | **depth 3** (그룹) + **depth 2** (사이즈 sub) + **depth 1** (상태) |
-| 4D 이상 (Button = Style × Strong × Size × State) | **depth 3** (Style 또는 Strong 中 상위) + **depth 2** (하위 그룹) + **depth 1** (Size, State) |
-
-> 📐 한 페이지에서 4축 이상이라도 **depth는 최대 3까지만 사용**한다 — 같은 depth에 여러 축이 공존 가능 (예: Button의 Size와 State는 둘 다 depth 1).
+| 그리드 형태 | 대표 컴포넌트 | 사용할 depth |
+|---|---|---|
+| 단일 변형 | Card, Modal, Drawer 등 | **depth 1** (변형 식별 라벨 1개) |
+| 1D × 사이즈 | Avatar, Spinner, Icon | **depth 1** (사이즈 라벨) |
+| 1D × 변형 | Tooltip, Tabs, Alert, Toast, Skeleton, Data Case, List Item, Stat Card, Chip, Label | **depth 1** (변형 라벨) |
+| 1D × 혼합축 | Divider (Horizontal × Size + Vertical) | **depth 1** (각 변형 라벨) |
+| 2D 그리드 | Toggle, Checkbox, Radio, Progress Bar | **depth 2** (행 축) + **depth 1** (열 축) |
+| 3D 그리드 | Icon Button, Input, Select, Text Area | **depth 3** (그룹) + **depth 2** (사이즈 sub) + **depth 1** (상태) |
+| 4D 그리드 | Button (Style × Strong × State × Size) | **depth 4** (Style 그룹) + **depth 3** (Strong 위계) + **depth 2** (상태) + **depth 1** (사이즈) |
 
 ### 컴포넌트 텍스트 폰트 규칙
 - **컴포넌트 정의 내부 텍스트는 반드시 `02 — Typography` 페이지의 Pretendard Text Style을 적용한다.** ([§7](#7-타이포그래피-규칙))
@@ -554,3 +555,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.6 | 2026.05.11 | §10 라벨↔베리언트 매칭 규칙 세분화 — 라벨 누락·밀림 금지 명시, 그리드 형태별 라벨 배치 매트릭스 7종(단일 변형 / 1D 사이즈 / 1D 변형 / 1D 혼합축 / 2D 변형×사이즈 / 2D 변형×상태 / 3D 변형×사이즈×상태) 신설, 정렬 원칙(격자/baseline/라벨 위치 일관성) 추가, 라벨 동기화 점검 의무 부언. Figma 복구: Avatar 페이지 메타 라벨 7건 정정(xl→XXL/lg→XL/md→L/sm→M/xs→S 한 칸씩 밀림 수정 + 누락 XS/XXS 라벨 추가, 모두 §11 대문자), Divider 페이지 Vertical 변형 라벨 추가. |
 | v2.7 | 2026.05.11 | §10 메타 라벨 구조 규칙 신설 — 메타 라벨은 개별 텍스트 레이어로 카드 프레임 직접 자식으로 배치, 별도 프레임/그룹(Labels/Spec/Meta)으로 묶지 않음을 명문화. 정렬 원칙 기본값을 "상단(top) 정렬"로 명시. "1D × 사이즈 레이아웃 상세" 표 신설(변형 32px 균등 간격, top-aligned, 라벨 변형 수평 중앙·동일 y 등). Figma 적용: Avatar 페이지 좌측 카드를 우측 reference에 맞춰 정리(변형 가로 1행 재배치·32px 간격·top-aligned, 라벨 상단 동일 y·중앙 정렬, Component Set y=213). |
 | v2.8 | 2026.05.11 | §10 메타 라벨 폰트 규칙 재정의(depth 기반). 페이지 헤더 신설 — 페이지 타이틀(Inter Bold 32 #000), 페이지 설명(Inter Medium 15 #000). 메타 라벨을 3단계 depth로 정의: depth 1 (Inter Regular 11) / depth 2 (Inter Medium 13) / depth 3 (Inter Semi Bold 15), 모두 색상 #000000. Depth 적용 가이드 표 신설 — 그리드 형태별로 사용할 depth 매핑(단일 변형·1D·1D 혼합축은 depth 1 / 2D는 depth 2+1 / 3D는 depth 3+2+1 / 4D는 depth 3+2+1 with 같은 depth 공존). 이전 권장 표(SemiBold 14·Regular 12·Regular 11 / primary·secondary·tertiary 토큰)는 제거. Figma 적용: Avatar/Divider 페이지 타이틀·설명·전체 메타 라벨 새 스펙으로 정규화. |
+| v2.9 | 2026.05.11 | §10 메타 라벨 depth를 3 → 4로 확장. depth 4 신설 (Inter Bold 17 #000) — Button과 같이 Style 그룹 + 위계(Primary/Secondary/Danger) + 상태 + 사이즈 4축 컴포넌트의 최상위 그룹 헤더용. Depth 적용 가이드 표를 4D 그리드 행으로 보강 (Button: Style→depth 4 / Strong→depth 3 / 상태→depth 2 / 사이즈→depth 1). 디자인 시스템에서 단일 컴포넌트의 최대 권장 depth는 4임을 명문화 (5축 이상은 컴포넌트 분리·결합 토큰화·페이지 분할 등으로 해소 권장). Figma 적용: 페이지 헤더 일괄 정규화 — 전 페이지(Foundations 7 + Components 38 + Change Log) 타이틀·설명을 Inter Bold 32 / Inter Medium 15 / #000으로 정규화. |
