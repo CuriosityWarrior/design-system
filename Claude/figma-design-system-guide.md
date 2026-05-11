@@ -464,12 +464,28 @@ for (const node of children) {
 | 카드 프레임 | (0, 0), 패딩 100px 사방 |
 | 페이지 타이틀 | (100, 100) — Inter Bold 32, #000 |
 | 페이지 설명 | (100, 144) — Inter Medium 15, #000 |
-| 첫 번째 Component Set / Component | (100, **215**) — 설명 아래 **50px** 간격 |
+| 첫 번째 Component Set / Component | (100, **헤더 bottom + 50px**) — 설명이 있으면 `description.y + description.height + 50`, 없으면 `title.y + title.height + 50` |
 | 다중 컴포넌트의 다음 컴포넌트 | (100, 이전 컴포넌트 bottom + **100px**) |
 
 - **모든 요소 좌측 x=100 정렬** (페이지 헤더와 컴포넌트들이 같은 선상)
 - 카드 너비 = `100 + max(title.width, description.width, content.width) + 100`
 - 카드 높이 = `마지막 컴포넌트.bottom + 100`
+
+> 📌 **참고**: 페이지 설명 텍스트의 렌더링 높이가 변하면 첫 Component Set의 y 좌표도 함께 바뀐다 (보통 ~217 부근). 좌표를 절대값으로 고정하지 않고 헤더 bottom 기반으로 동적 계산할 것.
+
+### 간격 조정 시 패딩 검증 의무
+
+레이아웃 작업(변형 재배치, 헤더 위치 변경, 컴포넌트 추가/삭제 등) **직후 반드시 카드 패딩 4면 모두 100px인지 검증**한다.
+
+| 항목 | 검증식 |
+|---|---|
+| 좌측 패딩 | `min(child.x for child in card.children) === 100` |
+| 상단 패딩 | `min(child.y for child in card.children) === 100` |
+| 우측 패딩 | `card.width − max(child.x + child.width for child in card.children) === 100` |
+| 하단 패딩 | `card.height − max(child.y + child.height for child in card.children) === 100` |
+
+- 패딩이 어긋난 경우 카드 프레임을 즉시 리사이즈한다 (§2 카드 프레임 리사이즈 규칙 참조).
+- 자동 검증 스크립트 작성 시 `page.loadAsync()`를 호출한 후 카드 자식을 읽어야 한다 (Figma dynamic-page 모드에서 stale 데이터 방지).
 
 ### 절대 좌표 배치
 
@@ -561,3 +577,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.12 | 2026.05.11 | **§10 계층 기반 레이아웃 정책 도입**. v2.11 5-col 그리드 정책 폐지. 컴포넌트 변형을 그룹(100px) > 위계(50px) > 상태/사이즈(20px) 의미적 계층으로 정렬. 축 수별 적용 패턴 표 신설 (1축/2축/2축 그룹/3축 그룹/3축 위계/4축). §8에서 잘못 작성된 Button Variants 예시 수정 (Primary/Secondary/Ghost → Fill/Border/Text × Primary/Secondary/Danger). Figma 적용: (1) Button 4축 계층 배치 (2) Icon Button 3축 위계 50px (3) Text Area/Select/Input 3축 그룹 100px (Input은 Surface 접두사로 Border/Surface 가상 그룹화) (4) Toggle/Checkbox/Radio 2축 flat 20px (5) Progress Bar/Badge 2축 Variant 그룹 100px (6) Avatar 7→5 사이즈 (XXL/XXS 변형 삭제, 5 사이즈를 1D 가로 행 20px 간격) (7) Icons 110개 컴포넌트 모두 24×24 적용 + width/height를 size/S Variable에 바인딩 (109개 신규 바인딩 + 1개 기존). md 갱신: 03-icon-button.md Ghost → Tertiary 4건, 05-avatar.md 사이즈 표 7종→5종(XXL/XXS 제거), 디자인 가이드의 Variants 네이밍 예시 정정. |
 | v2.13 | 2026.05.11 | **§10 페이지 레이아웃 규칙 보강 + Badge 50px 예외 + 다중 컴포넌트 정책**. 신규 규칙: (1) 페이지 헤더 ↔ 첫 컴포넌트 간격 50px 명시 (CS at y=215) (2) 좌측 정렬 — title/description/Component Set 모두 x=100 (3) 카드 패딩 정확히 상하좌우 100px 보장 (4) 페이지 레이아웃 좌표 표 추가 (5) 작은 변형 그룹 예외 — 변형 크기 작으면 그룹 간격 100→50px 다운그레이드 (Badge가 대표 케이스) (6) 한 페이지 다중 컴포넌트 정책 신설 — 각 컴포넌트 간 100px 간격, 세로 스택, x=100 정렬. Figma 적용: 38개 컴포넌트 페이지 전수 좌표 정규화 (title 100,100 / desc 100,144 / content 100,215 / 카드 100px 패딩). Badge Variant 간격 100→50px 재배치. 04 Badge & Tag 페이지에서 Tag(단일) + 100px gap + Badge(6×3 그리드) 다중 컴포넌트 배치. ⚠️ 01 — Icons 페이지 보강 사이드이펙트: v2.11에서 메타 라벨 일괄 삭제 시 카테고리 한글 라벨(내비게이션/액션/...)도 함께 삭제되어, 본 작업의 카테고리 그리드 복구에서 라벨 텍스트는 누락된 상태. 시각적 그룹화는 유지. 한글 라벨 재생성 여부는 사용자 결정 대기. |
 | v2.13.1 | 2026.05.11 | 01 Icons 카드 너비 1200→620px 정정. v2.13 Icons 복구 스크립트의 "safe min" 폴백 공식이 잘못 작성(100×ICONS_PER_ROW)되어 카드 너비가 콘텐츠보다 580px 넓게 계산되어 있던 버그 수정. 실제 콘텐츠 너비 = 10×24 + 9×20 = 420 + 좌우 패딩 200 = 620. 사용자 결정에 따라 Icons 카테고리 한글 라벨은 재생성하지 않고 시각적 그룹화로만 식별하는 방향(옵션 A) 채택. |
+| v2.14 | 2026.05.11 | §10 "간격 조정 시 패딩 검증 의무" 룰 신설 — 레이아웃 작업 직후 4면 100px 검증 의무화 + 자동 스크립트에서 page.loadAsync() 선행 호출 의무 명문화. 첫 Component Set y 좌표 정의를 절대값(215)에서 동적 계산(`헤더 bottom + 50`)으로 변경 (페이지 설명 높이 변동에 따른 y 변동 반영). Figma 적용: (1) 12 Checkbox에서 v2.11 일괄 삭제에서 누락됐던 잔재 메타 라벨 3건(XS at (0,48), S at (0,90), M at (100,144)) 삭제 (2) 01 Icons 카테고리 그리드 재복구 — v2.13에서 universal 정규화가 110개 아이콘을 또 다시 세로 스택해버린 버그를 즉시 복구해 카테고리별 그리드로 재배치 (3) 31-38 페이지 Component Set y 좌표를 헤더 bottom + 50px(=189)로 일괄 설정 — Figma 자동 보정으로 실제값 187 (±2px 허용오차로 수용). 최종 audit 결과 38개 카드 모두 패딩·간격 통과. |
