@@ -379,6 +379,8 @@ for (const node of children) {
 | **메타 라벨** | 디자인 시스템 Figma 파일 내 디자이너·개발자가 참고하기 위한 **설명·식별용 텍스트**. 컴포넌트 외부에 배치된 변형 라벨, Change Log entries, 페이지 타이틀·설명, 토큰 캡션 등. | **Inter** |
 | **컴포넌트 텍스트** | 컴포넌트(Component / Component Set) 정의 **내부**에 포함된 텍스트. 컴포넌트를 인스턴스로 사용했을 때 실제 사용자가 보게 되는 모든 텍스트. (예: 버튼의 "확인", 알럿의 메시지 등) | **Pretendard** ([§7](#7-타이포그래피-규칙)) |
 
+> ⚠️ **이름 혼동 주의**: 컴포넌트 폴더의 `30-label.md` "폼 레이블(Form Label)"은 실제 앱 UI에서 인풋 위에 표시되는 **컴포넌트**(예: "이메일" 라벨)이며, 본 §10의 "메타 라벨"이 아니다. Form Label 컴포넌트 내부 텍스트는 §7에 따라 Pretendard `text/label-*`를 사용한다. 마찬가지로 컴포넌트 md 파일들의 `text/label-*` 참조는 모두 **컴포넌트 내부 텍스트**용이므로 Pretendard 유지가 맞다.
+
 ### 메타 라벨 폰트 규칙
 - **메타 라벨은 모두 Inter를 사용한다.**
   - 메타 라벨은 디자인 시스템 파일 외부로 노출되지 않는 내부 참고용이며, Figma MCP 환경에서 Pretendard를 로드할 수 없는 제약을 우회한다.
@@ -461,3 +463,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.3 | 2026.05.11 | 가이드 문서 보강: (1) 목차 추가. (2) Change Log 정책에 SemVer(Major/Minor/Patch) 버전 부여 규칙 신설. (3) §1에 Change Log 페이지 양식 가이드(Header/Entries/Note 구조) 추가. (4) §3 Sizing 규칙에 HUG/FILL/FIXED 판단 기준 추가. (5) §7 타이포그래피에 02-typography.md Style×Size 매트릭스 참조 표 추가. (6) §10 라벨 텍스트에 text/label-* Text Style 사용 명시·Inter 등 외부 폰트 금지 명문화. (7) 01-icons.md 신규 작성. |
 | v2.3.1 | 2026.05.11 | 01-icons.md 등재 방식을 Figma Make 프롬프트 → 사내 라이브러리에서 직접 가져와 MCP로 붙여넣는 방식으로 변경. 등재 순서 6단계 명문화. |
 | v2.4 | 2026.05.11 | 메타 라벨 ↔ 컴포넌트 텍스트 폰트 정책 분리: §7 스코프를 "컴포넌트 정의 내부 텍스트 → Pretendard Text Style"로 명확화. §10 전면 개정 — 메타 라벨(컴포넌트 외부 설명·식별 텍스트, Change Log entries, 페이지 설명, 토큰 캡션)은 **Inter 사용 의무화**, 컴포넌트 정의 내부는 Pretendard 유지. Inter 권장 사이즈 표(Semi Bold 14 / Regular 12 / Regular 11) 신설. Why: Figma MCP 환경에서 Pretendard 로드 불가로 인한 작업 비용 제거 + 메타 라벨은 외부 노출 없어 폰트 차이 무관. |
+| v2.4.1 | 2026.05.11 | §10에 이름 혼동 주의 노트 추가: `30-label.md` 폼 레이블(Form Label)은 실제 앱 UI 컴포넌트이며 메타 라벨이 아님을 명시. 컴포넌트 md 파일들의 `text/label-*` 참조는 모두 컴포넌트 내부 텍스트용으로 Pretendard 유지가 맞음을 부언. 컴포넌트 md 파일 일괄 점검 결과 정책 충돌·수정 필요 항목 없음. |
