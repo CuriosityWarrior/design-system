@@ -5,6 +5,21 @@
 디자인 시스템을 Figma에서 생성할 때 따라야 하는 전체 규칙 문서.
 페이지 네이밍, 프레임 구조, 컴포넌트 작성 기준을 포함한다.
 
+## 목차
+
+- [1. 페이지 네이밍 규칙](#1-페이지-네이밍-규칙)
+- [2. 프레임 구조 규칙](#2-프레임-구조-규칙)
+- [3. 컴포넌트 Sizing 규칙](#3-컴포넌트-sizing-규칙)
+- [4. Figma MCP로 일괄 적용하는 방법](#4-figma-mcp로-일괄-적용하는-방법)
+- [5. 문서 작성 언어 규칙](#5-문서-작성-언어-규칙)
+- [6. 토큰 / 라이브러리 일관성 규칙](#6-토큰--라이브러리-일관성-규칙)
+- [7. 타이포그래피 규칙](#7-타이포그래피-규칙)
+- [8. Variants 구성 규칙](#8-variants-구성-규칙)
+- [9. 페이지 내 배치 간격 규칙](#9-페이지-내-배치-간격-규칙)
+- [10. 설명 라벨 규칙](#10-설명-라벨-규칙)
+- [11. T-Shirt 사이즈 표기 규칙](#11-t-shirt-사이즈-표기-규칙)
+- [Change Log](#change-log)
+
 ---
 
 ## 1. 페이지 네이밍 규칙
@@ -33,16 +48,47 @@
 ```
 
 ### 특수 페이지
-- `Cover`, `Changelog` 는 번호 없이 이름만 작성한다.
+- `Cover`, `Change Log` 는 번호 없이 이름만 작성한다.
 - 섹션 구분자 없이 파일 최상단에 위치한다.
+
+#### Change Log 페이지 콘텐츠 양식
+
+Figma `Change Log` 페이지의 카드 프레임 내부는 반드시 다음 3개 영역으로 구성한다.
+
+```
+[ Change Log 카드 프레임 (흰색, r16, 100px 패딩) ]
+├── Header
+│   ├── 타이틀 텍스트 ("Change Log") — text/heading-XL
+│   └── 설명 텍스트 — text/body-SM
+├── Entries (수직 Auto Layout, item spacing 24px)
+│   └── 각 entry 프레임 (이름: vX.Y 또는 vX.Y.Z)
+│       ├── meta (가로 80px 고정)
+│       │   ├── 버전 (vX.Y / vX.Y.Z) — text/label-SM
+│       │   └── 날짜 (YYYY.MM.DD) — text/label-XS, color/text/secondary
+│       └── 본문 텍스트 (1줄, 마침표로 종결) — text/body-SM
+└── Note (정책 박스)
+    ├── "정책" 라벨 — text/label-XS
+    └── 동기화 정책 본문 — text/body-SM
+```
+
+**작성 규칙**:
+- 새 항목은 Entries 프레임의 **하단에 append**한다 — Entries Auto Layout 바깥(카드 프레임 자식, Note 아래/옆 등)에 단독 텍스트 노드로 배치 금지.
+- 본문은 한 줄로 작성하되, 길어질 경우 폭(1000px)이 자동 wrap 처리하도록 한다. 별도 줄바꿈 강제 금지.
+- 본문은 **마침표(`.`)로 종결**한다 — md Change Log와 동일.
+- 버전과 날짜 형식은 md Change Log와 1:1 동일하게 기록한다.
+- v2.1 이후 누락분 또는 양식 깬 단일 텍스트 노드 발견 시, 즉시 Entries Auto Layout 내부 entry 프레임으로 정규화한다.
+
+#### Cover 페이지 콘텐츠 양식
+
+> _※ Cover 페이지의 콘텐츠는 디자이너 작업 후 본 가이드에 반영한다._
 
 ### 컴포넌트 Variants 네이밍
 - Figma 컴포넌트의 Variants 네이밍은 `{이름}/{변형}/{크기}/{상태}` 형식을 따른다.
 - 각 축은 슬래시(`/`)로 구분하고, 축이 불필요한 경우 생략할 수 있다.
 - 예:
-  - `Button / Primary / lg / Default`
-  - `Icon Button / Ghost / md / Hover`
-  - `Badge / Success / sm`
+  - `Button / Primary / LG / Default`
+  - `Icon Button / Ghost / MD / Hover`
+  - `Badge / Success / SM`
   - `Divider / Horizontal / Default`
 
 ### 전체 페이지 구조
@@ -145,8 +191,20 @@ Change Log
 ## 3. 컴포넌트 Sizing 규칙
 
 컴포넌트의 `layoutSizingHorizontal` / `layoutSizingVertical` 값(HUG / FILL / FIXED)은 **각 컴포넌트 md 파일에서 개별로 정의**한다.
-공통 규칙으로 일괄 강제하지 않는다.
+공통 규칙으로 일괄 강제하지 않되, 아래 판단 기준을 따른다.
 
+### HUG / FILL / FIXED 판단 기준
+
+| 모드 | 사용 시점 | 대표 컴포넌트 예시 |
+|---|---|---|
+| **HUG** | 콘텐츠(텍스트·자식 요소) 길이에 따라 자연스럽게 크기가 결정되어야 할 때 | Button(가로), Badge, Chip, Tooltip |
+| **FILL** | 부모 컨테이너의 가용 공간을 채워야 할 때 (가변 폭/높이) | Input(가로), Text Area(가로), Card 본문 영역, Modal 내부 폼 |
+| **FIXED** | T-Shirt 토큰(`size/*`) 또는 디자인 시스템에서 정의한 정해진 값이 필요할 때 | Avatar, Icon, Icon Button, Spinner, 고정 Height 버튼 |
+
+### 추가 원칙
+- **Height 고정 컴포넌트** (Button, Input 등)는 Height만 FIXED(`size/{T-Shirt}` 바인딩), Width는 HUG 또는 FILL로 자유롭게 가변.
+- **정사각 컴포넌트** (Avatar, Icon, Icon Button, Spinner)는 Width·Height 모두 FIXED + 동일 토큰.
+- **반응형은 좌우 가변(FILL/HUG)으로 제공**한다. 디바이스(모바일/태블릿/데스크탑)별 별도 변형은 현재 버전에서는 정의하지 않는다 — 향후 v3.0에서 검토.
 - 각 컴포넌트 문서의 "크기 (Size)" 또는 "사이즈 동작" 섹션에서 해당 컴포넌트의 sizing 방식을 명시한다.
 - 문서에 명시되지 않은 채 임의 값(예: `100px`)으로 Height를 Fixed 지정하는 것을 금지한다.
 
@@ -183,7 +241,7 @@ cardFrame.fills = [{ type: 'SOLID', color: { r: 1, g: 1, b: 1 } }];
 cardFrame.cornerRadius = 16;
 cardFrame.effects = [{
   type: 'DROP_SHADOW',
-  color: { r: 0.1, g: 0.1, b: 0.086, a: 0.08 },
+  color: { r: 0.102, g: 0.098, b: 0.086, a: 0.08 }, // #1A1916 = (26, 25, 22) / 255
   offset: { x: 0, y: 4 },
   radius: 16,
   spread: 0,
@@ -266,6 +324,19 @@ for (const node of children) {
 - Text Style 없이 fontSize / fontWeight를 직접 지정하는 것을 금지한다.
 - 타이포그래피 라이브러리에 없는 스타일이 필요한 경우, 먼저 `02 — Typography` 페이지에 스타일을 추가한 후 적용한다.
 
+### Style × Size 매트릭스 (요약)
+
+| 카테고리 | XL | LG | MD | SM | XS |
+|---|---|---|---|---|---|
+| **Display** | 40 Bold | 32 Bold | 28 Bold | 24 SemiBold | — |
+| **Display 2XL** (별도) | 48 Bold | — | — | — | — |
+| **Heading** | 20 SemiBold | 18 SemiBold | 16 SemiBold | 14 SemiBold | 13 SemiBold |
+| **Body** | 20 Regular | 18 Regular | 16 Regular (BASE) | 14 Regular | 13 Regular |
+| **Label** | — | 16 SemiBold | 14 SemiBold | 13 SemiBold | 12 SemiBold |
+| **Caption** | — | — | — | — | 12 Regular |
+
+> 📐 정확한 fontSize / lineHeight / letterSpacing / 사용처는 [`foundations/02-typography.md`](./foundations/02-typography.md)의 Semantic 토큰 표를 단일 출처(SoT)로 한다. 위 표는 빠른 참조용 요약이며, 값 충돌 시 02-typography.md를 우선한다.
+
 ---
 
 ## 8. Variants 구성 규칙
@@ -299,6 +370,17 @@ for (const node of children) {
 
 컴포넌트·베리어블에는 **종류, 사이즈, 상태 등을 설명하는 라벨이 항시 존재해야 한다.**
 
+### 라벨 Text Style
+- 설명 라벨은 반드시 `02 — Typography` 페이지에 정의된 **라이브러리 Text Style**을 적용한다.
+- **Inter 등 Figma 기본 폰트 / 외부 폰트 사용 금지** — 디자인 시스템은 Pretendard 단일 폰트 패밀리로 운영한다.
+- 사용할 Text Style이 라이브러리에 없으면 **Inter로 임시 대체하지 않고**, 먼저 `02 — Typography`에 스타일을 추가한 뒤 적용한다.
+
+| 라벨 종류 | 권장 Text Style | 색상 토큰 |
+|---|---|---|
+| 그룹 헤더 라벨 (예: "Fill / Primary") | `text/label-MD` | `color/text/primary` |
+| 개별 변형 라벨 (예: "LG / Default") | `text/label-SM` | `color/text/secondary` |
+| 메타·보조 라벨 (예: 토큰 코드 `#F26A00`) | `text/label-XS` | `color/text/tertiary` |
+
 ### 라벨 동기화 원칙
 - **추가 시**: 컴포넌트·베리어블이 추가되면, 기존 라벨들의 위치·스타일에 맞춰 해당 요소의 설명 라벨을 함께 추가한다.
 - **수정 시**: 컴포넌트·베리어블의 이름·상태·사이즈가 변경되면, 대응하는 설명 라벨도 함께 수정한다.
@@ -322,7 +404,7 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | `XXS` | Extra Extra Small |
 
 - 소문자(`xl`, `lg`, `md`, `sm`) 사용 금지.
-- `lg` / `lg` 등 약어 혼용 금지 — 반드시 위 표기 기준을 따른다.
+- `lg` / `md` / `sm` 등 소문자 약어와 대문자 표기를 혼용 금지 — 반드시 위 표기 기준(`XS`, `S`, `M`, `L`, `XL`)을 따른다.
 
 ---
 
@@ -332,6 +414,18 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 > Figma 작업(컴포넌트 추가·수정·삭제 등)이 발생한 경우에도 해당 변경 내용을 이 문서의 Change Log와 Figma Change Log 페이지에 동시에 기록한다.
 >
 > **기록 위치 제한**: 수정 이력은 반드시 이 Change Log에만 기록한다. Figma 내 개별 컴포넌트 페이지, 카드 프레임 내부, 캔버스 상의 노트 등 Change Log 이외의 위치에 버전 정보·수정 이력을 기록하는 것을 금지한다.
+>
+> **버전 번호 부여 정책 (Semantic Versioning)**:
+> 변경 규모에 따라 세 단계 중 하나를 골라 번호를 올린다.
+>
+> | 단계 | 변경 범위 | 예시 변경 |
+> |---|---|---|
+> | **Major** (앞자리) | 페이지/섹션 구조 재편, 토큰 체계 전환, 다수 컴포넌트 일괄 변경 | v1.9 → v2.0 |
+> | **Minor** (소수점 첫째) | 신규 섹션·규칙 추가, 단일 컴포넌트/파운데이션 신설·구조 변경 | v2.2 → v2.3 |
+> | **Patch** (소수점 둘째) | 오타·표기 정정, 정합성 보정, Change Log 정렬, 단일 값 수정 | v2.2 → v2.2.1 |
+>
+> - 한 번의 작업에 Major/Minor/Patch가 섞인 경우 **가장 큰 단계 하나의 entry**로 통합 기록한다.
+> - Patch는 같은 날짜에 여러 번 발생할 수 있으며, 각각 별도 entry로 추가한다.
 
 | 버전 | 날짜 | 변경 내용 |
 |---|---|---|
@@ -342,8 +436,11 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v1.4 | 2026.04.10 | §6 토큰 일관성 규칙, §7 타이포그래피 규칙, §8 Variants 구성(Combine as Variants), §9 배치 간격 규칙, §10 T-Shirt 사이즈 표기 규칙 추가. "버전 히스토리" → "Change Log"로 명칭 변경 |
 | v1.5 | 2026.04.10 | Change Log Figma 동기화 정책 추가 — md 수정 및 Figma 작업 시 양쪽 Change Log 동시 기록 의무화 |
 | v1.6 | 2026.04.10 | Typography Label weight Medium→SemiBold(lg/md/sm). Size Primitive를 실제px값 기반으로, Semantic을 T-Shirt 공통 체계로 변경. Spacing Semantic 제거·Primitive 토큰명 실제 px 기반으로 변경. Border Radius→Radius 파일명·페이지명 변경, Semantic T-Shirt 체계로 변경. Button 좌우 패딩 한 단계 축소·XS 사이즈 추가·Text 변형 추가. Select Surface 스타일·3가지 사이즈·아이콘 크기 사이즈별 추가. Textarea→Text Area 파일명·페이지명 변경·3가지 사이즈 추가. Alert·Toast 기호 텍스트→아이콘 인스턴스로 변경. Empty State→Data Case 파일명·페이지명 변경·Error/Loading/No Permission/Offline 변형 추가. Card·Drawer 액션 버튼을 Button 컴포넌트 인스턴스로 명시 |
-| v1.8 | 2026.04.12 | md 파일 넘버링을 Figma 페이지 넘버링과 동기화(01→02~37→38). Typography Label/xs SemiBold 600으로 통일. §5 아이콘 사용 규칙을 각 컴포넌트 md로 이관, 공통 가이드에서 제거. §5를 '문서 작성 언어 규칙(국문 작성)' 으로 교체. |
 | v1.7 | 2026.04.11 | Figma 파일 v1.6 전면 동기화: (1) 페이지 rename — Changelog 표기 통일, 05 Border Radius→Radius, 10 Textarea→Text Area, 19 Empty State→Data Case. (2) 누락 페이지 8개 생성(31~38 Search/Menu/Date & Time Picker/Slider/FAB/Navigation Bar/App Bar/Bottom Sheet). (3) 03 Icon Button·05 Avatar 페이지의 orphan 컴포넌트를 카드 프레임에 재parent. (4) Variables 재구성 — Spacing(semantic 제거, px 기반 16개), Radius(컬렉션명 Border Radius→Radius/Primitive, Radius/Semantic T-Shirt 6종 신규), Size(Primitive px 19종, Semantic T-Shirt 8종 재작성). (5) Effect Styles — Shadow/Focus spread 3px 수정. (6) 전 컴포넌트 페이지 23종을 Combine as Variants로 결합, variant property 이름/T-Shirt 대문자 표기 일괄 정규화. (7) Button에 XS 사이즈·Text 변형 추가, Select에 Border/Surface×L/M/S×4state 24변형 구성, Text Area L/M/S 사이즈 추가, Data Case Empty/Error/Loading/No Permission/Offline 변형 추가. (8) Card·Drawer·Alert·Toast 페이지에 v1.6 규칙 노트 추가. (9) Change Log Figma 페이지에 v1.0~v1.6 전체 이력 기록. ⚠️ 알려진 이슈: Label/xs는 수동 수정 시 모두 SemiBold로 바뀐 상태 — Figma 데스크탑에서 Medium으로 되돌려야 함 |
+| v1.8 | 2026.04.12 | md 파일 넘버링을 Figma 페이지 넘버링과 동기화(01→02~37→38). Typography Label/xs SemiBold 600으로 통일. §5 아이콘 사용 규칙을 각 컴포넌트 md로 이관, 공통 가이드에서 제거. §5를 '문서 작성 언어 규칙(국문 작성)' 으로 교체. |
+| v1.9 | 2026.04.14 | Figma 파일 전면 재감사 및 복구: (1) 빈 페이지 4종(Change Log, 03 Spacing, 05 Radius, 07 Size) 콘텐츠 재구축 — 타이틀·설명·Primitive/Semantic 스케일 시각화·사용 원칙 섹션 포함, 모든 텍스트는 Pretendard Text Style 바인딩, 모든 컬러는 color/* Variables 바인딩, 카드 프레임은 §2 스펙(white · r16 · DropShadow · 100px 패딩) 준수. (2) 10 Text Area 페이지의 orphan 변형(Text Area/Surface/S/Disabled) Component Set에 재통합 — Figma 자동 변형 속성(Style=Surface, Size=S, State=Disabled)로 정규화. (3) 18 Skeleton Component Set 변형 속성 오류 수정 — 기존 `Variant+Prop2` 혼재 스키마를 단일 `Variant` 속성으로 정규화하고 소문자 sm/md/lg를 대문자 `Text-SM/MD/LG`로 변경(§10 준수). (4) §1 네이밍·§2 카드 프레임 스펙 전체 48페이지 통과 확인. (5) v1.8 알려진 이슈(Label/xs weight)는 이미 SemiBold로 정상 설정되어 있음을 확인. |
 | v2.1 | 2026.04.14 | §2 카드 프레임 리사이즈 규칙 추가(콘텐츠 변경 시 프레임 크기 재지정 의무화). §5 아이콘 사용 규칙 공통 강제화(기호 텍스트 금지, 아이콘 인스턴스 필수). §9 배치 간격 규칙 개정(컴포넌트·베리어블 간 50px, 라벨↔요소 간 50px, 상위 그룹 간 100px). §10 설명 라벨 규칙 신설(라벨 항시 존재, 하단 레이어 배치, 추가·수정·삭제 시 동기화). 기존 §10→§11 번호 재지정. |
 | v2.2 | 2026.04.15 | §8 Variants 구성 규칙 재정의 — 단일 변형(Style/Size/State 각 1종) 컴포넌트는 개별 COMPONENT 유지, 2종 이상일 때만 Component Set 적용(판단 기준 예시 추가). Figma 전체 감사 및 수정: 01 — Icons Drop Shadow 색상·blur 정규화. FAB/Navigation Bar/App Bar 카드 프레임 이름 단순화. 기호 텍스트 아이콘 인스턴스 교체(Badge·Alert·Toast·Drawer ✕/✓, Pagination ‹›, Stat Card ↑↓, Slider ●, App Bar ←). 전 페이지(46개) Labels 프레임 §10 준수 추가. Figma Change Log v2.2 동기화. ⚠️ Stat Card ↑↓ 및 App Bar ← 텍스트 내 기호 문자는 Pretendard 폰트 플러그인 로드 불가로 수동 제거 필요. |
-| v1.9 | 2026.04.14 | Figma 파일 전면 재감사 및 복구: (1) 빈 페이지 4종(Change Log, 03 Spacing, 05 Radius, 07 Size) 콘텐츠 재구축 — 타이틀·설명·Primitive/Semantic 스케일 시각화·사용 원칙 섹션 포함, 모든 텍스트는 Pretendard Text Style 바인딩, 모든 컬러는 color/* Variables 바인딩, 카드 프레임은 §2 스펙(white · r16 · DropShadow · 100px 패딩) 준수. (2) 10 Text Area 페이지의 orphan 변형(Text Area/Surface/S/Disabled) Component Set에 재통합 — Figma 자동 변형 속성(Style=Surface, Size=S, State=Disabled)로 정규화. (3) 18 Skeleton Component Set 변형 속성 오류 수정 — 기존 `Variant+Prop2` 혼재 스키마를 단일 `Variant` 속성으로 정규화하고 소문자 sm/md/lg를 대문자 `Text-SM/MD/LG`로 변경(§10 준수). (4) §1 네이밍·§2 카드 프레임 스펙 전체 48페이지 통과 확인. (5) v1.8 알려진 이슈(Label/xs weight)는 이미 SemiBold로 정상 설정되어 있음을 확인. |
+| v2.2.1 | 2026.05.11 | 가이드 문서 정합성 정정: (1) §1 Variants 네이밍 예시 소문자(lg/md/sm) → 대문자(LG/MD/SM)로 정정 §11과 정합. (2) §11 약어 혼용 금지 문장 오타 수정. (3) Change Log 시간순(v1.7 ↔ v1.8 위치 교환, v1.9 위치 정정) 재정렬. (4) §4 카드 프레임 스크립트의 그림자 RGB 값을 #1A1916 정확값(0.102/0.098/0.086)으로 정정. |
+| v2.3 | 2026.05.11 | 가이드 문서 보강: (1) 목차 추가. (2) Change Log 정책에 SemVer(Major/Minor/Patch) 버전 부여 규칙 신설. (3) §1에 Change Log 페이지 양식 가이드(Header/Entries/Note 구조) 추가. (4) §3 Sizing 규칙에 HUG/FILL/FIXED 판단 기준 추가. (5) §7 타이포그래피에 02-typography.md Style×Size 매트릭스 참조 표 추가. (6) §10 라벨 텍스트에 text/label-* Text Style 사용 명시·Inter 등 외부 폰트 금지 명문화. (7) 01-icons.md 신규 작성. |
+| v2.3.1 | 2026.05.11 | 01-icons.md 등재 방식을 Figma Make 프롬프트 → 사내 라이브러리에서 직접 가져와 MCP로 붙여넣는 방식으로 변경. 등재 순서 6단계 명문화. |
