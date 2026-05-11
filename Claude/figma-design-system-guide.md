@@ -398,18 +398,41 @@ for (const node of children) {
 > ⚠️ **이름 혼동 주의**: 컴포넌트 폴더의 `30-label.md` "폼 레이블(Form Label)"은 실제 앱 UI에서 인풋 위에 표시되는 **컴포넌트**(예: "이메일" 라벨)이며, 본 §10의 "메타 라벨"이 아니다. Form Label 컴포넌트 내부 텍스트는 §7에 따라 Pretendard `text/label-*`를 사용한다. 마찬가지로 컴포넌트 md 파일들의 `text/label-*` 참조는 모두 **컴포넌트 내부 텍스트**용이므로 Pretendard 유지가 맞다.
 
 ### 메타 라벨 폰트 규칙
-- **메타 라벨은 모두 Inter를 사용한다.**
-  - 메타 라벨은 디자인 시스템 파일 외부로 노출되지 않는 내부 참고용이며, Figma MCP 환경에서 Pretendard를 로드할 수 없는 제약을 우회한다.
-- 메타 라벨에는 `02 — Typography` 페이지의 Pretendard Text Style을 적용하지 않는다.
-- 메타 라벨 기본 사이즈 가이드 (Text Style 등재 권장):
 
-| 라벨 종류 | 권장 폰트 / 사이즈 | 색상 토큰 |
+페이지 헤더 및 메타 라벨은 모두 **Inter**를 사용한다. 모든 텍스트 색상은 **`#000000`** (검정 단색, 토큰 바인딩 없음).
+
+#### 페이지 헤더 (모든 컴포넌트·파운데이션 페이지 공통)
+
+| 위치 | 폰트 | 색상 |
 |---|---|---|
-| 그룹 헤더 라벨 (예: "Fill / Primary") | Inter Semi Bold 14 | `color/text/primary` |
-| 개별 변형 라벨 (예: "LG / Default") | Inter Regular 12 | `color/text/secondary` |
-| 메타·보조 라벨 (예: 토큰 코드 `#F26A00`, 날짜) | Inter Regular 11 | `color/text/tertiary` |
+| 페이지 타이틀 (예: "Avatar") | Inter **Bold 32** | `#000000` |
+| 페이지 설명 (타이틀 아래 한 줄 설명) | Inter **Medium 15** | `#000000` |
 
-> 💡 Meta/* Text Style을 별도 등재해 두면 일관성과 일괄 갱신이 쉬워진다 (선택).
+#### 메타 라벨 계층(depth)별 스펙
+
+라벨의 계층 깊이에 따라 폰트가 달라진다. **숫자가 클수록 상위 그룹(시각적으로 큼)**.
+
+| Depth | 용도 | 폰트 | 색상 |
+|---|---|---|---|
+| **Depth 3** | 최상위 그룹 헤더 (페이지 내에 변형 그룹이 2개 이상 있을 때의 그룹명 — 예: Icon Button의 `Primary` / `Secondary` / `Ghost`) | Inter **Semi Bold 15** | `#000000` |
+| **Depth 2** | 중간 sub-라벨 (그룹 내부 또는 2D 그리드의 한 축 — 예: Icon Button 그룹 안의 `lg` / `md` / `sm`, Toggle의 사이즈 축) | Inter **Medium 13** | `#000000` |
+| **Depth 1** | 잎(leaf) 식별 라벨 (단일 축 변형, 그리드 잎 셀 축 — 예: Avatar의 `XXL` / `XL` / `L` / `M` / `S` / `XS` / `XXS`, 상태 열 헤더 `Default` / `Hover` / `Focus` / `Disabled`) | Inter **Regular 11** | `#000000` |
+
+> 💡 모든 메타 라벨은 `02 — Typography`의 Pretendard Text Style을 적용하지 **않는다**. Inter는 fontName 직접 지정으로 사용.
+
+#### Depth 적용 가이드 — 그리드 형태별 매핑
+
+| 그리드 형태 | 사용할 depth |
+|---|---|
+| 단일 변형 (Card, Modal, Drawer 등) | **depth 1** (변형 식별 라벨 1개) |
+| 1D × 사이즈 (Avatar, Spinner, Icon 등) | **depth 1** (사이즈 라벨) |
+| 1D × 변형 (Tooltip, Tabs, Alert, Toast, Skeleton, Data Case, List Item, Stat Card, Chip, Label) | **depth 1** (변형 라벨) |
+| 1D × 혼합축 (Divider Horizontal × Size + Vertical) | **depth 1** (각 변형 라벨) |
+| 2D 그리드 (Toggle / Checkbox / Radio / Progress Bar = 사이즈 × 상태 또는 변형 × 사이즈) | **depth 2** (행 축) + **depth 1** (열 축) |
+| 3D 그리드 (Icon Button / Input / Select / Text Area = 그룹 × 사이즈 × 상태) | **depth 3** (그룹) + **depth 2** (사이즈 sub) + **depth 1** (상태) |
+| 4D 이상 (Button = Style × Strong × Size × State) | **depth 3** (Style 또는 Strong 中 상위) + **depth 2** (하위 그룹) + **depth 1** (Size, State) |
+
+> 📐 한 페이지에서 4축 이상이라도 **depth는 최대 3까지만 사용**한다 — 같은 depth에 여러 축이 공존 가능 (예: Button의 Size와 State는 둘 다 depth 1).
 
 ### 컴포넌트 텍스트 폰트 규칙
 - **컴포넌트 정의 내부 텍스트는 반드시 `02 — Typography` 페이지의 Pretendard Text Style을 적용한다.** ([§7](#7-타이포그래피-규칙))
@@ -460,7 +483,7 @@ for (const node of children) {
 | 라벨 ↔ 변형 그룹 수직 간격 | **약 10px** (라벨 bottom edge ↔ 변형 top edge) |
 | 라벨 y | 모든 라벨 **동일 y** |
 | 라벨 x | 각 라벨이 대응 변형의 **수평 중앙** (label center x = variant center x) |
-| 라벨 폰트 | Inter Regular 12, `color/text/secondary` (§10 권장) |
+| 라벨 폰트 | depth 1 — Inter Regular 11, `#000000` (§10 폰트 규칙) |
 
 ### 라벨 동기화 원칙
 - **추가 시**: 컴포넌트·베리어블이 추가되면, 위 그리드 매트릭스에 따라 라벨을 동시 추가한다.
@@ -530,3 +553,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.5 | 2026.05.11 | §1.6 "페이지 내 메타 박스 금지" 신설 — 정책·노트 박스, 버전 콜아웃, 컴포넌트 스펙 요약 박스, 페이지 메타 인덱스를 Figma 페이지 내에 두지 않도록 명문화(메타 정보는 md에만 관리). §1 Change Log 페이지 양식에서 Note (정책 박스) 요구사항 제거. Figma 정리 작업: Change Log 페이지 Note 프레임 1건 제거, 전 페이지 메타 박스(Labels 프레임) 29건 제거, 버전 콜아웃 텍스트 8건 제거(Button v2.1, Text Area/Select/Alert/Toast/Data Case/Card/Drawer v1.6). §10 메타 라벨(변형 식별)은 유지 — 본 정리 대상이 아님. |
 | v2.6 | 2026.05.11 | §10 라벨↔베리언트 매칭 규칙 세분화 — 라벨 누락·밀림 금지 명시, 그리드 형태별 라벨 배치 매트릭스 7종(단일 변형 / 1D 사이즈 / 1D 변형 / 1D 혼합축 / 2D 변형×사이즈 / 2D 변형×상태 / 3D 변형×사이즈×상태) 신설, 정렬 원칙(격자/baseline/라벨 위치 일관성) 추가, 라벨 동기화 점검 의무 부언. Figma 복구: Avatar 페이지 메타 라벨 7건 정정(xl→XXL/lg→XL/md→L/sm→M/xs→S 한 칸씩 밀림 수정 + 누락 XS/XXS 라벨 추가, 모두 §11 대문자), Divider 페이지 Vertical 변형 라벨 추가. |
 | v2.7 | 2026.05.11 | §10 메타 라벨 구조 규칙 신설 — 메타 라벨은 개별 텍스트 레이어로 카드 프레임 직접 자식으로 배치, 별도 프레임/그룹(Labels/Spec/Meta)으로 묶지 않음을 명문화. 정렬 원칙 기본값을 "상단(top) 정렬"로 명시. "1D × 사이즈 레이아웃 상세" 표 신설(변형 32px 균등 간격, top-aligned, 라벨 변형 수평 중앙·동일 y 등). Figma 적용: Avatar 페이지 좌측 카드를 우측 reference에 맞춰 정리(변형 가로 1행 재배치·32px 간격·top-aligned, 라벨 상단 동일 y·중앙 정렬, Component Set y=213). |
+| v2.8 | 2026.05.11 | §10 메타 라벨 폰트 규칙 재정의(depth 기반). 페이지 헤더 신설 — 페이지 타이틀(Inter Bold 32 #000), 페이지 설명(Inter Medium 15 #000). 메타 라벨을 3단계 depth로 정의: depth 1 (Inter Regular 11) / depth 2 (Inter Medium 13) / depth 3 (Inter Semi Bold 15), 모두 색상 #000000. Depth 적용 가이드 표 신설 — 그리드 형태별로 사용할 depth 매핑(단일 변형·1D·1D 혼합축은 depth 1 / 2D는 depth 2+1 / 3D는 depth 3+2+1 / 4D는 depth 3+2+1 with 같은 depth 공존). 이전 권장 표(SemiBold 14·Regular 12·Regular 11 / primary·secondary·tertiary 토큰)는 제거. Figma 적용: Avatar/Divider 페이지 타이틀·설명·전체 메타 라벨 새 스펙으로 정규화. |
