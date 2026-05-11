@@ -8,6 +8,7 @@
 ## 목차
 
 - [1. 페이지 네이밍 규칙](#1-페이지-네이밍-규칙)
+  - [1.6 페이지 내 메타 박스 금지](#16-페이지-내-메타-박스-금지)
 - [2. 프레임 구조 규칙](#2-프레임-구조-규칙)
 - [3. 컴포넌트 Sizing 규칙](#3-컴포넌트-sizing-규칙)
 - [4. Figma MCP로 일괄 적용하는 방법](#4-figma-mcp로-일괄-적용하는-방법)
@@ -53,30 +54,45 @@
 
 #### Change Log 페이지 콘텐츠 양식
 
-Figma `Change Log` 페이지의 카드 프레임 내부는 반드시 다음 3개 영역으로 구성한다.
+Figma `Change Log` 페이지의 카드 프레임 내부는 다음 2개 영역으로 구성한다.
 
 ```
 [ Change Log 카드 프레임 (흰색, r16, 100px 패딩) ]
 ├── Header
 │   ├── 타이틀 텍스트 ("Change Log") — text/heading-XL
 │   └── 설명 텍스트 — text/body-SM
-├── Entries (수직 Auto Layout, item spacing 24px)
-│   └── 각 entry 프레임 (이름: vX.Y 또는 vX.Y.Z)
-│       ├── meta (가로 80px 고정)
-│       │   ├── 버전 (vX.Y / vX.Y.Z) — text/label-SM
-│       │   └── 날짜 (YYYY.MM.DD) — text/label-XS, color/text/secondary
-│       └── 본문 텍스트 (1줄, 마침표로 종결) — text/body-SM
-└── Note (정책 박스)
-    ├── "정책" 라벨 — text/label-XS
-    └── 동기화 정책 본문 — text/body-SM
+└── Entries (수직 Auto Layout, item spacing 24px)
+    └── 각 entry 프레임 (이름: vX.Y 또는 vX.Y.Z)
+        ├── meta (가로 80px 고정)
+        │   ├── 버전 (vX.Y / vX.Y.Z) — text/label-SM
+        │   └── 날짜 (YYYY.MM.DD) — text/label-XS, color/text/secondary
+        └── 본문 텍스트 (1줄, 마침표로 종결) — text/body-SM
 ```
 
 **작성 규칙**:
-- 새 항목은 Entries 프레임의 **하단에 append**한다 — Entries Auto Layout 바깥(카드 프레임 자식, Note 아래/옆 등)에 단독 텍스트 노드로 배치 금지.
+- 새 항목은 Entries 프레임의 **하단에 append**한다 — Entries Auto Layout 바깥(카드 프레임 자식 등)에 단독 텍스트 노드로 배치 금지.
 - 본문은 한 줄로 작성하되, 길어질 경우 폭(1000px)이 자동 wrap 처리하도록 한다. 별도 줄바꿈 강제 금지.
 - 본문은 **마침표(`.`)로 종결**한다 — md Change Log와 동일.
 - 버전과 날짜 형식은 md Change Log와 1:1 동일하게 기록한다.
 - v2.1 이후 누락분 또는 양식 깬 단일 텍스트 노드 발견 시, 즉시 Entries Auto Layout 내부 entry 프레임으로 정규화한다.
+- **정책·노트 박스 금지** ([§1.6](#16-페이지-내-메타-박스-금지) 참조) — Change Log 동기화 정책 등 메타 텍스트는 md에만 기록한다.
+
+### 1.6 페이지 내 메타 박스 금지
+
+디자인 시스템 페이지 내부(카드 프레임 또는 캔버스 상)에 아래 유형의 텍스트·프레임을 두지 않는다. 이러한 메타 정보는 모두 md 문서에서만 관리하고, Figma 파일은 시각 데모와 토큰 바인딩에만 집중한다.
+
+| 금지 유형 | 예시 | 정보가 있어야 할 곳 |
+|---|---|---|
+| **정책·노트 박스** | "정책: 이 페이지는 md와 동기화됩니다…" | `figma-design-system-guide.md` |
+| **버전 콜아웃** | "📝 v1.6 — Border/Surface 2가지 스타일…" | Change Log (md + Figma 페이지) |
+| **컴포넌트 스펙 요약 박스** | "Component Name / Variant: A/B/C / Size: L/M/S / State: …" | `components/{NN}-{name}.md` |
+| **페이지 메타 인덱스** | 카테고리 명만 나열한 텍스트 목록 (예: Icons 페이지의 영문 카테고리 목록) | 페이지 헤더 설명 또는 md |
+
+**§10 메타 라벨과의 차이**:
+- §10의 메타 라벨은 **개별 컴포넌트·베리어블 옆에 붙는 변형 식별 라벨**(예: "Primary", "LG / Default") — KEEP, Inter
+- 본 §1.6의 금지 대상은 **페이지 단위로 한 번에 모아 놓는 메타 박스/요약/노트** — REMOVE
+
+페이지 내 메타 박스가 발견되면 즉시 제거하고, 해당 정보가 md에 누락되어 있으면 md에 추가한다.
 
 #### Cover 페이지 콘텐츠 양식
 
@@ -464,3 +480,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.3.1 | 2026.05.11 | 01-icons.md 등재 방식을 Figma Make 프롬프트 → 사내 라이브러리에서 직접 가져와 MCP로 붙여넣는 방식으로 변경. 등재 순서 6단계 명문화. |
 | v2.4 | 2026.05.11 | 메타 라벨 ↔ 컴포넌트 텍스트 폰트 정책 분리: §7 스코프를 "컴포넌트 정의 내부 텍스트 → Pretendard Text Style"로 명확화. §10 전면 개정 — 메타 라벨(컴포넌트 외부 설명·식별 텍스트, Change Log entries, 페이지 설명, 토큰 캡션)은 **Inter 사용 의무화**, 컴포넌트 정의 내부는 Pretendard 유지. Inter 권장 사이즈 표(Semi Bold 14 / Regular 12 / Regular 11) 신설. Why: Figma MCP 환경에서 Pretendard 로드 불가로 인한 작업 비용 제거 + 메타 라벨은 외부 노출 없어 폰트 차이 무관. |
 | v2.4.1 | 2026.05.11 | §10에 이름 혼동 주의 노트 추가: `30-label.md` 폼 레이블(Form Label)은 실제 앱 UI 컴포넌트이며 메타 라벨이 아님을 명시. 컴포넌트 md 파일들의 `text/label-*` 참조는 모두 컴포넌트 내부 텍스트용으로 Pretendard 유지가 맞음을 부언. 컴포넌트 md 파일 일괄 점검 결과 정책 충돌·수정 필요 항목 없음. |
+| v2.5 | 2026.05.11 | §1.6 "페이지 내 메타 박스 금지" 신설 — 정책·노트 박스, 버전 콜아웃, 컴포넌트 스펙 요약 박스, 페이지 메타 인덱스를 Figma 페이지 내에 두지 않도록 명문화(메타 정보는 md에만 관리). §1 Change Log 페이지 양식에서 Note (정책 박스) 요구사항 제거. Figma 정리 작업: Change Log 페이지 Note 프레임 1건 제거, 전 페이지 메타 박스(Labels 프레임) 29건 제거, 버전 콜아웃 텍스트 8건 제거(Button v2.1, Text Area/Select/Alert/Toast/Data Case/Card/Drawer v1.6). §10 메타 라벨(변형 식별)은 유지 — 본 정리 대상이 아님. |
