@@ -16,7 +16,7 @@
 - [7. 타이포그래피 규칙](#7-타이포그래피-규칙)
 - [8. Variants 구성 규칙](#8-variants-구성-규칙)
 - [9. 페이지 내 배치 간격 규칙](#9-페이지-내-배치-간격-규칙)
-- [10. 설명 라벨 규칙](#10-설명-라벨-규칙)
+- [10. 설명 라벨 (메타 라벨) 규칙](#10-설명-라벨-메타-라벨-규칙)
 - [11. T-Shirt 사이즈 표기 규칙](#11-t-shirt-사이즈-표기-규칙)
 - [Change Log](#change-log)
 
@@ -318,11 +318,13 @@ for (const node of children) {
 
 ## 7. 타이포그래피 규칙
 
-**Figma 문서 내 모든 텍스트는 생성된 타이포그래피 라이브러리(Text Style)를 적용한다.**
+**컴포넌트 정의 내부의 모든 텍스트는 생성된 타이포그래피 라이브러리(Pretendard Text Style)를 적용한다.**
 
-- 제목, 본문, 레이블 등 모든 텍스트 노드에 `02 — Typography` 페이지에 정의된 Text Style을 바인딩한다.
+- 컴포넌트(Component / Component Set) 내부의 제목, 본문, 레이블 등 모든 텍스트 노드에 `02 — Typography` 페이지에 정의된 Text Style을 바인딩한다.
 - Text Style 없이 fontSize / fontWeight를 직접 지정하는 것을 금지한다.
 - 타이포그래피 라이브러리에 없는 스타일이 필요한 경우, 먼저 `02 — Typography` 페이지에 스타일을 추가한 후 적용한다.
+
+> ⚠️ **메타 라벨은 예외** — 디자인 시스템 페이지에 컴포넌트를 설명하기 위해 배치되는 메타 라벨(컴포넌트 외부의 설명·식별 텍스트, Change Log entries, 페이지 설명 등)은 [§10](#10-설명-라벨-메타-라벨-규칙)에 따라 **Inter**를 사용한다. 본 규칙은 컴포넌트 정의 내부에만 적용된다.
 
 ### Style × Size 매트릭스 (요약)
 
@@ -366,20 +368,34 @@ for (const node of children) {
 
 ---
 
-## 10. 설명 라벨 규칙
+## 10. 설명 라벨 (메타 라벨) 규칙
 
-컴포넌트·베리어블에는 **종류, 사이즈, 상태 등을 설명하는 라벨이 항시 존재해야 한다.**
+컴포넌트·베리어블에는 **종류, 사이즈, 상태 등을 설명하는 메타 라벨이 항시 존재해야 한다.**
 
-### 라벨 Text Style
-- 설명 라벨은 반드시 `02 — Typography` 페이지에 정의된 **라이브러리 Text Style**을 적용한다.
-- **Inter 등 Figma 기본 폰트 / 외부 폰트 사용 금지** — 디자인 시스템은 Pretendard 단일 폰트 패밀리로 운영한다.
-- 사용할 Text Style이 라이브러리에 없으면 **Inter로 임시 대체하지 않고**, 먼저 `02 — Typography`에 스타일을 추가한 뒤 적용한다.
+### 메타 라벨 vs 컴포넌트 텍스트 정의
 
-| 라벨 종류 | 권장 Text Style | 색상 토큰 |
+| 구분 | 정의 | 폰트 |
 |---|---|---|
-| 그룹 헤더 라벨 (예: "Fill / Primary") | `text/label-MD` | `color/text/primary` |
-| 개별 변형 라벨 (예: "LG / Default") | `text/label-SM` | `color/text/secondary` |
-| 메타·보조 라벨 (예: 토큰 코드 `#F26A00`) | `text/label-XS` | `color/text/tertiary` |
+| **메타 라벨** | 디자인 시스템 Figma 파일 내 디자이너·개발자가 참고하기 위한 **설명·식별용 텍스트**. 컴포넌트 외부에 배치된 변형 라벨, Change Log entries, 페이지 타이틀·설명, 토큰 캡션 등. | **Inter** |
+| **컴포넌트 텍스트** | 컴포넌트(Component / Component Set) 정의 **내부**에 포함된 텍스트. 컴포넌트를 인스턴스로 사용했을 때 실제 사용자가 보게 되는 모든 텍스트. (예: 버튼의 "확인", 알럿의 메시지 등) | **Pretendard** ([§7](#7-타이포그래피-규칙)) |
+
+### 메타 라벨 폰트 규칙
+- **메타 라벨은 모두 Inter를 사용한다.**
+  - 메타 라벨은 디자인 시스템 파일 외부로 노출되지 않는 내부 참고용이며, Figma MCP 환경에서 Pretendard를 로드할 수 없는 제약을 우회한다.
+- 메타 라벨에는 `02 — Typography` 페이지의 Pretendard Text Style을 적용하지 않는다.
+- 메타 라벨 기본 사이즈 가이드 (Text Style 등재 권장):
+
+| 라벨 종류 | 권장 폰트 / 사이즈 | 색상 토큰 |
+|---|---|---|
+| 그룹 헤더 라벨 (예: "Fill / Primary") | Inter Semi Bold 14 | `color/text/primary` |
+| 개별 변형 라벨 (예: "LG / Default") | Inter Regular 12 | `color/text/secondary` |
+| 메타·보조 라벨 (예: 토큰 코드 `#F26A00`, 날짜) | Inter Regular 11 | `color/text/tertiary` |
+
+> 💡 Meta/* Text Style을 별도 등재해 두면 일관성과 일괄 갱신이 쉬워진다 (선택).
+
+### 컴포넌트 텍스트 폰트 규칙
+- **컴포넌트 정의 내부 텍스트는 반드시 `02 — Typography` 페이지의 Pretendard Text Style을 적용한다.** ([§7](#7-타이포그래피-규칙))
+- 컴포넌트 내부에 Inter 사용 금지.
 
 ### 라벨 동기화 원칙
 - **추가 시**: 컴포넌트·베리어블이 추가되면, 기존 라벨들의 위치·스타일에 맞춰 해당 요소의 설명 라벨을 함께 추가한다.
@@ -444,3 +460,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.2.1 | 2026.05.11 | 가이드 문서 정합성 정정: (1) §1 Variants 네이밍 예시 소문자(lg/md/sm) → 대문자(LG/MD/SM)로 정정 §11과 정합. (2) §11 약어 혼용 금지 문장 오타 수정. (3) Change Log 시간순(v1.7 ↔ v1.8 위치 교환, v1.9 위치 정정) 재정렬. (4) §4 카드 프레임 스크립트의 그림자 RGB 값을 #1A1916 정확값(0.102/0.098/0.086)으로 정정. |
 | v2.3 | 2026.05.11 | 가이드 문서 보강: (1) 목차 추가. (2) Change Log 정책에 SemVer(Major/Minor/Patch) 버전 부여 규칙 신설. (3) §1에 Change Log 페이지 양식 가이드(Header/Entries/Note 구조) 추가. (4) §3 Sizing 규칙에 HUG/FILL/FIXED 판단 기준 추가. (5) §7 타이포그래피에 02-typography.md Style×Size 매트릭스 참조 표 추가. (6) §10 라벨 텍스트에 text/label-* Text Style 사용 명시·Inter 등 외부 폰트 금지 명문화. (7) 01-icons.md 신규 작성. |
 | v2.3.1 | 2026.05.11 | 01-icons.md 등재 방식을 Figma Make 프롬프트 → 사내 라이브러리에서 직접 가져와 MCP로 붙여넣는 방식으로 변경. 등재 순서 6단계 명문화. |
+| v2.4 | 2026.05.11 | 메타 라벨 ↔ 컴포넌트 텍스트 폰트 정책 분리: §7 스코프를 "컴포넌트 정의 내부 텍스트 → Pretendard Text Style"로 명확화. §10 전면 개정 — 메타 라벨(컴포넌트 외부 설명·식별 텍스트, Change Log entries, 페이지 설명, 토큰 캡션)은 **Inter 사용 의무화**, 컴포넌트 정의 내부는 Pretendard 유지. Inter 권장 사이즈 표(Semi Bold 14 / Regular 12 / Regular 11) 신설. Why: Figma MCP 환경에서 Pretendard 로드 불가로 인한 작업 비용 제거 + 메타 라벨은 외부 노출 없어 폰트 차이 무관. |
