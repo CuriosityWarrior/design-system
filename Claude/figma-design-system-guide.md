@@ -17,7 +17,7 @@
 - [7. 타이포그래피 규칙](#7-타이포그래피-규칙)
 - [8. Variants 구성 규칙](#8-variants-구성-규칙)
 - [9. 페이지 내 배치 간격 규칙](#9-페이지-내-배치-간격-규칙)
-- [10. 설명 라벨 (메타 라벨) 규칙](#10-설명-라벨-메타-라벨-규칙)
+- [10. 변형 그리드 배치 규칙](#10-변형-그리드-배치-규칙)
 - [11. T-Shirt 사이즈 표기 규칙](#11-t-shirt-사이즈-표기-규칙)
 - [Change Log](#change-log)
 
@@ -340,7 +340,7 @@ for (const node of children) {
 - Text Style 없이 fontSize / fontWeight를 직접 지정하는 것을 금지한다.
 - 타이포그래피 라이브러리에 없는 스타일이 필요한 경우, 먼저 `02 — Typography` 페이지에 스타일을 추가한 후 적용한다.
 
-> ⚠️ **메타 라벨은 예외** — 디자인 시스템 페이지에 컴포넌트를 설명하기 위해 배치되는 메타 라벨(컴포넌트 외부의 설명·식별 텍스트, Change Log entries, 페이지 설명 등)은 [§10](#10-설명-라벨-메타-라벨-규칙)에 따라 **Inter**를 사용한다. 본 규칙은 컴포넌트 정의 내부에만 적용된다.
+> ⚠️ **페이지 헤더와 Change Log entries는 Inter** — 페이지 타이틀(Inter Bold 32)과 페이지 설명(Inter Medium 15), Change Log entries 텍스트는 [§10](#10-변형-그리드-배치-규칙) 정책에 따라 Pretendard가 아닌 **Inter**를 사용한다. 본 §7 Pretendard 규칙은 컴포넌트 정의 내부 텍스트에만 적용된다.
 
 ### Style × Size 매트릭스 (요약)
 
@@ -374,123 +374,78 @@ for (const node of children) {
 
 ## 9. 페이지 내 배치 간격 규칙
 
-한 페이지 내에 컴포넌트, 베리언트, 설명 라벨 등 여러 요소가 배치될 경우, 아래 최소 간격을 준수한다.
+한 페이지 내에 여러 요소가 배치될 경우, 아래 간격을 준수한다.
 
-| 배치 대상 | 최소 간격 |
+| 배치 대상 | 간격 |
 |---|---|
-| 개별 컴포넌트·베리어블 간 | 50px |
-| 설명 라벨 ↔ 컴포넌트·베리어블 | 50px |
-| 상위 베리어블 그룹 간 (대분류 사이) | 100px |
+| Component Set 내 변형 간 | 20px ([§10](#10-변형-그리드-배치-규칙) 변형 그리드 배치 규칙) |
+| 카드 프레임 내 페이지 헤더 ↔ Component Set 간 | 100px (카드 프레임 패딩으로 보장 — §2) |
+| 상위 그룹 간 (한 페이지에 여러 컴포넌트 그룹 존재 시) | 100px |
 
 ---
 
-## 10. 설명 라벨 (메타 라벨) 규칙
+## 10. 변형 그리드 배치 규칙
 
-컴포넌트·베리어블에는 **종류, 사이즈, 상태 등을 설명하는 메타 라벨이 항시 존재해야 한다.**
+컴포넌트 페이지의 변형(variant)들은 카드 프레임 안에 단순한 그리드로 배치한다. **별도의 식별용 텍스트 라벨(메타 라벨)을 두지 않는다** — 변형은 시각적 차이와 Figma Variant Property 패널로 식별한다.
 
-### 메타 라벨 vs 컴포넌트 텍스트 정의
+### 페이지 헤더 (모든 컴포넌트·파운데이션 페이지 공통)
 
-| 구분 | 정의 | 폰트 |
-|---|---|---|
-| **메타 라벨** | 디자인 시스템 Figma 파일 내 디자이너·개발자가 참고하기 위한 **설명·식별용 텍스트**. 컴포넌트 외부에 배치된 변형 라벨, Change Log entries, 페이지 타이틀·설명, 토큰 캡션 등. | **Inter** |
-| **컴포넌트 텍스트** | 컴포넌트(Component / Component Set) 정의 **내부**에 포함된 텍스트. 컴포넌트를 인스턴스로 사용했을 때 실제 사용자가 보게 되는 모든 텍스트. (예: 버튼의 "확인", 알럿의 메시지 등) | **Pretendard** ([§7](#7-타이포그래피-규칙)) |
-
-> ⚠️ **이름 혼동 주의**: 컴포넌트 폴더의 `30-label.md` "폼 레이블(Form Label)"은 실제 앱 UI에서 인풋 위에 표시되는 **컴포넌트**(예: "이메일" 라벨)이며, 본 §10의 "메타 라벨"이 아니다. Form Label 컴포넌트 내부 텍스트는 §7에 따라 Pretendard `text/label-*`를 사용한다. 마찬가지로 컴포넌트 md 파일들의 `text/label-*` 참조는 모두 **컴포넌트 내부 텍스트**용이므로 Pretendard 유지가 맞다.
-
-### 메타 라벨 폰트 규칙
-
-페이지 헤더 및 메타 라벨은 모두 **Inter**를 사용한다. 모든 텍스트 색상은 **`#000000`** (검정 단색, 토큰 바인딩 없음).
-
-#### 페이지 헤더 (모든 컴포넌트·파운데이션 페이지 공통)
+페이지 정체성 표시를 위한 헤더만 유지한다.
 
 | 위치 | 폰트 | 색상 |
 |---|---|---|
 | 페이지 타이틀 (예: "Avatar") | Inter **Bold 32** | `#000000` |
 | 페이지 설명 (타이틀 아래 한 줄 설명) | Inter **Medium 15** | `#000000` |
 
-#### 메타 라벨 계층(depth)별 스펙
+### 메타 라벨 부재 정책
 
-라벨의 계층 깊이에 따라 폰트가 달라진다. **숫자가 클수록 상위 그룹(시각적으로 큼)**. 폰트 사이즈는 +2px 균등 증분, 굵기는 Regular → Medium → Semi Bold → Bold로 단계적 증가.
+**`[ COMPONENTS ]` 섹션 이하 모든 페이지에서 변형 식별용 텍스트 라벨을 두지 않는다.**
 
-| Depth | 용도 | 폰트 | 색상 |
-|---|---|---|---|
-| **Depth 4** | 페이지 내 최상위 그룹 (Style 묶음 — 예: Button의 `Fill` / `Border` / `Text` 스타일 분류) | Inter **Bold 17** | `#000000` |
-| **Depth 3** | 2단계 그룹 헤더 (위계/주요 변형 — 예: Button의 `Primary` / `Secondary` / `Danger`, Icon Button의 `Primary` / `Secondary` / `Ghost`) | Inter **Semi Bold 15** | `#000000` |
-| **Depth 2** | 중간 sub-라벨 (그룹 내부 또는 2D 그리드의 한 축 — 예: Button의 상태 열 헤더, Icon Button의 사이즈 sub `lg` / `md` / `sm`) | Inter **Medium 13** | `#000000` |
-| **Depth 1** | 잎(leaf) 식별 라벨 (단일 축 변형, 그리드 잎 셀 축 — 예: Avatar의 `XXL`~`XXS`, Button의 사이즈 `XS`/`S`/`M`/`L`) | Inter **Regular 11** | `#000000` |
+- 그리드/스택 자체와 Variant Property 패널로 식별
+- 예외 (이 정책에서 제외 — 라벨/텍스트 유지):
+  - 페이지 헤더(타이틀·설명) — 위 표 참조
+  - Foundations 페이지의 토큰 칩 라벨 (예: `color/primary/default`, `#F26A00`) — 토큰 자체의 설명
+  - Change Log 페이지 entries — 버전 이력
+- 카드 프레임 내부에 "Labels", "Spec", "Meta" 등 별도 프레임/그룹을 생성하지 않는다 ([§1.6](#16-페이지-내-메타-박스-금지)).
 
-> 💡 모든 메타 라벨은 `02 — Typography`의 Pretendard Text Style을 적용하지 **않는다**. Inter는 fontName 직접 지정으로 사용.
+### 변형 배치 규칙
 
-> 📏 **최대 depth = 4 (권장 상한)**. 한 컴포넌트에서 5축 이상의 변형 그리드가 필요해 보이면 다음을 검토한다: (a) 별도 컴포넌트로 분리, (b) 두 축을 단일 토큰으로 합치기(예: 변형명을 `Primary-Filled` 식으로 결합), (c) 별도 페이지에 같은 컴포넌트의 다른 view로 분할. 5 depth 이상의 폰트 사이즈를 임의로 추가하지 않는다.
+**기본 — 5 columns × N rows 그리드** (좌→우, 위→아래 순)
 
-#### Depth 적용 가이드 — 그리드 형태별 매핑
+**예외 — wide-stack (1 column × N rows)**:
+- 변형의 width/height 비율 > 2 AND 변형 너비 > 200px AND 변형 수 ≤ 5
+- 위 조건 모두 충족 시 세로 1열로 스택 (대표: Alert, Toast, List Item, Tabs, Skeleton)
 
-| 그리드 형태 | 대표 컴포넌트 | 사용할 depth |
+| 컴포넌트 | 변형 수 | 적용 레이아웃 |
 |---|---|---|
-| 단일 변형 | Card, Modal, Drawer 등 | **depth 1** (변형 식별 라벨 1개) |
-| 1D × 사이즈 | Avatar, Spinner, Icon | **depth 1** (사이즈 라벨) |
-| 1D × 변형 | Tooltip, Tabs, Alert, Toast, Skeleton, Data Case, List Item, Stat Card, Chip, Label | **depth 1** (변형 라벨) |
-| 1D × 혼합축 | Divider (Horizontal × Size + Vertical) | **depth 1** (각 변형 라벨) |
-| 2D 그리드 | Toggle, Checkbox, Radio, Progress Bar | **depth 2** (행 축) + **depth 1** (열 축) |
-| 3D 그리드 | Icon Button, Input, Select, Text Area | **depth 3** (그룹) + **depth 2** (사이즈 sub) + **depth 1** (상태) |
-| 4D 그리드 | Button (Style × Strong × State × Size) | **depth 4** (Style 그룹) + **depth 3** (Strong 위계) + **depth 2** (상태) + **depth 1** (사이즈) |
+| Avatar (1D × Size) | 7 | 5-col 그리드 (5×2) |
+| Spinner | 4 | 5-col 그리드 (4×1) |
+| Icon Button (3D) | 48 | 5-col 그리드 (5×10) |
+| Button (4D) | 144 | 5-col 그리드 (5×29) |
+| Alert (wide) | 5 | wide-stack (1×5) |
+| Toast (wide) | 2 | wide-stack (1×2) |
+| List Item (wide) | 3 | wide-stack (1×3) |
+| Tabs (wide) | 2 | wide-stack (1×2) |
+| Skeleton (wide max) | 5 | wide-stack (1×5) |
 
-### 컴포넌트 텍스트 폰트 규칙
-- **컴포넌트 정의 내부 텍스트는 반드시 `02 — Typography` 페이지의 Pretendard Text Style을 적용한다.** ([§7](#7-타이포그래피-규칙))
-- 컴포넌트 내부에 Inter 사용 금지.
+### 간격 규칙
 
-### 라벨 ↔ 베리언트 1:1 매칭 원칙
+- **변형 사이 상하좌우 20px 균등 간격**
+- 그리드 외곽에 추가 padding 없음 (카드 프레임의 100px 패딩만 적용 — §2)
 
-**모든 베리언트는 반드시 1개 이상의 메타 라벨로 식별 가능해야 한다.** Component Set 안의 각 variant가 어떤 변형·사이즈·상태인지 페이지에서 시각적으로 판별할 수 있어야 함.
+### 절대 좌표 배치
 
-- **누락 금지**: 베리언트는 있으나 라벨이 없는 케이스(예: Avatar XXS 무라벨, Divider Vertical 무라벨) 금지.
-- **밀림 금지**: 라벨 텍스트가 가리키는 베리언트와 라벨이 시각적으로 인접한 베리언트가 달라지는 케이스(예: "xl" 라벨이 실제로는 XXL 컴포넌트 아래에 배치) 금지. 라벨은 가리키는 베리언트 바로 옆/위/아래에 위치하고 텍스트는 정확히 그 베리언트를 가리켜야 함.
-- **사이즈 라벨 표기**: 사이즈 라벨은 §11 대문자 T-Shirt 표기(`XXL / XL / L / M / S / XS / XXS`) 사용. 소문자(xl, lg, md, sm, xs) 금지.
+- Component Set의 **Auto Layout 사용 금지** (`layoutMode = NONE`)
+- 변형들은 Component Set 내 **절대 좌표(x, y)**로 배치한다
+- Component Set 크기는 변형 배치에 맞춰 결정:
+  - 그리드: `width = 5 × maxVariantWidth + 4 × 20`, `height = N × maxVariantHeight + (N-1) × 20`
+  - 스택: `width = max(variant.width)`, `height = Σvariant.height + (N-1) × 20`
 
-### 메타 라벨 구조 규칙
+### 변형 추가/삭제 시
 
-- 각 메타 라벨은 **개별 텍스트 레이어**로 작성하고, 컴포넌트 카드 프레임의 **직접 자식**으로 배치한다.
-- 메타 라벨들을 별도 프레임/그룹(`Labels`, `Spec`, `Meta` 등)으로 묶지 않는다 — 카드 프레임 평탄 구조를 유지한다.
-- 같은 페이지의 라벨들은 모두 동일 폰트 사이즈·색상·정렬 방식을 사용한다 (예: Inter Regular 12, `color/text/secondary`).
-
-### 그리드 형태별 라벨 배치 매트릭스
-
-| 그리드 형태 | 대표 컴포넌트 | 베리언트 배치 | 라벨 배치 |
-|---|---|---|---|
-| **단일 변형** | Card, Modal, Drawer, Breadcrumb, Pagination, Table | 1개 컴포넌트 | 컴포넌트 **하단** 또는 **상단**에 변형 식별 라벨(예: `Card/Default`) 1개 |
-| **1D × 사이즈** | Avatar, Spinner, Icon | 모든 사이즈를 **가로 1행**으로 정렬 (좌→우 크기 내림차순 권장) | 각 사이즈 컴포넌트 **바로 아래** uniform y에 사이즈 라벨 (XXL ~ XXS) |
-| **1D × 변형** | Tabs, Tooltip, Skeleton | 변형들을 **세로 1열** 또는 가로 1행으로 정렬 | 각 변형 컴포넌트 **좌측** 또는 상단에 변형 라벨 |
-| **1D × 변형 (혼합 축)** | Divider (Horizontal × Size + Vertical) | 주축 변형은 메인 그리드, 다른 축은 옆 영역으로 분리 | **각 축마다 독립 라벨** — 메인 그리드는 행 라벨, 분리 영역은 변형 라벨 |
-| **2D 변형 × 사이즈** | Button | 행=강조/스타일, 열=사이즈 (또는 반대) | **좌측 행 헤더** + **상단 열 헤더**. 각 헤더는 해당 행/열의 모든 셀에 적용됨 |
-| **2D 변형 × 상태** | Toggle, Checkbox, Radio | 행=사이즈, 열=상태 | 좌측 사이즈 헤더 + 상단 상태 헤더 |
-| **3D 변형 × 사이즈 × 상태** | Icon Button, Select | 그룹=변형(세로로 그룹 헤더), 행=사이즈, 열=상태 | **좌측 그룹 헤더**(예: "Primary") + **그룹 안 좌측 sub-라벨**(예: "L", "M", "S") + **상단 열 헤더**(예: "Default", "Hover") |
-
-### 정렬 원칙
-
-- **격자 정렬**: 같은 행의 모든 변형은 동일 y, 같은 열의 모든 변형은 동일 x를 유지한다.
-- **사이즈가 다른 변형의 정렬 기준**: 한 행에 크기가 다른 변형이 섞일 경우(예: Avatar XXL=48 + XS=16), **상단(top) 정렬**(y=0 통일) · **하단 baseline 정렬** · **수직 중앙 정렬** 중 한 방식으로 통일한다. 같은 페이지 내에서 두 방식을 혼용하지 않는다. **기본값 = 상단 정렬**.
-- **라벨 위치 일관성**: 같은 페이지·같은 그리드 형태 내에서 라벨 배치 방향(아래/위/좌측/우측)을 통일한다.
-- **라벨 baseline**: 한 행의 사이즈 라벨들은 동일 y에 배치한다. 컴포넌트 크기가 달라도 라벨 y는 통일.
-
-### 1D × 사이즈 레이아웃 상세 (Avatar, Spinner, Icon 등)
-
-| 항목 | 값 |
-|---|---|
-| 변형 배치 | 단일 Component Set 내 가로 1행, **top-aligned (y=0)** |
-| 변형 순서 | 좌→우 사이즈 내림차순 (`XXL → XL → L → M → S → XS → XXS`) |
-| 변형 간 수평 간격 | 우측 가장자리 ↔ 다음 좌측 가장자리 **32px 균등** |
-| Component Set 크기 | 가장 큰 변형 높이(예: 48px) × (최대 우측 좌표 + 1px slack) |
-| 라벨 위치 | 변형 그룹 **상단**(권장) 또는 하단 (페이지 내 통일) |
-| 라벨 ↔ 변형 그룹 수직 간격 | **약 10px** (라벨 bottom edge ↔ 변형 top edge) |
-| 라벨 y | 모든 라벨 **동일 y** |
-| 라벨 x | 각 라벨이 대응 변형의 **수평 중앙** (label center x = variant center x) |
-| 라벨 폰트 | depth 1 — Inter Regular 11, `#000000` (§10 폰트 규칙) |
-
-### 라벨 동기화 원칙
-- **추가 시**: 컴포넌트·베리어블이 추가되면, 위 그리드 매트릭스에 따라 라벨을 동시 추가한다.
-- **수정 시**: 컴포넌트·베리어블의 이름·상태·사이즈가 변경되면, 대응하는 라벨도 함께 수정한다.
-- **삭제 시**: 컴포넌트·베리어블이 삭제되면, 해당 라벨도 함께 제거한다.
-- **점검 의무**: 페이지 작업 직후 시각적으로 베리언트 수 = 라벨 수(또는 그리드 헤더 수)가 매칭되는지 확인한다.
+- 새 변형이 추가되면 위 규칙에 따라 위치 재계산 후 Component Set 크기를 재지정한다.
+- 변형 삭제 시도 동일하게 남은 변형들을 재배열하고 빈 공간을 제거한다.
+- 페이지 헤더와 Component Set 사이의 수직 간격은 카드 프레임 패딩(100px)으로 자동 보장된다.
 
 ---
 
@@ -557,3 +512,4 @@ Figma 내 컴포넌트의 베리언트 사이즈 표기는 **대문자 T-Shirt �
 | v2.8 | 2026.05.11 | §10 메타 라벨 폰트 규칙 재정의(depth 기반). 페이지 헤더 신설 — 페이지 타이틀(Inter Bold 32 #000), 페이지 설명(Inter Medium 15 #000). 메타 라벨을 3단계 depth로 정의: depth 1 (Inter Regular 11) / depth 2 (Inter Medium 13) / depth 3 (Inter Semi Bold 15), 모두 색상 #000000. Depth 적용 가이드 표 신설 — 그리드 형태별로 사용할 depth 매핑(단일 변형·1D·1D 혼합축은 depth 1 / 2D는 depth 2+1 / 3D는 depth 3+2+1 / 4D는 depth 3+2+1 with 같은 depth 공존). 이전 권장 표(SemiBold 14·Regular 12·Regular 11 / primary·secondary·tertiary 토큰)는 제거. Figma 적용: Avatar/Divider 페이지 타이틀·설명·전체 메타 라벨 새 스펙으로 정규화. |
 | v2.9 | 2026.05.11 | §10 메타 라벨 depth를 3 → 4로 확장. depth 4 신설 (Inter Bold 17 #000) — Button과 같이 Style 그룹 + 위계(Primary/Secondary/Danger) + 상태 + 사이즈 4축 컴포넌트의 최상위 그룹 헤더용. Depth 적용 가이드 표를 4D 그리드 행으로 보강 (Button: Style→depth 4 / Strong→depth 3 / 상태→depth 2 / 사이즈→depth 1). 디자인 시스템에서 단일 컴포넌트의 최대 권장 depth는 4임을 명문화 (5축 이상은 컴포넌트 분리·결합 토큰화·페이지 분할 등으로 해소 권장). Figma 적용: 페이지 헤더 일괄 정규화 — 전 페이지(Foundations 7 + Components 38 + Change Log) 타이틀·설명을 Inter Bold 32 / Inter Medium 15 / #000으로 정규화. |
 | v2.10 | 2026.05.11 | Figma 1D / 단일 변형 페이지 17건에 depth 1 메타 라벨 41개 일괄 추가 (모두 Inter Regular 11 #000). 레이아웃 패턴 3종 적용 — (a) horizontal-below 균등 baseline 5페이지: Spinner / Tooltip / Stat Card / Chip / Label (b) vertical-left 4페이지: Alert / Toast / Tabs / List Item (c) individual-below 1페이지: Skeleton (d) single-below 6페이지: Card / Modal / Drawer / Breadcrumb / Pagination / Table. Data Case는 6 변형이 카드 내 동일 좌표 겹침 상태로 별도 정리 필요해 보류. |
+| v2.11 | 2026.05.11 | **§10 전면 단순화: 메타 라벨 폐지 + 변형 그리드 배치 규칙**. 페이지에 변형 식별용 텍스트 라벨을 두지 않기로 결정 — 변형은 시각 차이 + Figma Variant Property 패널로 식별. 기존 depth 1~4 폰트 스펙·라벨↔베리언트 1:1 매칭·그리드별 라벨 배치 매트릭스 등 라벨 관련 모든 규칙 제거. 변형 배치 신규 규칙: (1) 기본 5 columns × N rows (2) 예외 wide-stack: width/height > 2 + width > 200 + 변형수 ≤ 5일 때 1 column 스택 (3) 변형 사이 상하좌우 20px 균등 간격 (4) Component Set Auto Layout 사용 금지, 절대 좌표 배치. 페이지 헤더(Inter Bold 32 / Inter Medium 15)는 유지. §7에 메타 라벨 예외 노트 갱신, §9 간격 규칙도 메타 라벨 제거 반영. Figma 적용: [ COMPONENTS ] 섹션 38페이지 일괄 정리 — 메타 라벨 186건 삭제, 30개 Component Set 5-col 그리드 또는 wide-stack 재배치 (Alert/Toast/List Item/Tabs/Skeleton/Divider/Search/Navigation Bar = wide-stack, 나머지 22 = 5-col 그리드). |
