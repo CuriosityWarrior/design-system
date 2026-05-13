@@ -98,13 +98,13 @@ Icon / {Name} / {Size}
 - `Icon / Search / XS`
 
 - `{Name}`은 라이브러리 원본 이름을 그대로 사용한다 (PascalCase 권장).
-- `{Size}`는 `XS / S / M / L` 중 하나 (대문자 T-Shirt 표기, §11 준수).
+- `{Size}`는 `XS / S / M / L` 중 하나 (대문자 T-Shirt 표기, [figma-design-system-guide/03-component-authoring.md#t-shirt-사이즈-표기-규칙](../figma-design-system-guide/03-component-authoring.md#t-shirt-사이즈-표기-규칙) 준수).
 
 ---
 
 ## 사용 원칙
 
-> 📌 시각 정렬, 텍스트와 비례, 인스턴스 의무 등 **공통 사용 원칙은 `figma-design-system-guide.md` §5 "아이콘 사용 규칙(공통)"** 을 따른다.
+> 📌 시각 정렬, 텍스트와 비례, 인스턴스 의무 등 **공통 사용 원칙은 [figma-design-system-guide/05-doc-conventions.md#아이콘-사용-규칙-공통](../figma-design-system-guide/05-doc-conventions.md#아이콘-사용-규칙-공통)** 을 따른다.
 
 본 문서는 아이콘 컴포넌트 자체의 스펙(라이브러리 출처, 사이즈, 색상, 네이밍)만 정의한다.
 
@@ -117,10 +117,10 @@ Icon / {Name} / {Size}
 ### 등재 순서
 1. 사내 라이브러리 (위 "아이콘 라이브러리 출처" 참조)에서 아이콘 SVG / Figma 컴포넌트를 복사한다.
 2. Figma MCP로 `01 — Icons` 페이지의 카드 프레임 내부에 붙여넣는다.
-3. 각 아이콘을 Component로 변환 후 §1 네이밍(`Icon / {Name} / {Size}`)을 적용한다.
+3. 각 아이콘을 Component로 변환 후 [Variants 네이밍 규칙](../figma-design-system-guide/03-component-authoring.md#variants-네이밍-규칙)(`Icon / {Name} / {Size}`)을 적용한다.
 4. 4 사이즈(XS / S / M / L) 변형을 생성하고 Width·Height에 `size/{T-Shirt}` Variables를 바인딩한다.
 5. 기본 색상 `color/primary/default`를 fills에 바인딩한다.
-6. 4 사이즈를 **Combine as Variants**로 결합한다 (§8).
+6. 4 사이즈를 **Combine as Variants**로 결합한다 ([Variants 구성 규칙](../figma-design-system-guide/03-component-authoring.md#variants-구성-규칙)).
 
 ### 등재 전략 (협의 필요)
 사내 라이브러리의 총 아이콘 수와 도메인에 따라 등재 범위가 달라진다. 본 가이드와 별도로 **디자인 시스템 생성 커맨드**에서 도메인·개수를 인터랙티브 질의해 맞춤 등재할 예정.
