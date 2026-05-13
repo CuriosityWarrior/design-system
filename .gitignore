@@ -1,0 +1,15 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Claude Code local config (user-specific, do not commit)
+.claude/
+
+# Editor/IDE local files
+.vscode/
+.idea/
+
+# OS / system noise
+Thumbs.db
+ehthumbs.db
+desktop.ini

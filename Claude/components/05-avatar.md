@@ -32,13 +32,13 @@
 
 | 크기 | Size 토큰 | 가로 × 세로 | 폰트 크기 |
 |---|---|---|---|
-| 2XL | `size/avatar/2xl` → `size/2xl` | 56 × 56px | 20px |
-| XL | `size/avatar/xl` → `size/xl` | 48 × 48px | 18px |
+| XL | `size/avatar/XL` → `size/XL` | 48 × 48px | 18px |
 | Large (L) | `size/avatar/L` → `size/L` | 40 × 40px | 16px |
 | Medium (M) | `size/avatar/M` → `size/M` | 32 × 32px | 13px |
 | Small (S) | `size/avatar/S` → `size/S` | 24 × 24px | 11px |
-| XS | `size/avatar/xs` → `size/xs` | 16 × 16px | 9px |
-| 2XS | `size/avatar/2xs` → `size/2xs` | 12 × 12px | — |
+| XS | `size/avatar/XS` → `size/XS` | 16 × 16px | 9px |
+
+> Avatar는 5종 사이즈만 사용 (XL~XS). `02 — Typography` Foundation의 `size/*` Semantic 토큰 7종(XXL/XL/L/M/S/XS/XXS)은 그대로 유지되며, 다른 컴포넌트(예: Icon)가 더 작은 사이즈를 사용한다.
 
 ---
 
@@ -109,7 +109,7 @@
 ```
 다음 스펙으로 아바타(Avatar) 컴포넌트를 만들어줘:
 
-크기: 2XL(56px), XL(48px), Large(40px), Medium(32px), Small(24px), XS(16px), 2XS(12px)
+크기: XL(48px), Large(40px), Medium(32px), Small(24px), XS(16px)
 Width/Height에는 Size/Semantic Variables (size/avatar/*)를 바인딩
 형태: 완전한 원형 (border-radius 50%)
 폰트: Pretendard SemiBold 600

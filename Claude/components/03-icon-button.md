@@ -49,7 +49,7 @@
 - **보더**: 1px solid `color/border/default`
 - **호버**: 보더 → `color/border/strong`
 
-### Ghost
+### Tertiary
 - **배경**: transparent
 - **아이콘 색상**: `color/text/secondary`
 - **호버**: 배경 → `color/surface/2`, 아이콘 → `color/text/primary`
@@ -94,7 +94,7 @@
 |---|---|
 | 레이블 대체 금지 | 아이콘 버튼은 텍스트 레이블 없이 사용하므로 반드시 `aria-label`을 제공해 액션을 명확히 설명한다. |
 | 툴팁 병행 | 호버 시 툴팁으로 액션명을 표시해 의미를 보완한다. 아이콘만으로 의미가 명확하지 않을 경우 텍스트 버튼으로 대체를 검토한다. |
-| 변형 선택 | Primary는 가장 강조가 필요한 단독 액션, Secondary는 일반 인터페이스 내 액션, Ghost는 배경이 있는 영역의 저강조 보조 액션에 사용. |
+| 변형 선택 | Primary는 가장 강조가 필요한 단독 액션, Secondary는 일반 인터페이스 내 액션, Tertiary는 배경이 있는 영역의 저강조 보조 액션에 사용. |
 | 크기 일관성 | 동일 컨텍스트 내 아이콘 버튼 크기는 통일. 크기를 임의 px로 고정하지 않고 Size 토큰으로 지정한다. |
 | 아이콘 규칙 | 모든 아이콘은 `01 — Icons` 페이지의 컴포넌트 인스턴스를 사용. 텍스트 기호·이모지·직접 그린 벡터 금지. |
 | 최소 터치 영역 | 모바일에서 L 이하 크기 사용 시 터치 타깃을 최소 44px로 확보한다. |
@@ -108,12 +108,12 @@
 
 크기: XLarge (48×48px, 아이콘 24px), Large (40×40px, 아이콘 20px), Medium (32×32px, 아이콘 16px), Small (24×24px, 아이콘 14px)
 Width/Height에는 Size/Semantic Variables (size/icon-button/XL, L, M, S)를 바인딩
-변형: Primary, Secondary, Ghost
+변형: Primary, Secondary, Tertiary
 보더 반경: 8px
 
 Primary: 오렌지 배경 (#F26A00), 흰색 아이콘
 Secondary: 흰색 배경, 1px 회색 보더, 어두운 아이콘
-Ghost: 투명 배경, 회색 아이콘, 호버 시 연한 배경
+Tertiary: 투명 배경, 회색 아이콘, 호버 시 연한 배경
 
 상태: 기본, 호버, 액티브(scale 0.94), 포커스(3px 오렌지 링), 비활성(40% 불투명도)
 
