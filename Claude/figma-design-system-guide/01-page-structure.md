@@ -68,7 +68,7 @@ Figma `Change Log` 페이지의 카드 프레임 내부는 다음 2개 영역으
 |---|---|---|
 | **정책·노트 박스** | "정책: 이 페이지는 md와 동기화됩니다…" | 본 가이드 폴더 (`figma-design-system-guide/`) |
 | **버전 콜아웃** | "📝 v1.6 — Border/Surface 2가지 스타일…" | [CHANGELOG.md](CHANGELOG.md) + Figma `Change Log` 페이지 |
-| **컴포넌트 스펙 요약 박스** | "Component Name / Variant: A/B/C / Size: L/M/S / State: …" | `../components/{NN}-{name}.md` |
+| **컴포넌트 스펙 요약 박스** | "Component Name / Variant: A/B/C / Size: L/M/S / State: …" | `../design-system/components/{NN}-{name}.md` |
 | **페이지 메타 인덱스** | 카테고리 명만 나열한 텍스트 목록 (예: Icons 페이지의 영문 카테고리 목록) | 페이지 헤더 설명 또는 md |
 
 **변형 그리드 메타 라벨과의 차이**:

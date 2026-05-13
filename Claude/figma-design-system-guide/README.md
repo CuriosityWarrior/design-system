@@ -20,4 +20,4 @@ Vetching 디자인 시스템을 Figma에서 작성·유지보수하기 위한 �
 
 - 가이드 문서를 수정하면 [CHANGELOG.md](CHANGELOG.md)에 항목을 추가하고, 같은 내용을 Figma `Change Log` 페이지에도 동기화한다.
 - 페이지·카드 프레임에는 정책·노트·버전 콜아웃 등 메타 텍스트를 두지 않는다. ([01-page-structure.md#페이지-내-메타-박스-금지](01-page-structure.md#페이지-내-메타-박스-금지))
-- 가이드 외에 단일 컴포넌트별 세부 사양은 [`../components/{NN}-{name}.md`](../components/) 파일을, 파운데이션 토큰 정의는 [`../foundations/`](../foundations/) 파일을 참조한다.
+- 가이드 외에 단일 컴포넌트별 세부 사양은 [`../design-system/components/{NN}-{name}.md`](../design-system/components/) 파일을, 파운데이션 토큰 정의는 [`../design-system/foundations/`](../design-system/foundations/) 파일을 참조한다.
