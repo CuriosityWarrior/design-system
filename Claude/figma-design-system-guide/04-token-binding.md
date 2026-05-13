@@ -61,4 +61,4 @@
 | **Label** | — | 16 SemiBold | 14 SemiBold | 13 SemiBold | 12 SemiBold |
 | **Caption** | — | — | — | — | 12 Regular |
 
-> 📐 정확한 fontSize / lineHeight / letterSpacing / 사용처는 [`../foundations/02-typography.md`](../foundations/02-typography.md)의 Semantic 토큰 표를 단일 출처(SoT)로 한다. 위 표는 빠른 참조용 요약이며, 값 충돌 시 02-typography.md를 우선한다.
+> 📐 정확한 fontSize / lineHeight / letterSpacing / 사용처는 [`../design-system/foundations/02-typography.md`](../design-system/foundations/02-typography.md)의 Semantic 토큰 표를 단일 출처(SoT)로 한다. 위 표는 빠른 참조용 요약이며, 값 충돌 시 02-typography.md를 우선한다.
