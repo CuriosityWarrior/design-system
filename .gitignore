@@ -3,7 +3,11 @@
 **/.DS_Store
 
 # Claude Code local config (user-specific, do not commit)
-.claude/
+.claude/*
+# 단, 팀 공유용 skill은 추적 (단 .DS_Store는 계속 제외)
+!.claude/skills/
+!.claude/skills/**
+.claude/skills/**/.DS_Store
 
 # Editor/IDE local files
 .vscode/
