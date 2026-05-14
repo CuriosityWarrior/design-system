@@ -1,0 +1,140 @@
+# 컴포넌트: 프로그레스 바 (Progress Bar)
+
+## 개요
+작업 완료율 또는 진행 상태를 시각적으로 표시하는 인디케이터.
+
+---
+
+## 디자인 토큰
+
+| 토큰 | 값 |
+|---|---|
+| 트랙 배경 | `color/surface/3` |
+| 보더 반경 | `radius/badge` = 9999px (필 형태) |
+| 모션 | 너비 변화 시 600ms cubic-bezier(0,0,0.2,1) |
+
+---
+
+## 크기
+
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 프로그레스 바 전용 Semantic 토큰은 현재 미정의 — Semantic 토큰이 추가되면 참조로 전환한다.
+
+| 크기 | 높이 |
+|---|---|
+| Small (S) | 4px |
+| Medium (M, 기본) | 8px |
+| Large (L) | 12px |
+
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| 트랙 높이 (S) | `size/4` | 4px |
+| 트랙 높이 (M) | `size/8` | 8px |
+| 트랙 높이 (L) | `size/12` | 12px |
+| 헤더–트랙 간격 | `spacing/8` | 8px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
+---
+
+## 색상 변형
+
+| 변형 | 채움 색상 | 사용처 |
+|---|---|---|
+| Primary | `color/primary/default` | 일반 진행 상태 |
+| 성공 | `color/success/default` | 완료 상태 |
+| 경고 | `color/warning/default` | 한계 근접 경고 |
+| 오류 | `color/error/default` | 실패 또는 초과 |
+
+---
+
+## 확정형 (퍼센트 값 있음)
+- 헤더 행: 레이블 좌측 + 퍼센트 우측 (13px / Medium)
+- 트랙 아래
+- 채움 너비 = 트랙 너비의 퍼센트
+
+## 비확정형 (소요 시간 미정)
+- 퍼센트 표시 없음
+- 채움 애니메이션: translateX(-100%) → translateX(350%) 무한 반복
+- 채움 너비 고정 40%
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FILL` (부모 너비) |
+| layoutSizingVertical | `FIXED` |
+
+> 트랙 높이는 크기 변형별 고정 값. 너비는 부모에 맞춰 늘어난다. Height에 임의 값 입력 금지.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+---
+
+## 토큰 바인딩 체크리스트
+
+본 컴포넌트의 Figma 구현 시 다음을 모두 충족해야 한다 ([`04-token-binding.md#토큰-바인딩-검증-의무`](../figma-design-system-guide/04-token-binding.md#토큰-바인딩-검증-의무) 참조).
+
+| 속성 종류 | 바인딩 대상 | 검증 |
+|---|---|---|
+| Width / Height | `size/*` Variables (또는 부모 Auto Layout에 의해 결정) | `boundVariables.width` / `boundVariables.height` |
+| Padding 4면 / itemSpacing | `spacing/*` Variables | `boundVariables.padding{Top|Right|Bottom|Left}` / `boundVariables.itemSpacing` |
+| cornerRadius | `radius/*` Variables | `boundVariables.cornerRadius` (또는 4모서리별) |
+| fills / strokes (SOLID 컬러) | `color/*` Variables | `boundVariables.fills` / `strokes` 또는 `fillStyleId` / `strokeStyleId` |
+| 텍스트 노드 | Text Style (Pretendard) | `textStyleId !== ""` |
+| 그림자 (effects) | Effect Style | `effectStyleId !== ""` |
+
+위 "디자인 토큰" / "크기" 섹션에 명시된 값은 모두 위 토큰에 바인딩되어야 한다. 임의 px·HEX 값으로 남아있으면 위반이다.
+
+**라이브러리에 없는 값**이 필요한 경우 [`04-token-binding.md#토큰-부재-시-신설-의무`](../figma-design-system-guide/04-token-binding.md#토큰-부재-시-신설-의무)에 따라 먼저 토큰을 신설한 후 바인딩한다.
+
+---
+
+## 사용 원칙
+
+| 원칙 | 설명 |
+|---|---|
+| 확정형/비확정형 구분 | 완료까지 소요 시간을 알 수 있으면 퍼센트 값이 있는 확정형을 사용하고, 알 수 없으면 슬라이딩 애니메이션의 비확정형을 사용한다. |
+| 레이블 병행 표시 | 퍼센트 숫자만으로는 맥락이 부족할 수 있으므로 헤더에 레이블 텍스트를 함께 표시한다. |
+| 색상 의미 준수 | Primary(일반), 성공(완료), 경고(한계 근접), 오류(실패/초과)의 의미에 맞는 색상 변형을 선택한다. 장식 목적으로 색상을 임의로 사용하지 않는다. |
+| 크기 선택 기준 | 페이지의 주요 진행 상태에는 Medium(8px), 보조적인 소형 정보에는 Small(4px), 강조가 필요한 큰 컨텍스트에는 Large(12px)를 사용한다. |
+| 부모 너비에 맞춤 | Progress Bar는 항상 FILL로 배치하여 컨테이너 너비에 맞춘다. 고정 너비를 직접 지정하지 않는다. |
+
+## Figma Make 프롬프트
+
+```
+다음 스펙으로 프로그레스 바(Progress Bar) 컴포넌트를 만들어줘:
+
+트랙: 연한 회색 배경 (#F4F3F0), 필 형태 (전체 보더 반경)
+채움: 트랙 내부 컬러 필 형태
+
+크기: Small (4px), Medium (8px), Large (12px)
+
+색상 변형:
+- Primary: 오렌지 (#F26A00)
+- 성공: 초록 (#0D9144)
+- 경고: 앰버 (#F59E0B)
+- 오류: 빨간색 (#E8321E)
+
+헤더 포함: 레이블 텍스트 좌측, "72%" 퍼센트 우측 (13px Medium)
+
+비확정형 변형: 슬라이딩 채움 애니메이션, 퍼센트 없음
+
+네이밍: Progress / {변형} / {크기}
+```

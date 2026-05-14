@@ -1,0 +1,182 @@
+# 컴포넌트: 인풋 (Input)
+
+## 개요
+사용자 데이터 입력을 위한 단일 행 텍스트 입력 필드. 가장 일반적인 폼 요소.
+
+---
+
+## 디자인 토큰
+
+| 토큰 | 값 |
+|---|---|
+| 폰트 | 14px / Regular 400 → `text/body-SM` |
+| 배경 | `color/surface/1` |
+| 보더 | 1px solid `color/border/default` |
+| 보더 반경 | `radius/input` = 8px |
+| 패딩 | 9px 12px |
+| 플레이스홀더 | `color/text/tertiary` |
+| 포커스 링 | `shadow/focus` = 0 0 0 3px rgba(242,106,0,0.20) |
+| 모션 | 100ms ease-out |
+
+---
+
+## 크기
+
+> 📐 Height는 [파운데이션: 사이즈](../foundations/07-size.md)의 Semantic 토큰을 참조한다. Width는 콘텐츠에 따라 가변.
+
+| 크기 | Height 토큰 | Height | 폰트 | 패딩 (세로 × 가로) |
+|---|---|---|---|---|
+| Large (L) | `size/input/L` → `size/XL` | 48px | 16px | 14px 14px |
+| Medium (M) | `size/input/M` → `size/L` | 40px | 14px | 11px 12px |
+| Small (S) | `size/input/S` → `size/S` | 24px | 13px | 4px 10px |
+
+---
+
+## 상태
+
+| 상태 | 보더 | 그림자 | 배경 |
+|---|---|---|---|
+| 기본 | `color/border/default` | — | `color/surface/1` |
+| 호버 | `color/border/strong` | — | `color/surface/1` |
+| 포커스 | `color/primary/default` | `shadow/focus` | `color/surface/1` |
+| 오류 | `color/error/default` | 빨간 링 | `color/surface/1` |
+| 성공 | `color/success/default` | — | `color/surface/1` |
+| 비활성 | `color/border/subtle` | — | `color/surface/2` |
+| 읽기전용 | `color/border/default` | — | `color/surface/2` |
+
+---
+
+## 스타일 변형
+
+### Border 스타일 (기본)
+- 배경 투명, 보더로 영역을 표현하는 기본 스타일
+- 보더: 1px solid `color/border/default`
+- 배경: `color/surface/1`
+
+### Surface 스타일
+- 보더 없이 면(Fill)으로 영역을 표현하는 스타일
+- 배경: `color/background/subtle`
+- 보더: 없음 (포커스 상태에서만 `color/primary/default` 보더 표시)
+
+> 두 스타일 모두 동일한 사이즈(L, M, S) 및 상태(Default, Hover, Focus, Error, Success, Disabled, Readonly) 변형을 갖는다.
+
+---
+
+## 종류
+- **텍스트**: 표준 텍스트 입력
+- **비밀번호**: 마스킹 처리, 우측에 표시/숨기기 토글 아이콘
+- **검색**: 좌측 검색 아이콘 (⌕), 선택적 지우기 버튼
+
+---
+
+## 폼 필드 패턴 (전체)
+- **레이블**: 13px / Medium 500, `color/text/secondary`, 인풋 위, 5px 간격
+- **필수 표시**: `*` → `color/error/default`
+- **힌트 텍스트**: 12px / Regular, `color/text/tertiary`, 인풋 아래 4px
+- **오류 텍스트**: 12px / Regular, `color/text/error`, 인풋 아래 4px
+- **성공 텍스트**: 12px / Regular, `color/text/success`, 인풋 아래 4px
+
+---
+
+## 접근성
+- `<label>`을 `for`/`id`로 인풋과 연결 필수
+- 오류 상태: `aria-invalid="true"`, `aria-describedby`로 오류 메시지 연결
+- 필수 필드: `aria-required="true"`
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingVertical | `HUG` |
+
+> Height는 Size 토큰(`size/input/*`) 기준 콘텐츠 + 패딩으로 자동 결정된다. Width는 배치 컨텍스트에 따라 FILL 또는 HUG. 임의 px 값으로 Height Fixed 지정 금지.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+## 토큰 바인딩 체크리스트
+
+본 컴포넌트의 Figma 구현 시 다음을 모두 충족해야 한다 ([`04-token-binding.md#토큰-바인딩-검증-의무`](../figma-design-system-guide/04-token-binding.md#토큰-바인딩-검증-의무) 참조).
+
+| 속성 종류 | 바인딩 대상 | 검증 |
+|---|---|---|
+| Width / Height | `size/*` Variables (또는 부모 Auto Layout에 의해 결정) | `boundVariables.width` / `boundVariables.height` |
+| Padding 4면 / itemSpacing | `spacing/*` Variables | `boundVariables.padding{Top|Right|Bottom|Left}` / `boundVariables.itemSpacing` |
+| cornerRadius | `radius/*` Variables | `boundVariables.cornerRadius` (또는 4모서리별) |
+| fills / strokes (SOLID 컬러) | `color/*` Variables | `boundVariables.fills` / `strokes` 또는 `fillStyleId` / `strokeStyleId` |
+| 텍스트 노드 | Text Style (Pretendard) | `textStyleId !== ""` |
+| 그림자 (effects) | Effect Style | `effectStyleId !== ""` |
+
+위 "디자인 토큰" / "크기" 섹션에 명시된 값은 모두 위 토큰에 바인딩되어야 한다. 임의 px·HEX 값으로 남아있으면 위반이다.
+
+**라이브러리에 없는 값**이 필요한 경우 [`04-token-binding.md#토큰-부재-시-신설-의무`](../figma-design-system-guide/04-token-binding.md#토큰-부재-시-신설-의무)에 따라 먼저 토큰을 신설한 후 바인딩한다.
+
+---
+
+## 사용 원칙
+
+| 원칙 | 설명 |
+|---|---|
+| 레이블 필수 | 모든 인풋에 `<label>`을 `for`/`id`로 연결. 플레이스홀더를 레이블 대용으로 사용하지 않는다. |
+| 상태 피드백 명확화 | 오류·성공 상태는 색상뿐 아니라 힌트 텍스트로도 함께 전달해 색맹 사용자를 지원한다. |
+| 스타일 일관성 | 동일 폼 내에서 Border와 Surface 스타일을 혼용하지 않는다. |
+| 크기 선택 | 기본 폼에는 M(40px), 컴팩트 필터·툴바에는 S(24px), 강조 입력 영역에는 L(48px)을 사용한다. |
+| 읽기전용 vs 비활성 구분 | 값을 복사할 수 있으면 읽기전용(Readonly), 완전히 사용 불가이면 비활성(Disabled)을 적용한다. |
+| 접근성 마크업 | 오류 상태에는 `aria-invalid="true"` 및 `aria-describedby`로 오류 메시지를 연결. 필수 필드에는 `aria-required="true"` 사용. |
+| 아이콘 규칙 | 인풋 내 아이콘은 `01 — Icons` 페이지의 인스턴스만 사용. 텍스트 특수문자·이모지 금지. |
+
+---
+
+## Figma Make 프롬프트
+
+```
+다음 스펙으로 인풋(Input) 폼 컴포넌트를 만들어줘:
+
+기본 스타일:
+- 폰트: 14px Regular (Pretendard)
+- 패딩: 9px 12px
+- 보더 반경: 8px
+- 보더: 1px solid #E8E6E1 (라이트) / rgba(255,255,255,0.10) (다크)
+- 배경: 흰색 / 다크 서피스
+
+크기:
+- Large: height 48px, 16px, 패딩 14px 14px
+- Medium: height 40px, 14px, 패딩 11px 12px (기본)
+- Small: height 24px, 13px, 패딩 4px 10px
+Height에는 Size/Semantic Variables (size/input/L, M, S)를 바인딩
+
+상태:
+- 기본: 회색 보더
+- 호버: 약간 진한 보더
+- 포커스: 오렌지 보더 + 3px 오렌지 글로우 링
+- 오류: 빨간 보더 + 빨간 글로우 링
+- 성공: 초록 보더
+- 비활성: 흐린 배경, 상호작용 없음
+- 읽기전용: 흐린 배경, 텍스트 선택 가능
+
+변형:
+- 텍스트 전용
+- 좌측 아이콘 포함 (검색 아이콘)
+- 우측 아이콘 포함 (비밀번호 토글)
+
+폼 필드 패턴:
+- 레이블 (13px Medium) 인풋 위
+- 필수 표시 * 빨간색
+- 힌트/오류/성공 텍스트 (12px) 아래
+
+네이밍: Input / {상태} / {크기}
+```

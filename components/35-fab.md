@@ -1,0 +1,160 @@
+# 컴포넌트: 플로팅 액션 버튼 (FAB)
+
+## 개요
+화면의 주요 액션을 즉시 수행할 수 있도록 떠 있는 원형/둥근 사각형 버튼. 페이지의 주요 CTA를 고정된 위치에 노출한다. 일반 Button/Icon Button과 달리 엘리베이션(그림자)과 플로팅 위치를 특징으로 한다.
+
+---
+
+## 디자인 토큰
+
+| 토큰 | 값 |
+|---|---|
+| 배경 | `color/primary/default` |
+| 아이콘 색상 | `color/primary/on-primary` |
+| 보더 반경 | `radius/fab` = 16px (기본) / 9999px (원형 변형) |
+| 그림자 | `shadow/fab` = 0 6px 16px rgba(0,0,0,0.16) |
+| 호버 그림자 | 0 8px 20px rgba(0,0,0,0.20) |
+| 포커스 링 | `shadow/focus` |
+| 호버 모션 | 150ms ease-out |
+| 프레스 모션 | 50ms ease-in-out (scale 0.96) |
+
+---
+
+## 크기 (Size)
+
+> 📐 Width/Height는 [파운데이션: 사이즈](../foundations/07-size.md)의 Semantic 토큰을 참조한다.
+
+| 크기 | Size 토큰 | 가로 × 세로 | 아이콘 크기 |
+|---|---|---|---|
+| Large (L) | `size/fab/L` → `size/2XL` | 56 × 56px | 24px |
+| Medium (M) | `size/fab/M` → `size/XL` | 48 × 48px | 24px |
+| Small (S) | `size/fab/S` → `size/L` | 40 × 40px | 20px |
+
+---
+
+## 변형 (Variant)
+
+### FAB (기본)
+- 아이콘만 포함한 정사각형(둥근 모서리) 버튼
+- 아이콘은 `01 — Icons` 페이지 인스턴스
+
+### Extended FAB
+- 아이콘 + 텍스트 레이블을 한 행에 배치
+- Height: 48px, 패딩 `spacing/16` (16px) `spacing/20` (20px), 레이블 14px Medium
+- Width: HUG
+
+### Surface FAB
+- 배경 `color/surface/1`, 아이콘 `color/primary/default`
+- 보더 1px `color/border/default`
+- 덜 강조되는 보조 주요 액션
+
+---
+
+## 상태 (State)
+
+| 상태 | 배경 | 그림자 |
+|---|---|---|
+| 기본 | `color/primary/default` | `shadow/fab` |
+| 호버 | `color/primary/hover` | 확대된 그림자 |
+| Active / Pressed | `color/primary/active` | `shadow/fab`, scale(0.96) |
+| 포커스 | `color/primary/default` | `shadow/focus` |
+| 비활성 | opacity 0.4 | 그림자 없음 |
+
+---
+
+## 위치 및 간격
+- 화면 우하단 기본 (16~24px 여백)
+- 모바일 하단 탭바와 겹치지 않도록 상단 추가 여백(16px)
+- 페이지 중앙 하단도 가능 (예: 지도 확대/현재 위치)
+
+---
+
+## 사이즈 동작
+
+| 변형 | layoutSizingHorizontal | layoutSizingVertical |
+|---|---|---|
+| FAB (기본) | `FIXED` | `FIXED` |
+| Extended FAB | `HUG` | `FIXED` (48px) |
+
+> 기본 FAB는 Size 토큰(`size/fab/*`)만으로 크기를 지정. Extended FAB는 가로만 콘텐츠 HUG.
+
+---
+
+## 접근성
+- 아이콘 전용 FAB는 `aria-label` 필수 (예: `aria-label="글쓰기"`)
+- 포커스 링 항상 표시
+- 최소 터치 영역: 44px 이상 (S 변형은 모바일에서 지양)
+- 화면 가장자리 여백 확보하여 시스템 UI와 충돌 방지
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+### 아이콘 사용 규칙
+- 모든 아이콘은 `01 — Icons` 페이지에 정의된 아이콘 컴포넌트 인스턴스를 사용한다.
+- 유니코드 문자, 특수 기호 텍스트(+, ✕ 등)나 이모지, 직접 그린 벡터로 아이콘을 대체하는 것을 금지한다.
+- 아이콘 크기는 컴포넌트의 사이즈 변형에 맞춰 조정한다 (L/M: 24px, S: 20px).
+
+---
+
+---
+
+## 토큰 바인딩 체크리스트
+
+본 컴포넌트의 Figma 구현 시 다음을 모두 충족해야 한다 ([`04-token-binding.md#토큰-바인딩-검증-의무`](../figma-design-system-guide/04-token-binding.md#토큰-바인딩-검증-의무) 참조).
+
+| 속성 종류 | 바인딩 대상 | 검증 |
+|---|---|---|
+| Width / Height | `size/*` Variables (또는 부모 Auto Layout에 의해 결정) | `boundVariables.width` / `boundVariables.height` |
+| Padding 4면 / itemSpacing | `spacing/*` Variables | `boundVariables.padding{Top|Right|Bottom|Left}` / `boundVariables.itemSpacing` |
+| cornerRadius | `radius/*` Variables | `boundVariables.cornerRadius` (또는 4모서리별) |
+| fills / strokes (SOLID 컬러) | `color/*` Variables | `boundVariables.fills` / `strokes` 또는 `fillStyleId` / `strokeStyleId` |
+| 텍스트 노드 | Text Style (Pretendard) | `textStyleId !== ""` |
+| 그림자 (effects) | Effect Style | `effectStyleId !== ""` |
+
+위 "디자인 토큰" / "크기" 섹션에 명시된 값은 모두 위 토큰에 바인딩되어야 한다. 임의 px·HEX 값으로 남아있으면 위반이다.
+
+**라이브러리에 없는 값**이 필요한 경우 [`04-token-binding.md#토큰-부재-시-신설-의무`](../figma-design-system-guide/04-token-binding.md#토큰-부재-시-신설-의무)에 따라 먼저 토큰을 신설한 후 바인딩한다.
+
+---
+
+## 사용 원칙
+
+| 원칙 | 설명 |
+|---|---|
+| 화면당 하나만 사용 | FAB는 페이지의 가장 중요한 단일 액션에만 사용한다. 여러 FAB를 동시에 표시하면 우선순위가 불명확해진다. |
+| 주요 액션에만 사용 | 자주 사용되고 중요한 액션에만 FAB를 배치한다. 부가적이거나 드문 액션은 일반 Button이나 Menu를 사용한다. |
+| 콘텐츠를 가리지 않도록 배치 | FAB가 중요한 콘텐츠나 인터랙티브 요소를 가리지 않는지 확인한다. 필요시 하단 패딩을 추가하여 스크롤 시 콘텐츠가 FAB 뒤로 사라지지 않도록 한다. |
+| Extended FAB로 레이블 보완 | 아이콘만으로 액션이 명확하지 않은 경우 Extended FAB를 사용하여 텍스트 레이블을 추가한다. 아이콘 전용 FAB에는 반드시 aria-label을 제공한다. |
+| Surface FAB는 보조 액션에 | 강조를 낮춰야 하는 보조 주요 액션에는 Surface FAB를 사용한다. Primary FAB와 Surface FAB를 동시에 사용할 경우 Primary가 항상 더 두드러져야 한다. |
+
+## Figma Make 프롬프트
+
+```
+다음 스펙으로 플로팅 액션 버튼(FAB) 컴포넌트를 만들어줘:
+
+변형: FAB (기본), Extended FAB, Surface FAB
+크기: Large (56px), Medium (48px), Small (40px)
+Width/Height에는 Size/Semantic Variables (size/fab/L, M, S) 바인딩
+
+기본 FAB:
+- 오렌지 배경 (#F26A00), 흰색 아이콘
+- 보더 반경 16px
+- 그림자: 0 6px 16px rgba(0,0,0,0.16)
+- 아이콘은 Icons 페이지 인스턴스 사용 (텍스트 기호 금지)
+
+Extended FAB:
+- 아이콘 + 텍스트 레이블 (14px Medium)
+- 패딩 16px 20px
+- Height 48px, Width HUG
+
+Surface FAB:
+- 흰색 배경, 1px 보더, 오렌지 아이콘
+
+상태: 기본, 호버(그림자 확대), 액티브(scale 0.96), 포커스(3px 오렌지 링), 비활성(40% 불투명도)
+
+네이밍: FAB / {FAB|Extended|Surface} / {크기} / {상태}
+```

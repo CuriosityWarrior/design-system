@@ -1,0 +1,139 @@
+# 컴포넌트: 드로어 / 시트 (Drawer)
+
+## 개요
+보조 콘텐츠나 액션을 위해 화면 가장자리에서 슬라이드 인하는 사이드 패널.
+
+---
+
+## 디자인 토큰
+
+| 토큰 | 값 |
+|---|---|
+| 배경 | `color/surface/1` |
+| 그림자 | `shadow/modal` |
+| 너비 | 360px (최대 90vw) |
+| 오버레이 | `color/surface/overlay` |
+| 보더 반경 (바텀 시트) | `radius/XL` (16px) — 상단 모서리만 적용 (topLeftRadius/topRightRadius = `radius/XL`, bottomLeftRadius/bottomRightRadius = `radius/0`) |
+| 모션 | `motion/page` = 300ms ease-out (translateX) |
+
+---
+
+> 📐 사이즈 기본 원칙은 [파운데이션: 사이즈](../foundations/07-size.md) 참조. 내부 버튼/인풋은 해당 컴포넌트의 Semantic 토큰을 따른다.
+
+## 구조
+- **헤더**: 제목 (18px / SemiBold) + 닫기 버튼
+  - 패딩: 20px 24px
+  - 하단 보더: `color/border/subtle`
+  - flex-shrink: 0
+- **본문**: 스크롤 가능한 콘텐츠 영역
+  - 패딩: 20px 24px
+  - flex: 1, overflow-y: auto
+- **푸터**: 액션 버튼 — `02 — Button` 페이지의 Button 컴포넌트 인스턴스 (전체 너비 또는 우측 정렬)
+  - 패딩: 16px 24px
+  - 상단 보더: `color/border/subtle`
+  - flex-shrink: 0
+
+---
+
+### Size/Spacing 토큰 바인딩
+
+| 속성 | 토큰 | 값 |
+|---|---|---|
+| 기본 너비 | 360px (레이아웃 고정 — 토큰 미적용) |
+| 헤더 패딩 상하 | `spacing/20` | 20px |
+| 헤더 패딩 좌우 | `spacing/24` | 24px |
+| 본문 패딩 상하 | `spacing/20` | 20px |
+| 본문 패딩 좌우 | `spacing/24` | 24px |
+| 푸터 패딩 상하 | `spacing/16` | 16px |
+| 푸터 패딩 좌우 | `spacing/24` | 24px |
+| 헤더–본문 구분 보더 | 1px |
+
+> Figma에서 해당 속성에 Variables를 직접 바인딩한다. 임의 px 고정값 사용 금지.
+
+---
+
+## 위치
+- **우측** (기본): 우측 가장자리에서 슬라이드 인
+- **하단** (모바일): 하단에서 슬라이드 업 (바텀 시트)
+
+---
+
+## 사이즈 동작
+
+| 속성 | 값 |
+|---|---|
+| layoutSizingHorizontal | `FIXED` (크기 변형별 고정 너비) |
+| layoutSizingVertical | `FILL` (뷰포트 전체 높이) |
+
+> 좌/우 드로어는 너비만 고정하고 높이는 뷰포트에 맞춘다. 내부 콘텐츠는 스크롤.
+
+---
+
+## 아이콘 사용 규칙
+
+> 컴포넌트 내 아이콘은 반드시 `01 — Icons` 페이지의 아이콘 컴포넌트 인스턴스를 사용한다.
+> 텍스트 특수 문자(✓, ✕, →, ⋯ 등), 이모지, 직접 그린 벡터 도형으로 아이콘을 대체하는 것을 금지한다.
+> 필요한 아이콘이 없는 경우, 먼저 `01 — Icons` 페이지에 추가한 후 인스턴스를 참조한다.
+
+---
+
+### Variants 구성
+- 모든 변형은 Figma의 **Combine as Variants** 기능을 사용하여 하나의 Component Set으로 통합한다.
+
+---
+
+---
+
+## 토큰 바인딩 체크리스트
+
+본 컴포넌트의 Figma 구현 시 다음을 모두 충족해야 한다 ([`04-token-binding.md#토큰-바인딩-검증-의무`](../figma-design-system-guide/04-token-binding.md#토큰-바인딩-검증-의무) 참조).
+
+| 속성 종류 | 바인딩 대상 | 검증 |
+|---|---|---|
+| Width / Height | `size/*` Variables (또는 부모 Auto Layout에 의해 결정) | `boundVariables.width` / `boundVariables.height` |
+| Padding 4면 / itemSpacing | `spacing/*` Variables | `boundVariables.padding{Top|Right|Bottom|Left}` / `boundVariables.itemSpacing` |
+| cornerRadius | `radius/*` Variables | `boundVariables.cornerRadius` (또는 4모서리별) |
+| fills / strokes (SOLID 컬러) | `color/*` Variables | `boundVariables.fills` / `strokes` 또는 `fillStyleId` / `strokeStyleId` |
+| 텍스트 노드 | Text Style (Pretendard) | `textStyleId !== ""` |
+| 그림자 (effects) | Effect Style | `effectStyleId !== ""` |
+
+위 "디자인 토큰" / "크기" 섹션에 명시된 값은 모두 위 토큰에 바인딩되어야 한다. 임의 px·HEX 값으로 남아있으면 위반이다.
+
+**라이브러리에 없는 값**이 필요한 경우 [`04-token-binding.md#토큰-부재-시-신설-의무`](../figma-design-system-guide/04-token-binding.md#토큰-부재-시-신설-의무)에 따라 먼저 토큰을 신설한 후 바인딩한다.
+
+---
+
+## 사용 원칙
+
+| 원칙 | 설명 |
+|---|---|
+| 보조 콘텐츠에 사용 | Drawer는 메인 콘텐츠를 완전히 대체하지 않고 보조 정보나 설정, 상세 편집 등을 제공하는 용도로 사용한다. 전체 화면 전환이 필요하면 새 페이지를 사용한다. |
+| 플랫폼에 맞는 위치 선택 | 데스크톱에서는 우측 Drawer, 모바일에서는 Bottom Sheet(바텀 변형)을 기본으로 사용한다. 플랫폼의 일반적인 UX 패턴을 따른다. |
+| 본문 스크롤 가능하게 유지 | 드로어 본문은 콘텐츠가 길어질 경우 내부 스크롤이 가능해야 한다. 헤더와 푸터는 고정(flex-shrink: 0)되어야 한다. |
+| 푸터 액션 항상 가시화 | 저장, 취소 등 주요 액션이 있는 경우 반드시 고정 푸터에 배치한다. 스크롤에 의해 액션 버튼이 가려지지 않도록 한다. |
+| 오버레이 클릭으로 닫기 제공 | 배경 오버레이를 클릭하면 드로어가 닫히도록 한다. 저장되지 않은 변경사항이 있는 경우 닫기 전 확인을 요청한다. |
+
+## Figma Make 프롬프트
+
+```
+다음 스펙으로 드로어/사이드 패널(Drawer) 컴포넌트를 만들어줘:
+
+너비: 360px, 전체 뷰포트 높이
+위치: 우측 가장자리 고정
+배경: 흰색 / 다크 서피스
+좌측 가장자리에 강한 그림자
+
+구조 (전체 높이 flex 컬럼):
+- 헤더: 제목 (18px SemiBold) + ✕ 닫기 버튼, 하단 보더
+- 본문: 스크롤 가능한 콘텐츠, 패딩 20px 24px
+- 푸터: 나란한 두 Button 컴포넌트 인스턴스 (Secondary 취소 + Primary 저장), 상단 보더
+
+슬라이드인 애니메이션: 우측에서 300ms ease-out
+
+모바일 변형: 바텀 시트
+- 전체 너비, 하단 고정
+- 상단 모서리 둥글게 (24px)
+- 하단에서 슬라이드 업
+
+네이밍: Drawer / Right, Drawer / Bottom Sheet
+```
