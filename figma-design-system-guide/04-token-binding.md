@@ -62,3 +62,62 @@
 | **Caption** | — | — | — | — | 12 Regular |
 
 > 📐 정확한 fontSize / lineHeight / letterSpacing / 사용처는 [`../foundations/02-typography.md`](../foundations/02-typography.md)의 Semantic 토큰 표를 단일 출처(SoT)로 한다. 위 표는 빠른 참조용 요약이며, 값 충돌 시 02-typography.md를 우선한다.
+
+---
+
+## 토큰 바인딩 검증 의무
+
+컴포넌트의 속성을 추가·변경한 직후, **해당 속성이 Variables(또는 Text Style)에 바인딩되어 있는지 반드시 검증**한다. 임의 px·HEX 값으로 남아있지 않은지 확인한다.
+
+### 속성별 검증 항목
+
+| 속성 | 검증식 (boundVariables 또는 styleId 존재) |
+|---|---|
+| Width | `boundVariables.width` 존재, 또는 부모 Auto Layout에 의해 결정 |
+| Height | `boundVariables.height` 존재, 또는 부모 Auto Layout에 의해 결정 |
+| paddingTop / paddingRight / paddingBottom / paddingLeft | 4면 모두 `boundVariables.padding{Top|Right|Bottom|Left}` 존재 |
+| itemSpacing | `boundVariables.itemSpacing` 존재 |
+| cornerRadius | 균일한 경우 `boundVariables.cornerRadius`, 비균일이면 4모서리별 `boundVariables.{topLeft|topRight|bottomLeft|bottomRight}Radius` |
+| fills (SOLID 컬러) | `boundVariables.fills` 또는 `fillStyleId` 존재 |
+| strokes (SOLID 컬러) | `boundVariables.strokes` 또는 `strokeStyleId` 존재 |
+| 텍스트 노드 | `textStyleId !== ""` (fontSize / fontWeight / lineHeight / letterSpacing 직접 지정 금지) |
+| effects (Drop Shadow 등) | `effectStyleId !== ""` |
+
+- 어느 한 속성이라도 직접 값으로 들어가 있고 boundVariables / styleId에 없으면 **위반**이다.
+- 자동 검증 스크립트는 `page.loadAsync()`를 호출한 후 `mcp__figma__get_metadata`로 노드를 읽어야 한다 (dynamic-page 모드 stale 데이터 방지).
+
+### 검증 대상 제외
+
+- 그라데이션 fills (GRADIENT_LINEAR / GRADIENT_RADIAL 등), 이미지 fills (IMAGE) 등 SOLID 단일 컬러가 아닌 fills는 Variables 바인딩 대상이 아니다.
+- Component Set 노드 자체의 width / height는 변형 배치에 의해 자동 결정되므로 검증 대상에서 제외한다.
+
+---
+
+## 토큰 부재 시 신설 의무
+
+**컴포넌트가 사용해야 하는 값이 Variables 라이브러리(또는 Text Style / Effect Style 라이브러리)에 존재하지 않으면, 먼저 토큰을 신설한 후 바인딩한다.** 라이브러리에 없는 값을 그대로 사용하는 것을 금지한다.
+
+| 토큰 종류 | md 정의 위치 | Figma 페이지 | 라이브러리 형식 |
+|---|---|---|---|
+| Color | [`../foundations/01-color.md`](../foundations/01-color.md) | `01 — Color` | Variables (COLOR) |
+| Typography | [`../foundations/02-typography.md`](../foundations/02-typography.md) | `02 — Typography` | Text Style |
+| Spacing | [`../foundations/03-spacing.md`](../foundations/03-spacing.md) | `03 — Spacing` | Variables (FLOAT) |
+| Shadow | [`../foundations/04-shadow.md`](../foundations/04-shadow.md) | `04 — Shadow` | Effect Style |
+| Radius | [`../foundations/05-radius.md`](../foundations/05-radius.md) | `05 — Radius` | Variables (FLOAT) |
+| Motion | [`../foundations/06-motion.md`](../foundations/06-motion.md) | `06 — Motion` | (코드 토큰) |
+| Size | [`../foundations/07-size.md`](../foundations/07-size.md) | `07 — Size` | Variables (FLOAT) |
+
+### 신설 절차
+
+1. **확인** — 사용하려는 값이 라이브러리에 있는지 검색한다 (`mcp__figma__get_variable_defs` 또는 Figma Variables 패널).
+2. **없으면 신설** — 위 표의 md 위치에 토큰 정의를 추가하고, Figma 해당 페이지에도 동기화한다.
+3. **바인딩** — 신설된 토큰을 컴포넌트 속성에 바인딩한다.
+4. **CHANGELOG 기록** — 토큰 추가 사실을 [`CHANGELOG.md`](CHANGELOG.md)와 Figma `Change Log` 페이지에 동시 기록한다.
+
+> 📌 본 절은 위 [타이포그래피 규칙](#타이포그래피-규칙)의 "라이브러리에 없는 스타일이 필요한 경우, 먼저 `02 — Typography` 페이지에 스타일을 추가한 후 적용한다"를 Color · Size · Spacing · Radius · Shadow까지 확장한 것이다. 이제 모든 토큰 종류에 동일한 "선(先)신설 → 후(後)바인딩" 원칙이 적용된다.
+
+### 자주 발생하는 신설 케이스
+
+- `padding: 10px`가 필요한데 `spacing/8`(8px)과 `spacing/12`(12px)만 있는 경우 → `spacing/10`을 신설.
+- 신규 컬러 변형(예: `color/info/tint`)이 필요한 경우 → `01 — Color` 페이지에 추가 후 바인딩.
+- 신규 사이즈 변형이 필요한 경우 (예: 18px 아이콘) → `size/18` Primitive와 필요 시 `size/icon/XXS` Semantic alias 신설.

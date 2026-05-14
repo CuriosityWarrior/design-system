@@ -102,6 +102,25 @@ Icon / {Name} / {Size}
 
 ---
 
+## 토큰 바인딩 체크리스트
+
+본 컴포넌트의 Figma 구현 시 다음을 모두 충족해야 한다 ([`04-token-binding.md#토큰-바인딩-검증-의무`](../figma-design-system-guide/04-token-binding.md#토큰-바인딩-검증-의무) 참조).
+
+| 속성 종류 | 바인딩 대상 | 검증 |
+|---|---|---|
+| Width / Height | `size/*` Variables (또는 부모 Auto Layout에 의해 결정) | `boundVariables.width` / `boundVariables.height` |
+| Padding 4면 / itemSpacing | `spacing/*` Variables | `boundVariables.padding{Top|Right|Bottom|Left}` / `boundVariables.itemSpacing` |
+| cornerRadius | `radius/*` Variables | `boundVariables.cornerRadius` (또는 4모서리별) |
+| fills / strokes (SOLID 컬러) | `color/*` Variables | `boundVariables.fills` / `strokes` 또는 `fillStyleId` / `strokeStyleId` |
+| 텍스트 노드 | Text Style (Pretendard) | `textStyleId !== ""` |
+| 그림자 (effects) | Effect Style | `effectStyleId !== ""` |
+
+위 "디자인 토큰" / "크기" 섹션에 명시된 값은 모두 위 토큰에 바인딩되어야 한다. 임의 px·HEX 값으로 남아있으면 위반이다.
+
+**라이브러리에 없는 값**이 필요한 경우 [`04-token-binding.md#토큰-부재-시-신설-의무`](../figma-design-system-guide/04-token-binding.md#토큰-부재-시-신설-의무)에 따라 먼저 토큰을 신설한 후 바인딩한다.
+
+---
+
 ## 사용 원칙
 
 > 📌 시각 정렬, 텍스트와 비례, 인스턴스 의무 등 **공통 사용 원칙은 [figma-design-system-guide/05-doc-conventions.md#아이콘-사용-규칙-공통](../figma-design-system-guide/05-doc-conventions.md#아이콘-사용-규칙-공통)** 을 따른다.
